@@ -97,8 +97,7 @@ the LLMs and transformers.
 By design, they are not made to think but rather to predict the next word
 (token, to be exact).
 
-Well [OpenAI docs seem to suggest other
-wise](https://platform.openai.com/docs/guides/reasoning?api-mode=chat).
+Well [OpenAI docs seem to suggest otherwise](https://platform.openai.com/docs/guides/reasoning?api-mode=chat).
 
 This is a snippet from their docs page:
 
