@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Software Engineer | Database Systems | Developer Experience # <a href='#'>Affiliations</a>
+subtitle: Software Engineer | Developer Experience | Database Systems | # <a href='#'>Affiliations</a>
 
 profile:
   align: right
@@ -18,6 +18,6 @@ social: true # includes social icons at the bottom of the page
 
 Hi, I am a software engineer who finds particular happiness in figuring out how things operate.
 
-I am working in Memgraph, which builds the best graph database.
+I am working in [Memgraph](https://memgraph.com/), we are building the best graph database.
 
-If you are interested learning more about my mind, I suggest reading the [blog](/blog).
+If you want to learn more about my mind, read the [blog](/blog).
