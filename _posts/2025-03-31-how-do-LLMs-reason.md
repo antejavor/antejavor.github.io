@@ -11,7 +11,7 @@ categories: AI
 
 We live in fascinating times of mighty LLMs that can help boost productivity and simplify day-to-day tasks. The speed of adoption of LLMs is a story that will constantly be compared to everything that came before and after them.
 
-It is essential to highlight and understand the fundamentals and flaws of this technology. Let's jump to the big question around LLMs that became quite controversial: Can they reason? \*\* My short answer is no. Let's dive into why.
+It is essential to highlight and understand the fundamentals and flaws of this technology. Let's jump to the big question around LLMs that became quite controversial: Can they reason? My short answer is no. Let's dive into why.
 
 ## Reasoning
 
