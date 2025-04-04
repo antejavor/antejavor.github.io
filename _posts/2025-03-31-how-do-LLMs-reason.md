@@ -37,9 +37,9 @@ In a pure form, this is reasoning about specific information in your brain. If I
 follow up on the question and ask: "What will the stock market do tomorrow?" you
 will probably start thinking hard about this.
 
-In other words, you would read projections, news, and global tax and tariff
-policies and invest time and effort into trying to answer this. You would
-construct a thesis that works under different assumptions.
+In other words, you would read projections, news, global tax and tariff
+policies. You would invest time and effort into constructing a thesis that works
+under different assumptions.
 
 Usually, the more effort you invest, the higher the probability you will be
 correct.
