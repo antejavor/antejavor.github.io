@@ -11,11 +11,10 @@ categories: AI
 
 We live in fascinating times of mighty LLMs that can help boost productivity and
 help with day-to-day tasks. The speed of adoption of LLMs is a story that will
-constantly be compared to everything that came before and after the LLMs. It is
-essential to highlight and understand the fundamentals and flaws of this
-technology.
+constantly be compared to everything that came before and after the LLMs.
 
-Let's jump to the big question around LLMs that became quite
+It is essential to highlight and understand the fundamentals and flaws of this
+technology. Let's jump to the big question around LLMs that became quite
 controversial, **can they reason?** My short answer is **no**. Let's dive into
 why.
 
@@ -103,11 +102,12 @@ wise](https://platform.openai.com/docs/guides/reasoning?api-mode=chat).
 
 This is a snippet from their docs page:
 
-```
-Reasoning models, like OpenAI o1 and o3-mini, are new large language models trained with reinforcement learning to perform complex reasoning.
-Reasoning models think before they answer, producing a long internal chain of thought before responding to the user.
-Reasoning models excel in complex problem solving, coding, scientific reasoning, and multi-step planning for agentic workflows.
-```
+> Reasoning models, like OpenAI o1 and o3-mini, are new large language models
+> trained with reinforcement learning to perform complex reasoning. Reasoning
+> models think before they answer, producing a long internal chain of thought
+> before responding to the user. Reasoning models excel in complex problem
+> solving, coding, scientific reasoning, and multi-step planning for agentic
+> workflows.
 
 The image from the same docs page illustrates this
 process:
@@ -174,6 +174,8 @@ provide the proper context, they won't hallucinate. That is why we, in
 Graph and LLM-powered AI apps.
 
 As they say, the harder it is to explain and argue how bad or incapable
-technology is, the better it is. [Arthur C. Clarke's Third
-Law](https://en.wikipedia.org/wiki/Clarke%27s_three_laws): "Any sufficiently
-advanced technology is indistinguishable from magic."
+technology is, the better it is.
+[Arthur C. Clarke's Third
+Law](https://en.wikipedia.org/wiki/Clarke%27s_three_laws):
+
+> Any sufficiently advanced technology is indistinguishable from magic.
