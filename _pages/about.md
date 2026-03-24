@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Software Engineer | Developer Experience | Database Systems | # <a href='#'>Affiliations</a>
+subtitle: Software Engineer | Developer Experience | Database Systems
 
 profile:
   align: right
