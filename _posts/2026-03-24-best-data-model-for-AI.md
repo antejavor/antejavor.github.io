@@ -2,7 +2,7 @@
 layout: post
 title: What is the best data model for AI?
 date: 2026-03-24 00:00:00
-description: Exploring what data model is the most suited for LLM driven agents.
+description: Exploring what data model (or data model metric) is the most suited for LLM driven agents.
 tags: LLMs, AI, data model
 categories: AI
 ---
@@ -27,15 +27,15 @@ replaced by convolutions in neural nets.
 This brings me to something I have been thinking about for quite some time now.
 As you are probably aware, there are a bunch of different data models
 implemented in different database systems. The question is: **what data model is
-the most suited for AI (LLM driven agents)?**. Thinking from perspective that
-the actuall data model will introduce the least human sophistication and enable
+the most suited for AI (LLM driven agents)?** Thinking from the perspective that
+the actual data model will introduce the least human sophistication and enable
 search and compute to scale.
 
 We are probably a few years away from AGI or the LLM bubble bursting (it will be
 interesting to read this in a few years). That means we still need to somehow
 manage the data models that are most common to humans and LLM driven agents.
 
-Everything am I tinkering about at the moment is around the actual data model on
+Everything I am tinkering with at the moment is around the actual data model on
 the logical and representation level (software), not the actual storage model
 (hardware). At the point when AGI hits, who knows how data would be represented
 then, probably in some synapse-style baked into the hardware. Who knows what the
@@ -58,10 +58,10 @@ If you prefer the short history of how things evolved:
 Each of these periods was an era of discovery and adoption. In each of the
 periods, some of the models showed their strengths and weaknesses, but it was
 super early days for each of the data models. Graph was initially started in the
-1960s and later revisited in the NoSQL era. Flat files seems to be like were
+1960s and later revisited in the NoSQL era. Flat files seem to be like where
 [skills are
 today](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview).
-There was the one that scaled, the relational model was the prime winner so far.
+But there was one that scaled: the relational model was the prime winner so far.
 
 The main reason is that it was the most suited for what was needed at the time:
 a decent level of structure and rigidity to power the simpler businesses that
@@ -76,10 +76,10 @@ It is important to know that network effects, serendipity, and human bias play
 an important role in the development of technology. You won't pick a key-value
 or a graph database if you haven't used it before or didn't have exposure to it.
 Usually the choice is something that happens by accident, you find you need some
-feature or the current system becomes too rigid, and then you go an pick
+feature or the current system becomes too rigid, and then you go and pick
 something from your mind.
 
-Think about this way if you just need to smack a nail
+Think about it this way: if you just need to smack a nail
 into the wood, you may pick the first rock you find on the ground, not the
 hammer 30 meters away. Don't fool yourself that you are always picking the
 optimal tool.
@@ -122,7 +122,7 @@ box they have created to write into. I am not mocking here, I am impressed by
 what they did, but it strikes the direct point I am making: the relational model
 is not so flexible.
 
-Object, Document and key value store are in the same bucket since their
+Object, document, and key-value stores are in the same bucket since their
 capability to represent structure is limited.
 
 Vectors in themselves are not in the table since I don't consider them a data
@@ -138,7 +138,7 @@ thinking about.
 
 ## Metric of data models
 
-Tinkering about the data model is all about the **metric** that data model needs
+Tinkering with the data model is all about the **metric** that data model needs
 to serve. My personal metrics are being able to represent **structure** and
 **flexibility**. These two metrics in my mind are the most important ones.
 
