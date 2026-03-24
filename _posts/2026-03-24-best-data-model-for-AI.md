@@ -14,9 +14,11 @@ Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) by Rich
 Sutton. It opened my eyes in so many different ways, I would recommend reading
 it. There are different points there, you will probably see something else, but
 the bigger point for me is that any type of human sophistication (in technical
-systems) usually loses to the general search/compute methods that scale to
+systems) usually loses to the general **search/compute** methods that scale to
 infinity and are convex in nature, compared to the concave approach of human
-sophistication. The most visual example is in the computer vision space where
+sophistication.
+
+The most visual example is in the computer vision space where
 you had a bunch of sophisticated math models like
 [SIFT](https://en.wikipedia.org/wiki/Scale-invariant_feature_transform) that
 were made to detect robust features to do something bigger, but were completely
@@ -26,21 +28,21 @@ This brings me to something I have been thinking about for quite some time now.
 As you are probably aware, there are a bunch of different data models
 implemented in different database systems. The question is: **what data model is
 the most suited for AI (LLM driven agents)?**. Thinking from perspective that
-will introduce the least human sophistication and enable search and compute to
-scale.
+the actuall data model will introduce the least human sophistication and enable
+search and compute to scale.
 
 We are probably a few years away from AGI or the LLM bubble bursting (it will be
 interesting to read this in a few years). That means we still need to somehow
 manage the data models that are most common to humans and LLM driven agents.
 
-I have been tinkering around the actual data model on the logical and
-representation level (software), not the actual storage model (hardware). At the
-point when AGI hits, who knows how data would be represented then, probably in
-some synapse-style baked into the hardware. Who knows what the memory of that
-system will look like, but I guess we won't abandon the current deterministic
-computations in software on the data from databases since it is much superior to
-the human brain in deterministic computation, and we still need a human-readable
-format we use today.
+Everything am I tinkering about at the moment is around the actual data model on
+the logical and representation level (software), not the actual storage model
+(hardware). At the point when AGI hits, who knows how data would be represented
+then, probably in some synapse-style baked into the hardware. Who knows what the
+memory of that system will look like, but I guess we won't abandon the current
+deterministic computations in software on the data from databases since it is
+much superior to the human brain in deterministic computation, and we still need
+a human-readable format we use today.
 
 ## Shortest history of data models
 
@@ -56,8 +58,10 @@ If you prefer the short history of how things evolved:
 Each of these periods was an era of discovery and adoption. In each of the
 periods, some of the models showed their strengths and weaknesses, but it was
 super early days for each of the data models. Graph was initially started in the
-1960s and later revisited in the NoSQL era, but the relational model was the
-prime winner so far.
+1960s and later revisited in the NoSQL era. Flat files seems to be like were
+[skills are
+today](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview).
+There was the one that scaled, the relational model was the prime winner so far.
 
 The main reason is that it was the most suited for what was needed at the time:
 a decent level of structure and rigidity to power the simpler businesses that
@@ -73,7 +77,9 @@ an important role in the development of technology. You won't pick a key-value
 or a graph database if you haven't used it before or didn't have exposure to it.
 Usually the choice is something that happens by accident, you find you need some
 feature or the current system becomes too rigid, and then you go an pick
-something from your mind. Think about this way if you just need to smack a nail
+something from your mind.
+
+Think about this way if you just need to smack a nail
 into the wood, you may pick the first rock you find on the ground, not the
 hammer 30 meters away. Don't fool yourself that you are always picking the
 optimal tool.
@@ -87,12 +93,12 @@ about it this way: if you have a box you can write into, you have already
 created the box and limited it to a box. Now ask yourself, how are you
 envisioning AI?
 
-Well, I am envisioning that it will be over some of my data that is completely
-messy, and without me doing anything it will be able to reason and figure out
-how we got to that point (scaling search and compute). Now this is what you
-would ideally want in your daily life and in business, the data model that
-learns as you go and can enable scalable search on the fly. The search is
-important since you don't want to spend any resources you don't have.
+Well, I am envisioning that it will be able to go over some of my data that is
+completely messy, and without me doing anything it will be able to reason and
+figure out how we got to that point (scaling search and compute). Now this is
+what you would ideally want in your daily life and in business, the data model
+that learns (compute) as you go and can enable scalable search on the fly. The
+search is important since you don't want to spend any resources you don't have.
 
 What I described above is **flexibility** of the system to represent any data
 point, relationship, or structure. So the data model needs to be flexible and
@@ -107,7 +113,6 @@ flexibility:
 | Relational                | Structured          | Somewhat flexible |
 | Object/Document/Key value | Somewhat Fragmented | Flexible          |
 | Graph                     | Structured          | Flexible          |
-
 
 Relational models can also be quite flexible, but the schema needs to be created
 upfront. This means before putting data in you need to create the box, which
