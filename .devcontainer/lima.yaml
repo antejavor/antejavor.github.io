@@ -1,0 +1,112 @@
+# Lima VM for al-folio Jekyll development
+# Replaces Docker-based devcontainer with a native Lima VM.
+#
+# Usage:
+#   brew install lima
+#   limactl start .devcontainer/lima.yaml
+#   limactl shell jekyll-dev
+#
+# VS Code: Install "Remote - SSH" extension, then connect to:
+#   ssh -F ~/.lima/jekyll-dev/ssh.config lima-jekyll-dev
+#
+# The workspace is mounted at the same host path inside the VM,
+# so /Users/antejavor/repos/private/antejavor.github.io is available as-is.
+
+vmType: vz
+rosetta:
+  enabled: true
+  binfmt: true
+
+images:
+- location: "https://cloud-images.ubuntu.com/releases/24.04/release/ubuntu-24.04-server-cloudimg-arm64.img"
+  arch: "aarch64"
+- location: "https://cloud-images.ubuntu.com/releases/24.04/release/ubuntu-24.04-server-cloudimg-amd64.img"
+  arch: "x86_64"
+
+cpus: 4
+memory: "8GiB"
+disk: "20GiB"
+
+mounts:
+- location: "~"
+  writable: true
+- location: "/tmp/lima"
+  writable: true
+
+mountType: virtiofs
+
+portForwards:
+- guestPort: 8080
+  hostPort: 8080
+- guestPort: 35729
+  hostPort: 35729
+
+containerd:
+  system: false
+  user: false
+
+provision:
+- mode: system
+  script: |
+    #!/bin/bash
+    set -eux -o pipefail
+
+    export DEBIAN_FRONTEND=noninteractive
+
+    # System packages
+    apt-get update
+    apt-get install -y \
+      build-essential \
+      curl \
+      git \
+      imagemagick \
+      inotify-tools \
+      jupyter-nbconvert \
+      libffi-dev \
+      libgdbm-dev \
+      libncurses5-dev \
+      libreadline-dev \
+      libssl-dev \
+      libyaml-dev \
+      procps \
+      ruby-full \
+      zlib1g-dev
+
+    # Install Node.js (for prettier)
+    if ! command -v node &>/dev/null; then
+      curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+      apt-get install -y nodejs
+    fi
+
+    # Install prettier globally
+    npm install -g prettier
+
+- mode: user
+  script: |
+    #!/bin/bash
+    set -eux -o pipefail
+
+    # Configure gem installation to user directory
+    echo 'export GEM_HOME="$HOME/.gem"' >> ~/.bashrc
+    echo 'export PATH="$HOME/.gem/bin:$PATH"' >> ~/.bashrc
+    export GEM_HOME="$HOME/.gem"
+    export PATH="$HOME/.gem/bin:$PATH"
+
+    gem install bundler
+
+probes:
+- script: |
+    #!/bin/bash
+    set -eux -o pipefail
+    if ! command -v ruby &>/dev/null; then
+      echo >&2 "ruby is not installed yet"
+      exit 1
+    fi
+    if ! command -v node &>/dev/null; then
+      echo >&2 "node is not installed yet"
+      exit 1
+    fi
+  hint: See "/var/log/cloud-init-output.log" in the guest
+
+hostResolver:
+  enabled: true
