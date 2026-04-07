@@ -13,9 +13,11 @@
 # so /Users/antejavor/repos/private/antejavor.github.io is available as-is.
 
 vmType: vz
-rosetta:
-  enabled: true
-  binfmt: true
+vmOpts:
+  vz:
+    rosetta:
+      enabled: true
+      binfmt: true
 
 images:
 - location: "https://cloud-images.ubuntu.com/releases/24.04/release/ubuntu-24.04-server-cloudimg-arm64.img"
