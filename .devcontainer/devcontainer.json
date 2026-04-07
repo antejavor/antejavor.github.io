@@ -1,5 +1,11 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/jekyll
+//
+// Alternative: use Lima instead of Docker Desktop (see lima.yaml in this folder):
+//   brew install lima
+//   limactl start .devcontainer/lima.yaml --name jekyll-dev
+//   limactl shell jekyll-dev -- bash .devcontainer/lima-setup.sh
+//   Then connect via VS Code Remote-SSH to lima-jekyll-dev
 {
   "name": "Jekyll",
   "image": "mcr.microsoft.com/devcontainers/jekyll",
