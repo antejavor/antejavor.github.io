@@ -3,8 +3,8 @@ layout: post
 title: What is the best data model for AI?
 date: 2026-03-24 00:00:00
 description: Exploring what data model (or data model metric) is the most suited for LLM driven agents.
-tags: LLMs, AI, data model
-categories: AI
+tags: LLMs, AI
+categories: AI, Graphs
 ---
 
 ## Brain fog of data models
