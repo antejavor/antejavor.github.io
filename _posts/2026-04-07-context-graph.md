@@ -7,7 +7,6 @@ tags: LLMs, AI, Graphs, Knowledge-graphs
 categories: AI, Graphs
 ---
 
-
 # Agentic harnesses and prompting
 
 Turns out that a lot of manual work has moved toward using LLMs and agents to
@@ -41,7 +40,7 @@ The big question is: how should the agent think about this task?
 The agent operates purely on context. It is like a working memory it can
 process, and that memory is highly limited, so it needs to stay lean and
 optimized. You have given the agent a task through a prompt it needs to
-interpret, but there is not much context in it. 
+interpret, but there is not much context in it.
 
 So the question is: what is the context in this case?
 
@@ -58,19 +57,19 @@ a system prompt and more, which goes under the topic of [prompt
 engineering](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview),
 and I will not go into that rabbit hole here, but it is important that different
 levels of prompts exist.
-  
+
 Now the question becomes: what **context is not visible from your prompt**? As
 an employee in a company, you probably carry a lot of context based on the
-current state of the company, so the task sounds easy to you. 
+current state of the company, so the task sounds easy to you.
 
 Here are some examples of what is not visible:
 
 - Who are you inside the organization, what are your role, responsibilities,
-  actions you can take? 
-- What is Jake's role, responsibilities, and actions he can take? 
-- What decision is driving Jake's message? 
+  actions you can take?
+- What is Jake's role, responsibilities, and actions he can take?
+- What decision is driving Jake's message?
 - How does the task contribute to company goals, metrics, or the unit as a
-  whole? 
+  whole?
 
 That is the kind of context that can be captured, and it goes into the topic of
 [context
@@ -128,7 +127,7 @@ here are some examples with short descriptions and questions:
 
 Obviously this list can keep going, so in my mind there is no single context
 graph use case. It is really about the application of graph models and graph
-algorithms to solve context-engineering problems for agents. 
+algorithms to solve context-engineering problems for agents.
 
 ## Technical challenges and ambiguity
 
@@ -148,7 +147,7 @@ to the actual narrative they are working through.
 Thinking now about GraphRAG, I see context graphs as the broader framing.
 GraphRAG usually describes a retrieval pattern: use graph structure to improve
 retrieval and generation. A context graph is a wider operational concept that
-covers things from agents first perspecitve. 
+covers things from agents first perspecitve.
 
 That is why I think **context graph** is the more useful term for the workloads
 we are starting to face. The point is not just to retrieve better context. The
@@ -161,4 +160,3 @@ writing this blog, but I find them missing the bigger picture:
 - [Context Graph](https://arxiv.org/abs/2406.11160)
 - [Context Graphs: AI's Trillion-Dollar
   Opportunity](https://foundationcapital.com/ideas/context-graphs-ais-trillion-dollar-opportunity)
-
