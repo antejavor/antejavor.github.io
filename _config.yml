@@ -106,12 +106,12 @@ whatsapp_number: # your WhatsApp number (full phone number in international form
 wikidata_id: # your wikidata id
 wikipedia_id: # your wikipedia id (Case sensitive)
 work_url: # work page URL
-x_username: # your X handle
+x_username: AnteJavor # your X handle
 youtube_id: # your youtube channel id (youtube.com/@<youtube_id>)
 zotero_username: # your zotero username
 
 contact_note: >
-  If you need me just send me a message on LinkedIn.
+  If you want to reach me, send me a message on X or LinkedIn.
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification

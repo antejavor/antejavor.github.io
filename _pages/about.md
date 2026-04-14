@@ -20,4 +20,5 @@ Hi, I am a software engineer who finds particular happiness in figuring out how 
 
 I am working in [Memgraph](https://memgraph.com/), we are building the best graph database.
 
-If you want to learn more about my mind, read the [blog](/blog).
+If you want to learn more about my mind, read the [blog](/blog). If you want to
+reach me, send me a message on X or LinkedIn.
