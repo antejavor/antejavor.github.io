@@ -78,14 +78,14 @@ needed to prototype fast.
 If you ask an LLM for a comparison of statically typed and compiled languages
 versus dynamic and interpreted languages, you would get something like this:
 
-| Aspect | Static / Compiled | Dynamic / Interpreted |
-|---|---|---|
-| **Performance** | Fast; compile-time optimizations | Slower; JIT can help |
-| **Dev Time** | Slower; more boilerplate | Fast prototyping; less ceremony |
-| **Ecosystem** | Strong tooling & refactoring | Vast libraries; beginner-friendly |
-| **Security** | Compile-time bug detection | Prone to runtime & injection risks |
+| Aspect          | Static / Compiled                | Dynamic / Interpreted              |
+| --------------- | -------------------------------- | ---------------------------------- |
+| **Performance** | Fast; compile-time optimizations | Slower; JIT can help               |
+| **Dev Time**    | Slower; more boilerplate         | Fast prototyping; less ceremony    |
+| **Ecosystem**   | Strong tooling & refactoring     | Vast libraries; beginner-friendly  |
+| **Security**    | Compile-time bug detection       | Prone to runtime & injection risks |
 
-*Static:* C, C++, Rust, Go, Zig · *Dynamic:* Python, JS, Ruby, PHP
+_Static:_ C, C++, Rust, Go, Zig · _Dynamic:_ Python, JS, Ruby, PHP
 
 Fast prototyping is critical. You usually sacrifice performance and security
 for a faster pace and lower development time, and this leads to a more vibrant
@@ -95,7 +95,6 @@ because of project budgets, time, and engineers.
 Keep in mind that I do not have anything against dynamically interpreted
 languages.
 I write Python all the time, but it is a liability.
-
 
 ## Predicting the unpredictable
 
