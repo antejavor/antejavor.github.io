@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The language debate is back!
-date: 2026-04-23 00:00:00
+date: 2026-05-15 18:00:00
 description: Notes on the programming language debate and why we may increasingly favor statically typed and compiled languages and. 
 tags: Infrastructure, Security, LLMs, Rust, Zig
 categories: Infrastructure, Engineering
