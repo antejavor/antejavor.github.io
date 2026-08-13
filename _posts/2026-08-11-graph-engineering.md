@@ -147,8 +147,6 @@ Something small like this:
     /     \          
 ...      ...  
 
-
-            [Target?]
 ```
 
 This is where autonomy of work stops being partial to your hands and starts
