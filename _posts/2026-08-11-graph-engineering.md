@@ -12,7 +12,7 @@ categories: AI, Graphs
 For the past few years I have been working a lot with graphs. Having some skin
 in the game around graphs helps you understand the bigger picture when
 particular trends appear. Right now, the latest trend is what gets called
-**"[graph engineering](https://x.com/steipete/status/2078277297791189132?s=20)"**, a term popularized by [Peter Steinberger](https://en.wikipedia.org/wiki/Peter_Steinberger_(programmer)), the author of OpenClaw.
+**"[graph engineering](https://x.com/steipete/status/2078277297791189132?s=20)"**, a term popularized by Peter Steinberger, the author of OpenClaw.
 
 The latest premise is that we may be transitioning from loops to graphs.
 
@@ -29,7 +29,6 @@ You moved through time toward a solution like this:
 ---> LLM ---> Prompt ---> LLM ---> Prompt---> .... And to eternity, or until the problem is solved
 ```
 
-
 This is how the initial versions of what we now call a harness looked.
 
 Initially, it was just a single prompt: you put some text into the LLM, and the
@@ -39,7 +38,7 @@ previous messages were kept in context.
 
 After a few interactions, the beginning of the conversation had completely moved
 out of the context window.
- 
+
 You were the person pushing the LLM toward a solution. The two of you followed a
 single thread of work together. It was the bare bones era of 2023. The autonomy
 of work was still mostly in your hands.
@@ -75,7 +74,6 @@ loop" width="900" />
 
 [This picture is from the Anthropic Claude agentic loop
 docs](https://code.claude.com/docs/en/how-claude-code-works#the-agentic-loop)
-
 
 At this stage, an interesting dynamic appears. The two of you are no longer
 really collaborating in the same way. The model is trying to find the solution
@@ -126,7 +124,6 @@ could have chosen a different route by changing only a few tokens. This yields a
 graph of traces, changes, and internal thoughts that can be biased toward a
 particular better solution.
 
-
 Now imagine an army of LLMs running in loops, solving different problems while
 cooperating with one another in graph space.
 
@@ -144,8 +141,8 @@ Something small like this:
      /     \      \      \
  [Loop A1][Loop A2][Loop B1][Loop C1]
      /   \     ...    ...      ...
-    /     \          
-...      ...  
+    /     \
+...      ...
 
 ```
 
@@ -163,14 +160,6 @@ In that world, your job is less about doing the work directly and more about
 deciding which work deserves autonomy at all. Some tasks benefit from branching,
 while some of them will fail flat on their face.
 
-
 All of this happens while you are out drinking a macchiato and wondering whether
 your future of work is in jeopardy because at that point you have a self-problem
 solving army of agents working on a graph.
-
-
-
-
-
-
-
