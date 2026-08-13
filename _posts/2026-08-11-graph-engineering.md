@@ -12,8 +12,7 @@ categories: AI, Graphs
 For the past few years I have been working a lot with graphs. Having some skin
 in the game around graphs helps you understand the bigger picture when
 particular trends appear. Right now, the latest trend is what gets called
-"graph engineering," a term popularized by Peter, the author of OpenClaw.
-
+**"[graph engineering](https://x.com/steipete/status/2078277297791189132?s=20)"**, a term popularized by [Peter Steinberger](https://en.wikipedia.org/wiki/Peter_Steinberger_(programmer)), the author of OpenClaw.
 
 The latest premise is that we may be transitioning from loops to graphs.
 
@@ -35,8 +34,8 @@ This is how the initial versions of what we now call a harness looked.
 
 Initially, it was just a single prompt: you put some text into the LLM, and the
 LLM returned the most probable continuation, which often led to a correct
-solution. Early LLMs had sliding windows, so only a few previous messages were
-kept in context.
+solution. Early versions of harnesses had sliding windows, so only a few
+previous messages were kept in context.
 
 After a few interactions, the beginning of the conversation had completely moved
 out of the context window.
@@ -45,17 +44,18 @@ You were the person pushing the LLM toward a solution. The two of you followed a
 single thread of work together. It was the bare bones era of 2023. The autonomy
 of work was still mostly in your hands.
 
-That autonomy was not glamorous. It meant you were making the decisions and
+The work was not glamorous and automatic. It meant you were making the decisions and
 doing the quality control yourself. The model was useful, but it was like a
 very confused intern with great self-esteem.
 
-# Moving in a circle or a loop
+# Moving in a loop
 
 The limitation of the line is that you have to make the line work and push the
-line further. You need to guide the LLM toward the solution. In the meantime
-LLMs gained tools and MCP servers, which gave them hands to operate more
-autonomously. This meant the LLM was now mostly capable of solving smaller
-tasks from start to finish.
+line further. You need to guide the LLM toward the solution.
+
+In the meantime, LLMs gained access to tools and MCP servers, which gave them
+hands to operate more autonomously. This meant the LLM was now mostly capable of
+solving smaller tasks from start to finish.
 
 That also meant you were the bottleneck in accessing their potential output.
 This is where loops come in.
@@ -87,10 +87,11 @@ The LLM, or agent if you prefer that term, is actively trying to solve the
 problem posed by your question. This means the agent has taken some autonomy
 from you, or more precisely, you have delegated it.
 
-It is autonomous in the way any semi-supervised machine is autonomous: once
+It is autonomous in the way any semi-automatic machine is autonomous: once
 started, it can run through a sequence without further supervision, but it still
 depends on someone else to guide it correctly, define success, and clean up when
-it does something stupid.
+it does something stupid. Think of an automatic lawn mower, except it is not
+really autonomous, only semi-automatic.
 
 So the nature of work changes. You stop manually advancing every step of the
 line and start managing boundaries around what it can do. This already shows
@@ -106,7 +107,9 @@ you gave it.
 One of the biggest changes happens when you drop fixed structures such as a
 state machine and move into the domain of graphs. Graphs are strong causality
 engines because they can represent states that do not yet exist and remain
-unknown until the future unfolds.
+unknown until the future unfolds. Thinking about the lawn mower for a moment,
+imagine it wandering into your neighbor's yard and either getting you paid or
+getting smashed to pieces. You do not know the outcome in advance.
 
 I have written before about why I think the graph model is the most natural fit
 for these kinds of AI workloads in [What is the best data model for
@@ -143,12 +146,15 @@ Something small like this:
      /   \     ...    ...      ...
     /     \          
 ...      ...  
+
+
+            [Target?]
 ```
 
 This is where autonomy of work stops being partial to your hands and starts
 becoming an organizational problem. Once many agents can branch, delegate, and
 recombine, the human is no longer supervising individual steps. The human is
-supervising a system of moving parts, partial results, and failure modes that
+supervising a system of evolving components and failures that
 happily produce more of themselves. You can model that system only with a graph.
 
 If the graph is specifically organizing context for agents to consume, update,
@@ -157,8 +163,7 @@ graph](/blog/2026/context-graph/).
 
 In that world, your job is less about doing the work directly and more about
 deciding which work deserves autonomy at all. Some tasks benefit from branching,
-parallel exploration, and cheap retries. Some of them will fail flat on their
-face.
+while some of them will fail flat on their face.
 
 
 All of this happens while you are out drinking a macchiato and wondering whether
