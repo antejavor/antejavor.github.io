@@ -19,7 +19,7 @@ The latest premise is that we may be transitioning from loops to graphs.
 The idea is simple if we look at it from one perspective: through the lens of
 time, and through how we have become used to working with LLMs.
 
-# Moving in a straight line
+# Moving in a line
 
 In the early stages of LLM development, problem solving was mostly linear.
 
