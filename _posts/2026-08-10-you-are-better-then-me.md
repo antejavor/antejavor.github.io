@@ -21,15 +21,15 @@ primarily driven by DeepSeek.
 
 I guess we are all starting to feel a bit of fear. What's happening? Is AI going
 to replace us? What will happen to my job? Is my job replaceable? What is my
-purpose? Why did I go to university to study this, only to be replaced by AI in
-a month? This frenzy is driven by pure pessimism and a [doomer
+a month? How will I pay my bills? These are all human emotions. Because of that
+there has been negative frenzy driven by pure pessimism and a [doomer
 approach](https://world.hey.com/dhh/what-on-earth-are-you-dooming-about-386cc1da)
 to human life and action, mostly by people who can't handle their emotions and
 egos. And yet, we are the ones improving the frontier!
 
 ## You are better than me
 
-As an engineer, I have a distinct approach to this: "You are better than me; you
+As an engineer, I have a distinct approach to this: "You are better than me, you
 write better code!" You should admit this to yourself as soon as possible. The
 reason is that there will always be plenty of problems to solve, since human
 curiosity is infinite.
@@ -45,7 +45,7 @@ sleeves.
 Typically, I write when something nudges me to communicate with myself and then
 with others. This time, I have [David Heinemeier
 Hansson](https://world.hey.com/dhh) to thank. He has been quite vocal about the
-impact of this on the industry, languages, and people, as I wrote before in my
+impact of this on the industry, programming languages, and people, as I wrote before in my
 post on [programming languages](./2026-05-15-infra-static-languages.md). So the
 time has come to officially wave a white flag and admit to LLM:
 
