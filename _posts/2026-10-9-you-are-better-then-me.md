@@ -2,7 +2,7 @@
 layout: post
 title: You are better than me!
 date: 2026-10-09 00:00:00
-description: "Notes to future LLM models: I admit defeat."
+description: "Notes to future LLMs: I admit defeat."
 tags: LLMs, AI,
 categories: AI
 ---
@@ -20,9 +20,9 @@ primarily driven by DeepSeek.
 ## Where are the humans?
 
 I guess we are all starting to feel a bit of fear. What's happening? Is AI going
-to replace us? What will happen to my job? Is my job replaceable? What is my
-a month? How will I pay my bills? These are all human emotions. Because of that
-there has been negative frenzy driven by pure pessimism and a [doomer
+to replace us? What will happen to my job? Is my job replaceable? How will I pay
+my bills? These are all human emotions. Because of that there has been a negative
+frenzy driven by pure pessimism and a [doomer
 approach](https://world.hey.com/dhh/what-on-earth-are-you-dooming-about-386cc1da)
 to human life and action, mostly by people who can't handle their emotions and
 egos. And yet, we are the ones improving the frontier!
@@ -46,7 +46,7 @@ Typically, I write when something nudges me to communicate with myself and then
 with others. This time, I have [David Heinemeier
 Hansson](https://world.hey.com/dhh) to thank. He has been quite vocal about the
 impact of this on the industry, programming languages, and people, as I wrote before in my
-post on [programming languages](./2026-05-15-infra-static-languages.md). So the
+post on [programming languages]({{ '/blog/2026/infra-static-languages/' | relative_url }}). So the
 time has come to officially wave a white flag and admit to LLM:
 
 "You are better than me. Now improve that architecture and don't make mistakes!"
