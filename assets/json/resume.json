@@ -55,10 +55,7 @@
       "startDate": "2021",
       "endDate": "",
       "summary": "Teaching in the computing programme, now as a guest lecturer.",
-      "highlights": [
-        "Algorithms and data structures",
-        "Computer vision"
-      ]
+      "highlights": ["Algorithms and data structures", "Computer vision"]
     }
   ],
   "volunteer": [],
@@ -71,48 +68,25 @@
       "name": "Databases",
       "level": "",
       "icon": "fa-solid fa-database",
-      "keywords": [
-        "Memgraph",
-        "Cypher",
-        "Graph data modeling",
-        "Benchmarking",
-        "Tail latency",
-        "Query plans"
-      ]
+      "keywords": ["Memgraph", "Cypher", "Graph data modeling", "Benchmarking", "Tail latency", "Query plans"]
     },
     {
       "name": "AI engineering",
       "level": "",
       "icon": "fa-solid fa-brain",
-      "keywords": [
-        "Agent memory",
-        "MCP",
-        "GraphRAG",
-        "Information extraction",
-        "LLM evaluation"
-      ]
+      "keywords": ["Agent memory", "MCP", "GraphRAG", "Information extraction", "LLM evaluation"]
     },
     {
       "name": "Languages",
       "level": "",
       "icon": "fa-solid fa-code",
-      "keywords": [
-        "Python",
-        "C++",
-        "Rust",
-        "Go"
-      ]
+      "keywords": ["Python", "C++", "Rust", "Go"]
     },
     {
       "name": "Infrastructure",
       "level": "",
       "icon": "fa-solid fa-server",
-      "keywords": [
-        "Kubernetes",
-        "Helm",
-        "Docker",
-        "GitHub Actions"
-      ]
+      "keywords": ["Kubernetes", "Helm", "Docker", "GitHub Actions"]
     }
   ],
   "languages": [
@@ -131,19 +105,12 @@
     {
       "name": "Teaching",
       "icon": "fa-solid fa-chalkboard-user",
-      "keywords": [
-        "Algorithms",
-        "Data structures"
-      ]
+      "keywords": ["Algorithms", "Data structures"]
     },
     {
       "name": "Sport",
       "icon": "fa-solid fa-person-running",
-      "keywords": [
-        "Running",
-        "Tennis",
-        "Padel"
-      ]
+      "keywords": ["Running", "Tennis", "Padel"]
     },
     {
       "name": "Reading",

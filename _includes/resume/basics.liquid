@@ -12,13 +12,20 @@
       <td class="p-1 pr-2 font-weight-bold">
         <b>
           {%- case content[0] -%}
-            {%- when 'label' -%}Role
-            {%- when 'url' -%}Site
-            {%- when 'email' -%}Email
-            {%- when 'name' -%}Name
-            {%- when 'summary' -%}Summary
-            {%- when 'phone' -%}Phone
-            {%- else -%}{{ content[0] | capitalize }}
+            {%- when 'label' -%}
+              Role
+            {%- when 'url' -%}
+              Site
+            {%- when 'email' -%}
+              Email
+            {%- when 'name' -%}
+              Name
+            {%- when 'summary' -%}
+              Summary
+            {%- when 'phone' -%}
+              Phone
+            {%- else -%}
+              {{ content[0] | capitalize }}
           {%- endcase -%}
         </b>
       </td>
