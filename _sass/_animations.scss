@@ -1,0 +1,181 @@
+/*******************************************************************************
+ * Animations
+ ******************************************************************************/
+
+$anim-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes underline-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+// Page header animates in on load
+.post-header,
+.header-bar {
+  animation: fade-up 0.7s $anim-ease both;
+}
+
+.post-header .desc,
+.post-header .post-meta {
+  animation: fade-up 0.7s $anim-ease 0.12s both;
+}
+
+.post-header .post-title::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 3px;
+  margin-top: 0.5rem;
+  border-radius: 2px;
+  background: var(--global-theme-color);
+  transform-origin: left;
+  animation: underline-grow 0.8s $anim-ease 0.3s both;
+}
+
+// Scroll reveal; `.anim-ready` is only set by JS, so content stays visible without it
+.anim-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s $anim-ease,
+    transform 0.6s $anim-ease;
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.anim-ready [data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+}
+
+// Navbar links: sliding underline
+.navbar .nav-item:not(.dropdown) .nav-link {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.2rem;
+    height: 2px;
+    background: var(--global-theme-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s $anim-ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.navbar .nav-item.active .nav-link::after {
+  transform: scaleX(1);
+}
+
+// Theme toggle spins when clicked
+#light-toggle i {
+  display: inline-block;
+  transition: transform 0.5s $anim-ease;
+}
+
+#light-toggle:active i,
+#light-toggle.spin i {
+  transform: rotate(360deg);
+}
+
+// Blog list entries: lift and highlight on hover
+.post-list > li {
+  transition:
+    transform 0.3s $anim-ease,
+    border-color 0.3s ease;
+  border-left: 3px solid transparent;
+  padding-left: 0.75rem;
+  margin-left: -0.75rem;
+
+  &:hover {
+    transform: translateX(4px);
+    border-left-color: var(--global-theme-color);
+  }
+}
+
+.post-list .post-title,
+.post a.post-title {
+  background-image: linear-gradient(var(--global-theme-color), var(--global-theme-color));
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s $anim-ease;
+
+  &:hover {
+    background-size: 100% 2px;
+    text-decoration: none;
+  }
+}
+
+// Cards: smooth lift on hover
+.card.hoverable {
+  transition:
+    transform 0.35s $anim-ease,
+    box-shadow 0.35s $anim-ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+// Profile picture: soft glow on hover
+.profile img {
+  transition:
+    transform 0.5s $anim-ease,
+    box-shadow 0.5s $anim-ease;
+
+  &:hover {
+    transform: scale(1.03) rotate(-1deg);
+    box-shadow: 0 10px 30px -10px var(--global-theme-color);
+  }
+}
+
+// Social icons: little bounce
+.contact-icons a,
+.social a {
+  display: inline-block;
+  transition:
+    transform 0.3s $anim-ease,
+    color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .anim-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
