@@ -27,8 +27,12 @@ layout: default
           {% endif %}
           {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
       30vw, 95vw"{% endcapture %}
+          {% capture profile_alt %}{{ site.first_name }} {{ site.last_name }}{% endcapture %}
+          {% if page.profile.alt %}
+            {% assign profile_alt = page.profile.alt %}
+          {% endif %}
           {%
-            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
+            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=profile_alt
             cache_bust=true
           %}
         {% endif %}
@@ -51,7 +55,7 @@ layout: default
     <!-- Latest posts -->
     {% if site.latest_posts.enabled %}
       <h2>
-        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest posts</a>
+        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">Recent blogs</a>
       </h2>
       {% include latest_posts.liquid %}
     {% endif %}

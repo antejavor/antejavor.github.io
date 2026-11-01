@@ -16,7 +16,10 @@
   </head>
 
   <!-- Body -->
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} layout-{{ page.layout }}">
+    <!-- Animated graph background -->
+    <canvas id="graph-bg" aria-hidden="true"></canvas>
+
     <!-- Header -->
     {% include header.liquid %}
 

@@ -2,23 +2,19 @@
 layout: about
 title: about
 permalink: /
-subtitle: Software Engineer | Developer Experience | Database Systems
+subtitle: Engineer at Memgraph · AI, graphs & databases
 
 profile:
   align: right
   image: profile_ante.jpeg
   image_circular: true # crops the image to make it circular
-  # more_info: >
-  #   <p>Croatia</p>
+
 
 news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Hi, I am a software engineer who finds particular happiness in figuring out how things operate.
+Hi, I'm Ante, an engineer at [Memgraph](https://memgraph.com/). I work across the stack from database internals and performance up to AI agents. Most of my time goes into building things, measuring them, and throwing away what doesn't hold up. Lately that means agent memory, with [Context Graph](https://memgraph.com/docs/ai-ecosystem/ai-memory) as one example.
 
-I am working in [Memgraph](https://memgraph.com/), we are building the best graph database.
-
-If you want to learn more about my mind, read the [blog](/blog). If you want to
-reach me, send me a message on X or LinkedIn.
+I also teach algorithms and data structures in Bjelovar. Away from the screen, I read, run, and play tennis and padel.

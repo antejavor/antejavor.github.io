@@ -7,6 +7,8 @@ tags: LLMs, AI
 categories: AI
 ---
 
+It’s never been a better time to be an engineer.
+
 ## The mighty LLMs
 
 We live in fascinating times of mighty LLMs that can help boost productivity and simplify day-to-day tasks. The speed of adoption of LLMs is a story that will constantly be compared to everything that came before and after them.
