@@ -232,6 +232,491 @@ footer:not(.fixed-bottom) {
   }
 }
 
+// Reading list
+.reading-intro {
+  color: var(--global-text-color-light);
+}
+
+.reading-core-mark {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--global-theme-color);
+  border: 1px solid var(--global-theme-color);
+  border-radius: 3px;
+  padding: 0 0.3rem;
+}
+
+.reading-controls {
+  position: sticky;
+  top: 3.6rem;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  margin: 1.5rem 0 1rem;
+  padding: 0.6rem 0;
+  background: color-mix(in srgb, var(--global-bg-color) 88%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px dashed var(--global-divider-color);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.reading-tracks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.reading-chip {
+  font: inherit;
+  color: var(--global-text-color-light);
+  background: transparent;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 999px;
+  padding: 0.15rem 0.65rem;
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+  }
+}
+
+.reading-toggle {
+  margin: 0;
+  color: var(--global-text-color-light);
+  cursor: pointer;
+}
+
+
+.reading-stage {
+  margin-top: 2.5rem;
+  scroll-margin-top: 8rem;
+
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.35rem;
+  }
+}
+
+.reading-stage-num,
+.reading-era {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--global-theme-color);
+}
+
+.reading-era {
+  color: var(--global-text-color-light);
+}
+
+.reading-blurb {
+  margin: 0.5rem 0 0.75rem;
+  color: var(--global-text-color-light);
+}
+
+.reading-items {
+  list-style: none;
+  padding-left: 0;
+}
+
+.reading-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed var(--global-divider-color);
+
+  &[hidden] {
+    display: none;
+  }
+
+  .reading-dot {
+    flex: 0 0 auto;
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-top: 0.45rem;
+    border-radius: 50%;
+    border: 1.5px solid var(--global-text-color-light);
+  }
+
+  &.is-read .reading-dot {
+    background: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+  }
+
+  &:target {
+    background: var(--global-code-bg-color);
+  }
+}
+
+.reading-walked {
+  color: var(--global-theme-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+.path-suggested {
+  fill: none;
+  stroke: var(--global-text-color-light);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 4;
+  opacity: 0.45;
+}
+
+.reading-question,
+
+
+
+
+
+.reading-checklist {
+  margin: 0 0 0.75rem;
+  padding: 0.6rem 0.9rem;
+  border-left: 2px solid var(--global-theme-color);
+  background: var(--global-code-bg-color);
+  font-size: 0.88rem;
+
+  ul {
+    margin: 0.3rem 0 0;
+    padding-left: 1.1rem;
+  }
+}
+
+.reading-checklist-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--global-theme-color);
+}
+
+.path-kit {
+  margin: 1rem 0 0;
+  font-size: 0.92rem;
+
+  summary {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--global-theme-color);
+    cursor: pointer;
+  }
+
+  ol {
+    padding-left: 1.2rem;
+  }
+}
+
+// Connections between items on the map
+.path-edge {
+  fill: none;
+  stroke: var(--global-text-color-light);
+  stroke-width: 0.8;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+#path-svg.show-edges .path-edge {
+  opacity: 0.14;
+}
+
+#path-svg .path-edge.is-in {
+  opacity: 0.95;
+  stroke: var(--global-theme-color);
+  stroke-width: 1.4;
+}
+
+#path-svg .path-edge.is-out {
+  opacity: 0.7;
+  stroke-dasharray: 3 3;
+  stroke-width: 1.2;
+}
+
+#path-svg.is-focusing .path-walked,
+#path-svg.is-focusing .path-suggested {
+  opacity: 0.15;
+}
+
+.path-node.is-focus circle,
+.path-node.is-linked circle {
+  stroke: var(--global-theme-color);
+  stroke-width: 2;
+  opacity: 1;
+}
+
+.path-map figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+// The stack: layers × compute / store / move / search
+.path-stack {
+  margin: 1.5rem 0 0.5rem;
+
+  figcaption {
+    margin-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--global-text-color-light);
+  }
+}
+
+.path-stack-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.path-stack-title {
+  color: var(--global-theme-color);
+}
+
+.path-stack-picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.path-stack-grid {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, auto) repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.path-stack-colhead {
+  text-align: center;
+  color: var(--global-text-color-light);
+  padding-bottom: 0.15rem;
+}
+
+.path-stack-rowhead {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.4rem;
+  color: var(--global-text-color-light);
+}
+
+.path-stack-cell {
+  --cov: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-height: 3.2rem;
+  padding: 0.3rem 0.4rem;
+  font: inherit;
+  text-align: left;
+  color: var(--global-text-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--global-theme-color) calc(var(--cov) * 45%), var(--global-card-bg-color));
+  cursor: pointer;
+
+  &:hover,
+  &.is-active {
+    border-color: var(--global-theme-color);
+  }
+
+  &.is-empty {
+    cursor: default;
+    opacity: 0.45;
+    background: transparent;
+    border-style: dashed;
+  }
+}
+
+.path-stack-count {
+  color: var(--global-text-color-light);
+}
+
+.path-stack-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+
+  i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    border: 1px solid var(--global-text-color-light);
+    opacity: 0.6;
+  }
+
+  i.is-read {
+    background: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+    opacity: 1;
+  }
+}
+
+.reading-cell-filter {
+  font-family: var(--font-mono);
+}
+
+// Down and around: map of stages with the walked route
+.path-intro {
+  color: var(--global-text-color-light);
+}
+
+.path-map {
+  margin: 1.5rem 0 0.5rem;
+
+  figcaption {
+    margin-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--global-text-color-light);
+  }
+}
+
+.path-map-scroll {
+  overflow-x: auto;
+  border: 1px dashed var(--global-divider-color);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--global-bg-color) 80%, transparent);
+}
+
+#path-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  [data-track] {
+    transition: opacity 0.2s;
+  }
+
+  .is-dim {
+    opacity: 0.15;
+  }
+}
+
+.path-planned {
+  fill: none;
+  stroke: var(--global-divider-color);
+  stroke-width: 2;
+  stroke-dasharray: 4 5;
+}
+
+.path-stage {
+  circle {
+    fill: var(--global-bg-color);
+    stroke: var(--global-theme-color);
+    stroke-width: 1.5;
+  }
+
+  text {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-anchor: middle;
+    fill: var(--global-theme-color);
+  }
+}
+
+.path-walked {
+  fill: none;
+  stroke: var(--global-theme-color);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+
+  &.is-drawn {
+    transition: stroke-dashoffset 2.5s ease-in-out;
+  }
+}
+
+.path-node {
+  circle {
+    fill: var(--global-bg-color);
+    stroke: var(--global-text-color-light);
+    stroke-width: 1;
+    opacity: 0.7;
+  }
+
+  &.is-read circle {
+    fill: var(--global-theme-color);
+    stroke: var(--global-theme-color);
+    opacity: 1;
+  }
+
+  &:hover circle {
+    stroke: var(--global-theme-color);
+    stroke-width: 2;
+    opacity: 1;
+  }
+}
+
+.path-here {
+  fill: none;
+  stroke: var(--global-theme-color);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: path-pulse 2s ease-out infinite;
+}
+
+.path-here-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--global-theme-color);
+}
+
+@keyframes path-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .path-here {
+    animation: none;
+  }
+
+  .path-walked.is-drawn {
+    transition: none;
+  }
+}
+
+.reading-title {
+  font-weight: 600;
+}
+
+.reading-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--global-text-color-light);
+}
+
 // CV: accent badges instead of the stock red
 .cv .badge.danger-color-dark {
   background-color: var(--global-theme-color) !important;

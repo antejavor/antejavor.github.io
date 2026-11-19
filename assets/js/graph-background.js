@@ -8,6 +8,8 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const LINK_DISTANCE = 150;
   const MAX_SIGNALS = 6;
+  // Overall pace of the animation; 1 was the original speed at 60 fps
+  const SPEED = 0.5;
 
   let width = 0;
   let height = 0;
@@ -65,10 +67,12 @@
     signals.push({ from, to, t: 0, hops: 2 + Math.floor(Math.random() * 4) });
   };
 
-  const step = () => {
+  // dt is elapsed time in 60 fps frames, so the pace is the same on 60 and 120 Hz screens
+  const step = (dt) => {
+    const k = dt * SPEED;
     for (const n of nodes) {
-      n.x += n.vx;
-      n.y += n.vy;
+      n.x += n.vx * k;
+      n.y += n.vy * k;
       if (n.x < -20) n.x = width + 20;
       if (n.x > width + 20) n.x = -20;
       if (n.y < -20) n.y = height + 20;
@@ -80,17 +84,17 @@
         const dy = pointer.y - n.y;
         const d = Math.hypot(dx, dy);
         if (d < 200 && d > 1) {
-          n.x += (dx / d) * 0.15;
-          n.y += (dy / d) * 0.15;
+          n.x += (dx / d) * 0.15 * k;
+          n.y += (dy / d) * 0.15 * k;
         }
       }
-      n.glow *= 0.96;
+      n.glow *= Math.pow(0.96, k);
     }
 
-    if (Math.random() < 0.03) spawnSignal();
+    if (Math.random() < 0.03 * k) spawnSignal();
 
     signals = signals.filter((s) => {
-      s.t += 0.018;
+      s.t += 0.018 * k;
       if (s.t < 1) return true;
       s.to.glow = 1;
       if (--s.hops <= 0) return false;
@@ -156,8 +160,12 @@
     ctx.globalAlpha = 1;
   };
 
-  const loop = () => {
-    step();
+  let last = null;
+  const loop = (now) => {
+    // Cap dt so a stalled tab doesn't make nodes jump when it resumes
+    const dt = last === null ? 1 : Math.min((now - last) / (1000 / 60), 3);
+    last = now;
+    step(dt);
     draw();
     frame = requestAnimationFrame(loop);
   };
@@ -167,6 +175,7 @@
       draw();
       return;
     }
+    last = null;
     if (!frame) frame = requestAnimationFrame(loop);
   };
 

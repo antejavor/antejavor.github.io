@@ -26,6 +26,14 @@
               </td>
             </tr>
           {% endfor %}
+          {% if content.url %}
+            <tr>
+              <td></td>
+              <td class="list-group-name">
+                <a href="{{ content.url | relative_url }}">{{ content.url_label | default: content.url }}</a>
+              </td>
+            </tr>
+          {% endif %}
         </tbody>
       </table>
     </div>
