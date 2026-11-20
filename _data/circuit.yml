@@ -1,0 +1,14 @@
+# The first circuit: the opening stops of the suggested route.
+# Stop n collects the readings marked `circuit: n` in reading_list.yml, in route order.
+#   title   -> what the stop is about
+#   prompt  -> optional closing question, shown after the stop's readings
+
+- title: From switches to gates
+- title: What a machine and a neuron compute
+- title: Information
+- title: The energy of a bit
+- title: Reversible and quantum
+- title: Learning by gradient
+- title: Compute against memory
+- title: Scale against hardware
+  prompt: "Take one algorithm through both essays. How would its prospects change on different hardware?"

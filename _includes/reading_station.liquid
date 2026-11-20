@@ -1,0 +1,93 @@
+{%- comment -%}
+  One station on the down-and-around page: a collapsed row that expands into its detail.
+  include.it    the item from _data/reading_list.yml
+  include.stage the stage it belongs to
+  include.si    stage index, include.ii item index (together they identify the station)
+  include.view  stages | circuit | route; only the stages view carries the anchor id the map links to
+  include.num   optional number shown before the title (route position)
+{%- endcomment -%}
+{%- assign it = include.it -%}
+{%- assign s = include.stage -%}
+{%- assign key = include.si | append: '-' | append: include.ii -%}
+{%- assign did = 'd-' | append: include.view | append: '-' | append: key -%}
+{%- assign st = it.stack | default: s.stack -%}
+<li
+  class="reading-item{% if it.core %} is-core{% endif %}{% if it.read %} is-read{% endif %}"
+  {% if include.view == 'stages' %}
+    id="p-{{ key }}"
+  {% endif %}
+  data-key="{{ key }}"
+  data-track="{{ s.track }}"
+  data-layer="{{ it.layer }}"
+  data-does="{{ it.does | join: ' ' }}"
+  data-stack="{{ st }}"
+>
+  <div class="reading-row">
+    <button type="button" class="reading-open" aria-expanded="false" aria-controls="{{ did }}">
+      <span class="reading-dot" aria-hidden="true"></span>
+      <span class="reading-head">
+        <span class="reading-title">
+          {%- if include.num -%}
+            <span class="reading-num">{{ include.num | prepend: '0' | slice: -2, 2 }}</span>
+          {%- endif -%}
+          {{- it.title -}}
+        </span>
+        <span class="reading-meta">
+          <span>{{ it.year }}</span> · <span>{{ it.by }}</span> · <span>{{ it.kind }}</span>
+          {%- if it.core %}
+            <span class="reading-badge is-core">core</span>
+          {%- endif %}
+          {%- if it.circuit and include.view == 'stages' %}
+            <span class="reading-badge">stop {{ it.circuit }}</span>
+          {%- endif %}
+          {%- if include.view != 'stages' %}
+            <span class="reading-from">
+              {{- include.si | prepend: '0' | slice: -2, 2 }}
+              {{ s.title -}}
+            </span>
+          {%- endif %}
+          {%- if it.read %}
+            <span class="reading-walked">walked {{ it.read | date: '%b %-d, %Y' }}</span>
+          {%- endif %}
+        </span>
+      </span>
+      <span class="reading-chevron" aria-hidden="true"></span>
+    </button>
+    <a class="reading-out" href="{{ it.url }}" target="_blank" rel="noopener" aria-label="Open {{ it.title | escape }}" title="Open the {{ it.kind }}"
+      >↗</a
+    >
+  </div>
+  <div class="reading-detail" id="{{ did }}">
+    {%- if it.note %}
+      <p class="reading-note">{{ it.note | escape }}</p>
+    {%- endif %}
+    <dl class="reading-facts">
+      {%- if it.focus %}
+        <dt>task</dt>
+        <dd>{{ it.focus | escape }}</dd>
+      {%- endif %}
+      {%- if it.question %}
+        <dt>carry</dt>
+        <dd class="reading-question">{{ it.question | escape }}</dd>
+      {%- endif %}
+      <dt>references</dt>
+      <dd>
+        <ul class="reading-refs">
+          <li>
+            <a href="{{ it.url }}" target="_blank" rel="noopener">The work itself</a> <span class="reading-ref-kind">{{ it.kind }}</span>
+          </li>
+          {%- for r in it.refs %}
+            <li>
+              <a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.title }}</a>
+              {%- if r.kind %}
+                <span class="reading-ref-kind">{{ r.kind }}</span>
+              {%- endif %}
+            </li>
+          {%- endfor %}
+        </ul>
+      </dd>
+      <dt class="reading-links-label" hidden>connections</dt>
+      <dd class="reading-links" hidden></dd>
+    </dl>
+  </div>
+</li>

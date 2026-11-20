@@ -13,11 +13,16 @@ noindex: true
 <p class="path-intro">
   An engineer's walk through what sits under intelligence: down through the whole stack (physics, devices,
   architecture, systems, algorithms, learning) and around three of them: the classical one that runs on transistors
-  and GPUs, the brain, and the quantum computer. At every layer the same four questions come back: how do you
-  <strong>compute</strong>, <strong>store</strong>, <strong>move</strong> and <strong>search</strong>? Nothing here is learned in one pass; every
-  stage sends you back to an earlier one, and that is the point. Large language models are one answer at the top of one
-  stack, a great case study in scale, not the destination.
+  and GPUs, the brain, and the quantum computer.
 </p>
+
+{% assign circuit_stops = site.data.circuit %}
+{% assign route_keys = "" | split: "," %}
+{% for s in stages %}{% assign si = forloop.index0 %}{% for it in s.items %}{% if it.route %}
+{% capture rk %}{{ it.route | prepend: "000" | slice: -3, 3 }}|{{ si }}|{{ forloop.index0 }}{% endcapture %}
+{% assign route_keys = route_keys | push: rk %}
+{% endif %}{% endfor %}{% endfor %}
+{% assign route_keys = route_keys | sort %}
 
 <details class="path-kit">
   <summary>How to walk a step</summary>
@@ -29,6 +34,7 @@ noindex: true
     <li><strong>Assumptions.</strong> Which still shape how we think today?</li>
     <li><strong>One derivation</strong>, done by hand.</li>
     <li><strong>One experiment</strong> that can be reproduced.</li>
+    <li><strong>One rival explanation.</strong> What experiment would tell the authors' explanation apart from another one for the same result?</li>
     <li><strong>Next question</strong> it raises, with links to earlier steps.</li>
   </ol>
   <p>Keep an analogy apart from a mathematical equivalence, and an empirical observation apart from a theorem.</p>
@@ -64,6 +70,11 @@ noindex: true
 </figure>
 
 <div class="reading-controls" id="reading-controls">
+  <div class="reading-views" role="tablist" aria-label="How to walk the list">
+    <button type="button" class="reading-view active" role="tab" aria-selected="true" data-view="stages">stages</button>
+    <button type="button" class="reading-view" role="tab" aria-selected="false" data-view="circuit">first circuit</button>
+    <button type="button" class="reading-view" role="tab" aria-selected="false" data-view="route">full route</button>
+  </div>
   <div class="reading-tracks" role="group" aria-label="Filter by track">
     <button type="button" class="reading-chip active" data-track="all">all</button>
     <button type="button" class="reading-chip" data-track="foundations">foundations</button>
@@ -78,15 +89,17 @@ noindex: true
     <button type="button" class="reading-chip" data-track="quantum">quantum</button>
     <button type="button" class="reading-chip" data-track="crossroads">crossroads</button>
   </div>
-  <label class="reading-toggle"><input type="checkbox" id="reading-core-only"> core only</label>
-  <label class="reading-toggle"><input type="checkbox" id="reading-todo-only"> not walked yet</label>
-  <button type="button" class="reading-chip reading-cell-filter active" id="reading-cell-filter" hidden></button>
+  <div class="reading-switches">
+    <label class="reading-toggle"><input type="checkbox" id="reading-core-only"> core only</label>
+    <label class="reading-toggle"><input type="checkbox" id="reading-todo-only"> not walked yet</label>
+    <button type="button" class="reading-chip reading-cell-filter active" id="reading-cell-filter" hidden></button>
+  </div>
 </div>
 
+<div class="reading-view-panel" data-view="stages">
 {% for s in stages %}
 {% assign si = forloop.index0 %}
-
-<section class="reading-stage" id="{{ s.id }}" data-track="{{ s.track }}">
+<section class="reading-stage" id="{{ s.id }}">
   <header>
     <span class="reading-stage-num">{{ si | prepend: '0' | slice: -2, 2 }}</span>
     <h2>{{ s.title }}</h2>
@@ -100,21 +113,45 @@ noindex: true
   </div>
   {% endif %}
   <ul class="reading-items">
-    {% for it in s.items %}
-    {% assign st = it.stack | default: s.stack %}
-    <li class="reading-item{% if it.core %} is-core{% endif %}{% if it.read %} is-read{% endif %}" id="p-{{ si }}-{{ forloop.index0 }}" data-layer="{{ it.layer }}" data-does="{{ it.does | join: ' ' }}" data-stack="{{ st }}">
-      <span class="reading-dot" aria-hidden="true"></span>
-      <div>
-        <a href="{{ it.url }}" target="_blank" rel="noopener" class="reading-title">{{ it.title }}</a>
-        <div class="reading-meta">
-          <span>{{ it.year }}</span> · <span>{{ it.by }}</span>{% if it.core %} · <span class="reading-core-mark">core</span>{% endif %}{% if it.read %} · <span class="reading-walked">walked {{ it.read | date: "%b %-d, %Y" }}</span>{% endif %}
-        </div>
-      </div>
-    </li>
-    {% endfor %}
+    {% for it in s.items %}{% include reading_station.liquid it=it stage=s si=si ii=forloop.index0 view="stages" %}{% endfor %}
   </ul>
 </section>
 {% endfor %}
+</div>
+
+<div class="reading-view-panel" data-view="circuit" hidden>
+<p class="reading-view-lead">The opening stretch of the route: {{ circuit_stops.size }} stops that cross the stack from switches to scaling. Do the task at each station before moving on.</p>
+{% for stop in circuit_stops %}
+{% assign n = forloop.index %}
+<section class="reading-stage">
+  <header>
+    <span class="reading-stage-num">stop {{ n | prepend: '0' | slice: -2, 2 }}</span>
+    <h2>{{ stop.title }}</h2>
+  </header>
+  <ul class="reading-items">
+    {% for rk in route_keys %}
+      {% assign parts = rk | split: "|" %}{% assign psi = parts[1] | plus: 0 %}{% assign pii = parts[2] | plus: 0 %}
+      {% assign pstage = stages[psi] %}{% assign it = pstage.items[pii] %}
+      {% if it.circuit == n %}{% include reading_station.liquid it=it stage=pstage si=psi ii=pii view="circuit" %}{% endif %}
+    {% endfor %}
+  </ul>
+  {% if stop.prompt %}<p class="reading-stop-prompt">{{ stop.prompt }}</p>{% endif %}
+</section>
+{% endfor %}
+</div>
+
+<div class="reading-view-panel" data-view="route" hidden>
+<p class="reading-view-lead">Every step of the suggested route in order, the dashed line on the map. After the circuit comes a thread through graphs: draw a four-vertex graph, run Dijkstra from one vertex, then reuse it for a convolution. Which vertices can you tell apart after one round of aggregation?</p>
+<section class="reading-stage">
+  <ul class="reading-items">
+    {% for rk in route_keys %}
+      {% assign parts = rk | split: "|" %}{% assign psi = parts[1] | plus: 0 %}{% assign pii = parts[2] | plus: 0 %}
+      {% assign pstage = stages[psi] %}{% assign it = pstage.items[pii] %}
+      {% include reading_station.liquid it=it stage=pstage si=psi ii=pii view="route" num=forloop.index %}
+    {% endfor %}
+  </ul>
+</section>
+</div>
 
 <script id="path-data" type="application/json">{{ stages | jsonify }}</script>
 <script>
@@ -153,7 +190,7 @@ noindex: true
       s.items.forEach(function (it, ii) {
         nodes.push({
           si: si, ii: ii, track: s.track, stack: it.stack || s.stack, layer: it.layer || null, does: it.does || [],
-          title: it.title, core: !!it.core,
+          title: it.title, note: it.note || null, core: !!it.core,
           read: it.read ? String(it.read).slice(0, 10) : null, route: it.route || null,
           buildsOn: it.builds_on || [], inEdges: [], outEdges: [],
           x: sx[si].left + Math.floor(ii / ROWMAX) * SUB, y: TOP + (ii % ROWMAX) * ROW
@@ -241,6 +278,7 @@ noindex: true
       el("circle", { cx: n.x, cy: n.y, r: n.core ? 4.2 : 2.8 }, a);
       var t = el("title", {}, a);
       t.textContent = n.title + (n.layer ? " · " + n.layer : "") + (n.read ? " (walked " + n.read + ")" : "") +
+        (n.note ? "\n" + n.note : "") +
         (n.inEdges.length ? "\nbuilds on " + n.inEdges.length : "") + (n.outEdges.length ? " · built on by " + n.outEdges.length : "");
       n.els = [a];
       n.dot = a;
@@ -261,7 +299,7 @@ noindex: true
     });
 
     // Where I am now
-    var here = walk[walk.length - 1] || nodes[0];
+    var here = walk[walk.length - 1] || suggested[0] || nodes[0];
     el("circle", { cx: here.x, cy: here.y, r: 8, class: "path-here" });
     var label = el("text", { x: here.x + 11, y: here.y - 6, class: "path-here-label" });
     label.textContent = walk.length ? "you are here" : "start";
@@ -333,10 +371,13 @@ noindex: true
       });
     }
 
-    // ---------------------------------------------------------------- filters
+    // ---------------------------------------------------------------- filters and views
     var coreOnly = document.getElementById("reading-core-only");
     var todoOnly = document.getElementById("reading-todo-only");
     var cellChip = document.getElementById("reading-cell-filter");
+    var panels = document.querySelectorAll(".reading-view-panel");
+    var viewTabs = document.querySelectorAll(".reading-view");
+    state.view = "stages";
 
     function matches(track, stack, layer, does) {
       return (state.track === "all" || track === state.track) &&
@@ -345,16 +386,14 @@ noindex: true
     }
 
     function update() {
-      document.querySelectorAll(".reading-stage").forEach(function (stage) {
-        var any = false;
-        stage.querySelectorAll(".reading-item").forEach(function (li) {
-          var does = li.dataset.does ? li.dataset.does.split(" ") : [];
-          var show = matches(stage.dataset.track, li.dataset.stack, li.dataset.layer, does) &&
-            (!coreOnly.checked || li.classList.contains("is-core")) &&
-            (!todoOnly.checked || !li.classList.contains("is-read"));
-          li.hidden = !show; if (show) any = true;
-        });
-        stage.hidden = !any;
+      document.querySelectorAll(".reading-item").forEach(function (li) {
+        var does = li.dataset.does ? li.dataset.does.split(" ") : [];
+        li.hidden = !(matches(li.dataset.track, li.dataset.stack, li.dataset.layer, does) &&
+          (!coreOnly.checked || li.classList.contains("is-core")) &&
+          (!todoOnly.checked || !li.classList.contains("is-read")));
+      });
+      document.querySelectorAll(".reading-stage").forEach(function (sec) {
+        sec.hidden = !sec.querySelector(".reading-item:not([hidden])");
       });
       nodes.forEach(function (n) {
         var on = matches(n.track, n.stack, n.layer, n.does);
@@ -367,6 +406,20 @@ noindex: true
       if (state.cell) cellChip.textContent = state.cell.layer + " × " + state.cell.does + "  ✕";
     }
 
+    function setView(v) {
+      state.view = v;
+      panels.forEach(function (p) { p.hidden = p.dataset.view !== v; });
+      viewTabs.forEach(function (t) {
+        var on = t.dataset.view === v;
+        t.classList.toggle("active", on);
+        t.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      try { localStorage.setItem("down-and-around:view", v); } catch (e) {}
+    }
+
+    viewTabs.forEach(function (t) {
+      t.addEventListener("click", function () { setView(t.dataset.view); });
+    });
     document.querySelectorAll(".reading-tracks .reading-chip").forEach(function (chip) {
       chip.addEventListener("click", function () {
         document.querySelectorAll(".reading-tracks .reading-chip").forEach(function (c) { c.classList.remove("active"); });
@@ -382,7 +435,88 @@ noindex: true
     cellChip.addEventListener("click", function () { state.cell = null; renderGrid(); update(); });
     coreOnly.addEventListener("change", update);
     todoOnly.addEventListener("change", update);
+
+    // ---------------------------------------------------------------- stations
+    // Connections: what a station builds on and what builds on it, as links into the stage view
+    var byKey = {};
+    nodes.forEach(function (n) { byKey[n.si + "-" + n.ii] = n; });
+
+    function linkList(label, list) {
+      if (!list.length) return null;
+      var wrap = document.createElement("div");
+      var lab = document.createElement("span");
+      lab.className = "reading-links-dir";
+      lab.textContent = label;
+      wrap.appendChild(lab);
+      list.forEach(function (e) {
+        var a = document.createElement("a");
+        a.href = "#p-" + e.other.si + "-" + e.other.ii;
+        a.className = "reading-link";
+        a.textContent = e.other.title;
+        wrap.appendChild(a);
+      });
+      return wrap;
+    }
+
+    document.querySelectorAll(".reading-item").forEach(function (li) {
+      var n = byKey[li.dataset.key];
+      var dd = li.querySelector(".reading-links");
+      if (n && dd && (n.inEdges.length || n.outEdges.length)) {
+        [linkList("builds on", n.inEdges), linkList("leads to", n.outEdges)].forEach(function (w) { if (w) dd.appendChild(w); });
+        dd.hidden = false;
+        li.querySelector(".reading-links-label").hidden = false;
+      }
+
+      var btn = li.querySelector(".reading-open");
+      var timer = null;
+      function setOpen(on) {
+        li.classList.toggle("is-open", on);
+        li.classList.remove("is-peek");
+        btn.setAttribute("aria-expanded", on ? "true" : "false");
+      }
+      btn.addEventListener("click", function () { setOpen(!li.classList.contains("is-open")); });
+      li._open = setOpen;
+
+      // Pointing at a station previews it in a floating card; clicking pins it open in place
+      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        li.addEventListener("mouseenter", function () {
+          timer = setTimeout(function () { if (!li.classList.contains("is-open")) li.classList.add("is-peek"); }, 220);
+        });
+        li.addEventListener("mouseleave", function () { clearTimeout(timer); li.classList.remove("is-peek"); });
+      }
+    });
+
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") document.querySelectorAll(".reading-item.is-peek").forEach(function (li) { li.classList.remove("is-peek"); });
+    });
+
+    // A link to a station (from the map or a connection) opens it in the stage view
+    function reveal(hash) {
+      var m = /^#p-\d+-\d+$/.test(hash) && document.getElementById(hash.slice(1));
+      if (!m) return;
+      if (state.view !== "stages") setView("stages");
+      if (m.hidden) {
+        state.track = "all"; state.cell = null; coreOnly.checked = false; todoOnly.checked = false;
+        document.querySelectorAll(".reading-tracks .reading-chip").forEach(function (c) { c.classList.toggle("active", c.dataset.track === "all"); });
+        renderGrid(); update();
+      }
+      m._open(true);
+      m.scrollIntoView({ block: "center" });
+      m.classList.remove("is-flash"); void m.offsetWidth; m.classList.add("is-flash");
+    }
+    document.addEventListener("click", function (ev) {
+      var a = ev.target.closest && ev.target.closest('a[href^="#p-"]');
+      if (!a) return;
+      ev.preventDefault();
+      history.replaceState(null, "", a.getAttribute("href"));
+      reveal(a.getAttribute("href"));
+    });
+
+    var saved = null;
+    try { saved = localStorage.getItem("down-and-around:view"); } catch (e) {}
+    if (saved && document.querySelector('.reading-view-panel[data-view="' + saved + '"]')) setView(saved);
     renderGrid();
     update();
+    if (location.hash) reveal(location.hash);
   })();
 </script>
