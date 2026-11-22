@@ -9,7 +9,10 @@
 #
 # item fields:
 #   title, by, year, kind (paper | book | course | essay | video | interactive), url
-#   core: true       -> the entry point for each stage
+#   start: true      -> the entry point for each stage ("start here"); never intro or side
+#   (no tier field)  -> core: the deep-AI path; the route and the circuit use only these
+#   side: "..."      -> a side track: depth in a neighbouring field, named (e.g. "quantum hardware & error correction")
+#   intro: true      -> beginner-friendly or refresher reading; hidden by default on the page
 #   layer: ...       -> physics | devices | architecture | systems | algorithms | learning | intelligence
 #   does: [...]      -> any of compute, store, move, search (empty for purely conceptual items)
 #   stack: ...       -> only when it differs from the stage's stack
@@ -69,15 +72,13 @@
       year: 1998
       kind: book
       url: https://www.basicbooks.com/titles/w-daniel-hillis/the-pattern-on-the-stone/9780465066933/
+      intro: true
       layer: architecture
       does: [compute, store]
       builds_on:
         - "A Symbolic Analysis of Relay and Switching Circuits"
         - "On Computable Numbers, with an Application to the Entscheidungsproblem"
       note: "The whole stack in 160 pages, from logic and Boolean switches to parallel machines, learning and emergence. The best first map of what lies underneath."
-      core: true
-      route: 1
-      circuit: 1
       focus: "Follow the path from a switch to a logic gate. Sketch how gates can select between two signals."
 
     - title: "The Deep Learning Revolution"
@@ -85,6 +86,7 @@
       year: 2018
       kind: book
       url: https://mitpress.mit.edu/9780262038034/the-deep-learning-revolution/
+      intro: true
       layer: learning
       does: [compute]
       note: "An insider history, from the Boltzmann machine to the GPU era, by someone who was in the room."
@@ -101,15 +103,17 @@
         - "A General Reinforcement Learning Algorithm That Masters Chess, Shogi, and Go Through Self-Play"
         - "ImageNet Classification with Deep Convolutional Neural Networks"
       note: "One page. General methods that scale with compute have won, again and again. Keep it in mind for the whole list, then argue with it."
-      route: 17
-      circuit: 8
       focus: "Choose a scaling result and state which resource increased and how performance changed."
+      start: true
+      circuit: 9
+      route: 24
 
     - title: "Code: The Hidden Language of Computer Hardware and Software"
       by: Charles Petzold
       year: 2022
       kind: book
       url: https://www.charlespetzold.com/code/
+      intro: true
       layer: architecture
       does: [compute, store]
       builds_on:
@@ -121,6 +125,7 @@
       year: 2023
       kind: book
       url: https://www.abriefhistoryofintelligence.com/
+      intro: true
       layer: intelligence
       does: []
       builds_on:
@@ -147,9 +152,8 @@
       builds_on:
         - "On Computable Numbers, with an Application to the Entscheidungsproblem"
       note: "The first formal neuron: a threshold unit computing logic. Neural networks and the brain started out as one idea."
-      route: 5
-      circuit: 2
       focus: "Express AND and OR as threshold neurons. Then chain two neurons and say how many time steps an input needs to reach the output."
+      route: 26
 
     - title: "A Mathematical Theory of Communication"
       by: Claude Shannon
@@ -159,10 +163,9 @@
       layer: algorithms
       does: [move]
       note: "Entropy, coding and n-gram language models. Cross-entropy loss and next-token prediction come straight from here."
-      core: true
-      route: 7
-      circuit: 3
+      start: true
       focus: "Read the section on entropy. Calculate the entropy per symbol of independent flips with a 3:1 bias."
+      route: 27
 
     - title: "The Organization of Behavior"
       by: Donald Hebb
@@ -229,7 +232,7 @@
         - "The Organization of Behavior"
         - "A Logical Calculus of the Ideas Immanent in Nervous Activity"
       note: "Memory as an energy landscape. It brought physics into neural networks and won the 2024 Nobel Prize in physics."
-      route: 28
+      route: 34
 
     - title: "A Learning Algorithm for Boltzmann Machines"
       by: David Ackley, Geoffrey Hinton, Terrence Sejnowski
@@ -255,9 +258,8 @@
         - "The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain"
         - "Perceptrons"
       note: "Backpropagation, short and clear. Every model on this list is trained with it."
-      route: 13
-      circuit: 6
       focus: "Follow the chain rule from one output error back to one hidden weight."
+      route: 30
 
     - title: "Finding Structure in Time"
       by: Jeffrey Elman
@@ -345,9 +347,9 @@
       builds_on:
         - "A Mathematical Theory of Communication"
       note: "Free. Information theory and learning as one subject. Read it after Shannon."
-      route: 8
-      circuit: 3
       focus: "Use the entropy examples to connect the biased coin to the expected compressed length of a long sequence."
+      start: true
+      route: 28
 
     - title: "Probability Theory: The Logic of Science"
       by: E. T. Jaynes
@@ -370,6 +372,7 @@
       year: 2006
       kind: book
       url: https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/
+      intro: true
       does: []
       note: "The probabilistic view of ML: Bayesian methods, graphical models, kernels. Still the reference."
 
@@ -388,6 +391,7 @@
       year: 2016
       kind: video
       url: https://www.3blue1brown.com/topics/neural-networks
+      intro: true
       does: []
       note: "The best intuition for vectors, matrices, gradients and attention you will find. Watch before the textbooks."
 
@@ -396,6 +400,7 @@
       year: 2018
       kind: book
       url: https://doi.org/10.1201/9780429492563
+      intro: true
       does: []
       note: "Fixed points, stability, bifurcations, oscillators. The prerequisite for neurons, control, Hopfield networks and state-space models."
 
@@ -404,6 +409,7 @@
       year: 2019
       kind: book
       url: https://math.mit.edu/~gs/learningfromdata/
+      intro: true
       does: []
       note: "Strang's linear algebra aimed at deep learning, with the MIT 18.065 lectures online."
 
@@ -412,10 +418,9 @@
       year: 2020
       kind: book
       url: https://mml-book.github.io/
+      intro: true
       does: []
       note: "Free. Exactly the math the rest of this list assumes, and no more."
-      core: true
-      route: 22
       focus: "Use the matrix and vector calculus sections to work out the gradient of a squared error for one linear neuron."
 
     - title: "Probabilistic Machine Learning: An Introduction"
@@ -423,8 +428,20 @@
       year: 2022
       kind: book
       url: https://probml.github.io/pml-book/book1.html
+      intro: true
       does: []
       note: "Free. The probabilistic modelling view in depth, so not every problem looks like an architecture choice."
+
+    - title: "Probabilistic Machine Learning: Advanced Topics"
+      by: Kevin Murphy
+      year: 2023
+      kind: book
+      url: https://probml.github.io/pml-book/book2.html
+      layer: learning
+      does: []
+      builds_on:
+        - "Pattern Recognition and Machine Learning"
+      note: "Free. Graduate-level probabilistic ML: inference, generative models, causality and decision making. The follow-up to Bishop and the introduction volume."
 
 - id: computation
   title: Computation
@@ -440,11 +457,10 @@
       year: 1936
       kind: paper
       url: https://doi.org/10.1112/plms/s2-42.1.230
+      intro: true
       layer: algorithms
       does: [compute]
       note: "The Turing machine and the limits of computation. Everything else on this list runs inside this definition."
-      route: 4
-      circuit: 2
       focus: "Read sections 1 to 3. Trace Turing's first example machine, which prints 0 and 1 alternately, for six steps."
 
     - title: "An Unsolvable Problem of Elementary Number Theory"
@@ -452,6 +468,7 @@
       year: 1936
       kind: paper
       url: https://doi.org/10.2307/2371045
+      intro: true
       layer: algorithms
       does: [compute]
       note: "The lambda calculus and the first undecidability result. Turing's equivalent, and the root of functional programming."
@@ -461,6 +478,7 @@
       year: 1949
       kind: paper
       url: https://doi.org/10.1109/JRPROC.1949.232969
+      intro: true
       layer: algorithms
       does: [move]
       builds_on:
@@ -472,6 +490,7 @@
       year: 1950
       kind: paper
       url: https://doi.org/10.1002/j.1538-7305.1950.tb00463.x
+      intro: true
       layer: algorithms
       does: [store, move]
       builds_on:
@@ -483,6 +502,7 @@
       year: 1952
       kind: paper
       url: https://doi.org/10.1109/JRPROC.1952.273898
+      intro: true
       layer: algorithms
       does: [store]
       builds_on:
@@ -494,6 +514,7 @@
       year: 1959
       kind: paper
       url: https://doi.org/10.1147/rd.32.0114
+      intro: true
       layer: algorithms
       does: [compute, store]
       builds_on:
@@ -505,6 +526,7 @@
       year: 1965
       kind: paper
       url: https://doi.org/10.1090/S0002-9947-1965-0170805-7
+      intro: true
       layer: algorithms
       does: [compute]
       builds_on:
@@ -528,6 +550,7 @@
       year: 1971
       kind: paper
       url: https://doi.org/10.1145/800157.805047
+      intro: true
       layer: algorithms
       does: [search]
       builds_on:
@@ -539,6 +562,7 @@
       year: 1972
       kind: paper
       url: https://doi.org/10.1007/978-1-4684-2001-2_9
+      intro: true
       layer: algorithms
       does: [search]
       builds_on:
@@ -550,6 +574,7 @@
       year: 1977
       kind: paper
       url: https://doi.org/10.1109/TIT.1977.1055714
+      intro: true
       layer: algorithms
       does: [store]
       builds_on:
@@ -567,13 +592,14 @@
       builds_on:
         - "On the Computational Complexity of Algorithms"
       note: "Lower bounds on data movement between fast and slow memory. The theory behind tiling, and behind FlashAttention."
-      route: 36
+      route: 41
 
     - title: "Structure and Interpretation of Computer Programs"
       by: Harold Abelson, Gerald Jay Sussman
       year: 1985
       kind: book
       url: https://web.mit.edu/6.001/6.037/sicp.pdf
+      intro: true
       layer: algorithms
       does: [compute, store]
       builds_on:
@@ -596,6 +622,7 @@
       year: 1997
       kind: paper
       url: https://doi.org/10.1137/S0097539796300921
+      side: "quantum foundations"
       layer: algorithms
       does: [compute]
       stack: quantum
@@ -603,7 +630,6 @@
         - "Quantum Theory, the Church–Turing Principle and the Universal Quantum Computer"
         - "On the Computational Complexity of Algorithms"
       note: "Defines BQP and the quantum Turing machine: the class of problems quantum computers solve efficiently."
-      route: 54
 
     - title: "Cache-Oblivious Algorithms"
       by: Matteo Frigo, Charles Leiserson, Harald Prokop, Sridhar Ramachandran
@@ -621,6 +647,7 @@
       year: 2009
       kind: book
       url: https://theory.cs.princeton.edu/complexity/
+      side: "complexity theory"
       layer: algorithms
       does: [compute]
       note: "Graduate-level complexity, including randomness, interactive proofs and quantum computation. Free draft online."
@@ -636,15 +663,16 @@
         - "On Computable Numbers, with an Application to the Entscheidungsproblem"
         - "The Complexity of Theorem-Proving Procedures"
       note: "Complexity, algorithms, phase transitions and quantum computation in one book written by physicists. The best single map of this stage."
-      core: true
-      route: 23
+      start: true
       focus: "Read the introduction to computational complexity. Explain how you could check a proposed solution to a decision problem in polynomial time."
+      route: 33
 
     - title: "Introduction to the Theory of Computation"
       by: Michael Sipser
       year: 2012
       kind: book
       url: https://math.mit.edu/~sipser/book.html
+      intro: true
       layer: algorithms
       does: [compute]
       note: "The standard text on automata, computability and complexity. Clear enough to work through alone."
@@ -663,6 +691,7 @@
       year: 1950
       kind: paper
       url: https://doi.org/10.1080/14786445008521796
+      intro: true
       layer: algorithms
       does: [search]
       note: "Minimax, evaluation functions and the size of the game tree, laid out before anyone had a computer to try it on."
@@ -681,13 +710,12 @@
       year: 1959
       kind: paper
       url: https://doi.org/10.1007/BF01386390
+      intro: true
       layer: algorithms
       does: [search]
       builds_on:
         - "Solutio problematis ad geometriam situs pertinentis"
       note: "Shortest paths in three pages. Every route planner and weighted graph traversal still starts here."
-      core: true
-      route: 19
       focus: "Trace the shortest-path algorithm on a four-vertex graph. Record the tentative distances after each vertex is settled."
 
     - title: "Some Studies in Machine Learning Using the Game of Checkers"
@@ -706,18 +734,19 @@
       year: 1968
       kind: paper
       url: https://doi.org/10.1109/TSSC.1968.300136
+      intro: true
       layer: algorithms
       does: [search]
       builds_on:
         - "A Note on Two Problems in Connexion with Graphs"
       note: "A*: Dijkstra plus an admissible heuristic. Knowledge used to prune search, with optimality kept."
-      route: 24
 
     - title: "Space/Time Trade-offs in Hash Coding with Allowable Errors"
       by: Burton Bloom
       year: 1970
       kind: paper
       url: https://doi.org/10.1145/362686.362692
+      intro: true
       layer: algorithms
       does: [search, store]
       note: "The Bloom filter: answer 'is it there?' in tiny memory by accepting some false positives."
@@ -727,6 +756,7 @@
       year: 1975
       kind: paper
       url: https://doi.org/10.1016/0004-3702(75)90019-3
+      intro: true
       layer: algorithms
       does: [search]
       builds_on:
@@ -738,6 +768,7 @@
       year: 1975
       kind: book
       url: https://doi.org/10.7551/mitpress/1090.001.0001
+      side: "physics-inspired solvers"
       layer: algorithms
       does: [search]
       note: "Genetic algorithms: search by variation and selection, the evolutionary alternative to gradients."
@@ -747,6 +778,7 @@
       year: 1975
       kind: paper
       url: https://doi.org/10.1145/361219.361220
+      intro: true
       layer: algorithms
       does: [search, store]
       note: "Documents and queries as vectors, relevance as an angle. Embedding search is this idea, learned."
@@ -756,6 +788,7 @@
       year: 1975
       kind: paper
       url: https://doi.org/10.1145/361002.361007
+      intro: true
       layer: algorithms
       does: [search, store]
       note: "The k-d tree: nearest-neighbour search in low dimensions, and the start of seeing why high dimensions are hard."
@@ -765,6 +798,7 @@
       year: 1983
       kind: paper
       url: https://doi.org/10.1126/science.220.4598.671
+      side: "physics-inspired solvers"
       layer: algorithms
       does: [search]
       builds_on:
@@ -776,6 +810,7 @@
       year: 1985
       kind: paper
       url: https://doi.org/10.1007/BF00339943
+      side: "physics-inspired solvers"
       layer: architecture
       does: [search]
       builds_on:
@@ -787,6 +822,7 @@
       year: 1998
       kind: paper
       url: https://doi.org/10.1016/S0169-7552(98)00110-X
+      intro: true
       layer: systems
       does: [search, store]
       builds_on:
@@ -810,6 +846,7 @@
       year: 1998
       kind: book
       url: https://www-cs-faculty.stanford.edu/~knuth/taocp.html
+      intro: true
       layer: algorithms
       does: [search, store]
       note: "The reference on searching and sorting, including how data structures meet slow external memory."
@@ -819,6 +856,7 @@
       year: 1999
       kind: paper
       url: http://ilpubs.stanford.edu:8090/422/
+      intro: true
       layer: algorithms
       does: [search]
       builds_on:
@@ -830,6 +868,7 @@
       year: 1999
       kind: paper
       url: https://doi.org/10.1109/12.769433
+      side: "physics-inspired solvers"
       layer: algorithms
       does: [search]
       builds_on:
@@ -846,13 +885,14 @@
       builds_on:
         - "Equation of State Calculations by Fast Computing Machines"
       note: "UCT: Monte Carlo tree search guided by bandit theory. The search inside AlphaGo."
-      route: 43
+      route: 47
 
     - title: "Introduction to Information Retrieval"
       by: Christopher Manning, Prabhakar Raghavan, Hinrich Schütze
       year: 2008
       kind: book
       url: https://doi.org/10.1017/CBO9780511809071
+      intro: true
       layer: systems
       does: [search, store]
       builds_on:
@@ -864,6 +904,7 @@
       year: 2009
       kind: paper
       url: https://doi.org/10.1561/1500000019
+      intro: true
       layer: algorithms
       does: [search]
       builds_on:
@@ -940,13 +981,16 @@
         - "Mastering the Game of Go with Deep Neural Networks and Tree Search"
         - "An Analysis of Alpha-Beta Pruning"
       note: "AlphaZero: search and learning, no human knowledge beyond the rules. The Bitter Lesson's two methods working together."
-      route: 44
+      focus: "Write down the training targets for the policy and value heads. Say where tree search enters the loss."
+      start: true
+      route: 48
 
     - title: "Artificial Intelligence: A Modern Approach"
       by: Stuart Russell, Peter Norvig
       year: 2020
       kind: book
       url: https://aima.cs.berkeley.edu/
+      intro: true
       layer: intelligence
       does: [search]
       builds_on:
@@ -968,6 +1012,7 @@
       year: 1929
       kind: paper
       url: https://doi.org/10.1002/bs.3830090402
+      side: "thermodynamics & limits"
       layer: physics
       does: [store]
       note: "Maxwell's demon with one molecule: acquiring a bit of information has a thermodynamic price. Where information becomes physical."
@@ -989,10 +1034,10 @@
       year: 1959
       kind: essay
       url: https://web.pa.msu.edu/people/yang/RFeynman_plentySpace.pdf
+      intro: true
       layer: physics
       does: [compute, store]
       note: "Writing the encyclopedia on a pin head and computers built from atoms, imagined in 1959. The founding text of the miniaturization that followed."
-      route: 25
 
     - title: "Irreversibility and Heat Generation in the Computing Process"
       by: Rolf Landauer
@@ -1006,10 +1051,10 @@
         - "A Mathematical Theory of Communication"
       note: "Erasing a bit has a minimum energy cost. The physical limit under all of this, classical and quantum."
       question: "Which costs follow from the algorithm and which from the physical substrate?"
-      core: true
-      route: 9
-      circuit: 4
+      start: true
       focus: "Follow the reset of one initially unbiased bit. State the assumptions behind the minimum heat dissipated."
+      circuit: 4
+      route: 10
 
     - title: "Logical Reversibility of Computation"
       by: Charles Bennett
@@ -1021,15 +1066,15 @@
       builds_on:
         - "Irreversibility and Heat Generation in the Computing Process"
       note: "Any computation can be made reversible, and so, in principle, free of Landauer's cost. Quantum circuits must work this way."
-      route: 11
-      circuit: 5
       focus: "Read the opening argument. Make AND reversible by keeping its inputs, and count the extra bits you carry."
+      route: 29
 
     - title: "Conservative Logic"
       by: Edward Fredkin, Tommaso Toffoli
       year: 1982
       kind: paper
       url: https://doi.org/10.1007/BF01857727
+      side: "thermodynamics & limits"
       layer: physics
       does: [compute]
       builds_on:
@@ -1041,6 +1086,7 @@
       year: 1982
       kind: paper
       url: https://doi.org/10.1007/BF02084158
+      side: "thermodynamics & limits"
       layer: physics
       does: [compute]
       builds_on:
@@ -1054,6 +1100,7 @@
       year: 1996
       kind: book
       url: https://doi.org/10.1201/9780429500442
+      intro: true
       layer: physics
       does: [compute]
       builds_on:
@@ -1067,6 +1114,7 @@
       year: 1998
       kind: paper
       url: https://arxiv.org/abs/quant-ph/9710043
+      side: "thermodynamics & limits"
       layer: physics
       does: [compute]
       note: "Energy bounds how fast any physical system can move between distinguishable states, and so how fast it can compute."
@@ -1076,6 +1124,7 @@
       year: 2000
       kind: paper
       url: https://doi.org/10.1038/35023282
+      side: "thermodynamics & limits"
       layer: physics
       does: [compute, store]
       builds_on:
@@ -1101,6 +1150,7 @@
       year: 2012
       kind: paper
       url: https://doi.org/10.1038/nature10872
+      side: "thermodynamics & limits"
       layer: physics
       does: [store]
       builds_on:
@@ -1112,6 +1162,7 @@
       year: 2014
       kind: paper
       url: https://doi.org/10.1038/nature13570
+      side: "thermodynamics & limits"
       layer: physics
       does: [compute, move]
       builds_on:
@@ -1123,6 +1174,7 @@
       year: 2016
       kind: paper
       url: https://doi.org/10.1126/science.aah4243
+      side: "physics-inspired solvers"
       layer: physics
       does: [search]
       builds_on:
@@ -1134,6 +1186,7 @@
       year: 2019
       kind: paper
       url: https://arxiv.org/abs/1905.05669
+      side: "thermodynamics & limits"
       layer: physics
       does: [compute]
       builds_on:
@@ -1155,11 +1208,10 @@
       year: 1938
       kind: paper
       url: https://doi.org/10.1109/T-AIEE.1938.5057767
+      intro: true
       layer: devices
       does: [compute]
       note: "Boolean algebra describes switching circuits. Perhaps the most important master's thesis ever: logic becomes hardware."
-      route: 2
-      circuit: 1
       focus: "Read the part on series and parallel connections. Write XOR as a Boolean expression and draw it as a network of switches."
 
     - title: "The Transistor, A Semi-Conductor Triode"
@@ -1167,16 +1219,17 @@
       year: 1948
       kind: paper
       url: https://doi.org/10.1103/PhysRev.74.230
+      side: "devices & electronics"
       layer: devices
       does: [compute]
       note: "The first transistor, a point-contact germanium device. One page that started everything below the software."
-      route: 26
 
     - title: "The Theory of p-n Junctions in Semiconductors and p-n Junction Transistors"
       by: William Shockley
       year: 1949
       kind: paper
       url: https://doi.org/10.1002/j.1538-7305.1949.tb03645.x
+      side: "devices & electronics"
       layer: devices
       does: [compute]
       builds_on:
@@ -1188,6 +1241,7 @@
       year: 1960
       kind: paper
       url: https://patents.google.com/patent/US3102230A
+      side: "devices & electronics"
       layer: devices
       does: [compute]
       builds_on:
@@ -1210,6 +1264,7 @@
       year: 1968
       kind: paper
       url: https://patents.google.com/patent/US3387286A
+      side: "devices & electronics"
       layer: devices
       does: [store]
       builds_on:
@@ -1221,6 +1276,7 @@
       year: 1971
       kind: paper
       url: https://doi.org/10.1109/TCT.1971.1083337
+      side: "in-memory & analog"
       layer: devices
       does: [store]
       note: "A fourth circuit element, predicted from symmetry, whose resistance remembers. Found 37 years later."
@@ -1242,6 +1298,7 @@
       year: 1976
       kind: paper
       url: https://doi.org/10.1109/T-ED.1976.18467
+      side: "devices & electronics"
       layer: devices
       does: [compute]
       builds_on:
@@ -1253,6 +1310,7 @@
       year: 1980
       kind: book
       url: https://en.wikipedia.org/wiki/Mead%E2%80%93Conway_VLSI_chip_design_revolution
+      side: "devices & electronics"
       layer: devices
       does: [compute]
       builds_on:
@@ -1264,6 +1322,7 @@
       year: 1987
       kind: paper
       url: https://doi.org/10.1109/IEDM.1987.191485
+      side: "devices & electronics"
       layer: devices
       does: [store]
       builds_on:
@@ -1275,6 +1334,7 @@
       year: 2006
       kind: book
       url: https://doi.org/10.1002/0470068329
+      side: "devices & electronics"
       layer: devices
       does: [compute, store]
       builds_on:
@@ -1286,6 +1346,7 @@
       year: 2006
       kind: paper
       url: https://doi.org/10.1109/JSSC.2005.864128
+      side: "devices & electronics"
       layer: devices
       does: [search, store]
       note: "Memory that is searched by content in a single cycle. How routers do lookups, and the hardware form of attention's 'find the matching key'."
@@ -1295,6 +1356,7 @@
       year: 2009
       kind: paper
       url: https://doi.org/10.1109/JPROC.2009.2014298
+      side: "devices & electronics"
       layer: devices
       does: [move]
       note: "The energy per bit of moving data off-chip, and why light may have to replace wires."
@@ -1304,6 +1366,7 @@
       year: 2014
       kind: paper
       url: https://doi.org/10.1145/2678373.2665726
+      side: "devices & electronics"
       layer: devices
       does: [store]
       builds_on:
@@ -1320,16 +1383,17 @@
       builds_on:
         - "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions"
       note: "The table to remember: reading DRAM costs hundreds of times more energy than an add. Moving data costs more than computing on it."
-      core: true
-      route: 10
-      circuit: 4
+      start: true
       focus: "Compare a memory access with an arithmetic operation in the energy estimates. Write down the operand size and memory level."
+      circuit: 4
+      route: 11
 
     - title: "The Art of Electronics"
       by: Paul Horowitz, Winfield Hill
       year: 2015
       kind: book
       url: https://artofelectronics.net/
+      side: "devices & electronics"
       layer: devices
       does: [compute]
       note: "Circuit design as craft, full of practical judgment. The artisan's electronics book."
@@ -1351,6 +1415,7 @@
       year: 2018
       kind: paper
       url: https://doi.org/10.1038/s41928-018-0092-2
+      side: "in-memory & analog"
       layer: devices
       does: [compute, store]
       builds_on:
@@ -1363,6 +1428,7 @@
       year: 2020
       kind: paper
       url: https://www.nature.com/articles/s41565-020-0655-z
+      side: "in-memory & analog"
       layer: devices
       does: [compute, store]
       builds_on:
@@ -1374,6 +1440,7 @@
       year: 2021
       kind: paper
       url: https://doi.org/10.1038/s41467-021-25873-0
+      side: "in-memory & analog"
       layer: devices
       does: [search, compute]
       builds_on:
@@ -1395,6 +1462,7 @@
       year: 1945
       kind: paper
       url: https://doi.org/10.1109/85.238389
+      intro: true
       layer: architecture
       does: [compute, store]
       builds_on:
@@ -1407,6 +1475,7 @@
       year: 1962
       kind: paper
       url: https://doi.org/10.1109/TEC.1962.5219356
+      intro: true
       layer: architecture
       does: [store]
       builds_on:
@@ -1418,6 +1487,7 @@
       year: 1965
       kind: paper
       url: https://doi.org/10.1109/PGEC.1965.264263
+      intro: true
       layer: architecture
       does: [store]
       builds_on:
@@ -1429,6 +1499,7 @@
       year: 1966
       kind: paper
       url: https://doi.org/10.1109/PROC.1966.5273
+      intro: true
       layer: architecture
       does: [compute]
       builds_on:
@@ -1440,6 +1511,7 @@
       year: 1967
       kind: paper
       url: https://doi.org/10.1145/1465482.1465560
+      intro: true
       layer: architecture
       does: [compute]
       note: "Amdahl's law in three pages. The serial part always wins in the end."
@@ -1449,6 +1521,7 @@
       year: 1967
       kind: paper
       url: https://doi.org/10.1147/rd.111.0025
+      intro: true
       layer: architecture
       does: [compute]
       note: "Out-of-order execution with register renaming. Nearly every fast CPU core today runs this algorithm in hardware."
@@ -1469,6 +1542,7 @@
       year: 1978
       kind: paper
       url: https://doi.org/10.1145/359327.359336
+      side: "architecture history"
       layer: architecture
       does: [compute, move]
       builds_on:
@@ -1480,6 +1554,7 @@
       year: 1979
       kind: paper
       url: https://doi.org/10.1109/TC.1979.1675439
+      side: "distributed systems"
       layer: architecture
       does: [store]
       builds_on:
@@ -1502,6 +1577,7 @@
       year: 1985
       kind: book
       url: https://dspace.mit.edu/handle/1721.1/14719
+      side: "architecture history"
       layer: architecture
       does: [compute, move]
       builds_on:
@@ -1513,6 +1589,7 @@
       year: 1985
       kind: paper
       url: https://doi.org/10.1145/2465.214917
+      intro: true
       layer: architecture
       does: [compute]
       builds_on:
@@ -1524,6 +1601,7 @@
       year: 1985
       kind: paper
       url: https://doi.org/10.1109/TC.1985.6312192
+      side: "architecture history"
       layer: architecture
       does: [move]
       note: "An interconnect whose bandwidth grows toward the root. The topology of most datacenter and GPU-cluster networks."
@@ -1544,6 +1622,7 @@
       year: 1997
       kind: paper
       url: https://doi.org/10.1109/40.592312
+      side: "in-memory & analog"
       layer: architecture
       does: [compute, store]
       builds_on:
@@ -1561,7 +1640,7 @@
         - "Hitting the Memory Wall"
         - "Slave Memories and Dynamic Storage Allocation"
       note: "DRAM, caches, TLBs and NUMA from the hardware up, with measurements. The engineer's classic."
-      route: 35
+      route: 40
 
     - title: "NVIDIA Tesla: A Unified Graphics and Computing Architecture"
       by: Erik Lindholm et al.
@@ -1596,10 +1675,10 @@
         - "Hitting the Memory Wall"
         - "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities"
       note: "One chart that tells you whether a kernel is limited by compute or by memory bandwidth."
-      core: true
-      route: 15
-      circuit: 7
+      start: true
       focus: "Plot a kernel given its operations and bytes transferred. Identify the bandwidth and compute ceilings."
+      circuit: 5
+      route: 12
 
     - title: "Dark Silicon and the End of Multicore Scaling"
       by: Hadi Esmaeilzadeh et al.
@@ -1623,7 +1702,7 @@
         - "Why Systolic Architectures?"
         - "Roofline: An Insightful Visual Performance Model for Multicore Architectures"
       note: "The first TPU. A systolic array built for matrix multiplication, and the case for designing chips around one workload."
-      route: 39
+      route: 44
 
     - title: "Efficient Processing of Deep Neural Networks: A Tutorial and Survey"
       by: Vivienne Sze, Yu-Hsin Chen, Tien-Ju Yang, Joel Emer
@@ -1635,13 +1714,14 @@
       builds_on:
         - "Why Systolic Architectures?"
       note: "Dataflows, data reuse and accelerator design. Also available as an expanded book."
-      route: 38
+      route: 43
 
     - title: "Computer Architecture: A Quantitative Approach"
       by: John Hennessy, David Patterson
       year: 2017
       kind: book
       url: https://shop.elsevier.com/books/computer-architecture/hennessy/978-0-12-811905-1
+      intro: true
       layer: architecture
       does: [compute, store, move]
       builds_on:
@@ -1653,6 +1733,7 @@
       year: 2019
       kind: paper
       url: https://arxiv.org/abs/1903.03988
+      side: "in-memory & analog"
       layer: architecture
       does: [compute, store]
       builds_on:
@@ -1677,6 +1758,7 @@
       year: 2020
       kind: book
       url: https://doi.org/10.1007/978-3-031-01764-3
+      side: "distributed systems"
       layer: architecture
       does: [store]
       builds_on:
@@ -1699,13 +1781,12 @@
       year: 2021
       kind: course
       url: https://www.nand2tetris.org/
+      intro: true
       layer: architecture
       does: [compute]
       builds_on:
         - "A Symbolic Analysis of Relay and Switching Circuits"
       note: "Build a computer from NAND gates up to an OS. The best way to know what the hardware underneath really is."
-      route: 3
-      circuit: 1
       focus: "In Project 1, build XOR and Mux from NAND and the gates you construct. Check both truth tables."
       refs:
         - title: "Nand2Tetris course and software"
@@ -1728,6 +1809,7 @@
       year: 2022
       kind: paper
       url: https://doi.org/10.1038/s42254-022-00440-8
+      side: "physics-inspired solvers"
       layer: architecture
       does: [search]
       builds_on:
@@ -1772,6 +1854,7 @@
       year: 1966
       kind: paper
       url: https://doi.org/10.1147/sj.52.0078
+      intro: true
       layer: systems
       does: [store]
       builds_on:
@@ -1783,6 +1866,7 @@
       year: 1968
       kind: paper
       url: https://doi.org/10.1145/363095.363141
+      intro: true
       layer: systems
       does: [store]
       builds_on:
@@ -1794,6 +1878,7 @@
       year: 1970
       kind: paper
       url: https://doi.org/10.1145/362384.362685
+      intro: true
       layer: systems
       does: [store, search]
       note: "Separating what data means from how it is stored. The idea every database, graph ones included, answers to."
@@ -1803,6 +1888,7 @@
       year: 1972
       kind: paper
       url: https://doi.org/10.1007/BF00288683
+      intro: true
       layer: systems
       does: [store, search]
       note: "The B-tree: a data structure shaped by the cost of reaching slow memory."
@@ -1812,6 +1898,7 @@
       year: 1974
       kind: paper
       url: https://doi.org/10.1145/361011.361061
+      intro: true
       layer: systems
       does: [store]
       note: "A file system, processes and pipes, with very little else. Simplicity as a design principle."
@@ -1821,6 +1908,7 @@
       year: 1974
       kind: paper
       url: https://doi.org/10.1109/TCOM.1974.1092259
+      intro: true
       layer: systems
       does: [move]
       note: "TCP: moving data reliably across networks that don't."
@@ -1830,6 +1918,7 @@
       year: 1978
       kind: paper
       url: https://doi.org/10.1145/359545.359563
+      side: "distributed systems"
       layer: systems
       does: [move]
       note: "Happened-before and logical clocks. Order is something a system has to construct."
@@ -1839,6 +1928,7 @@
       year: 1983
       kind: paper
       url: https://doi.org/10.1145/773379.806614
+      side: "distributed systems"
       layer: systems
       does: [compute, store, move]
       builds_on:
@@ -1850,6 +1940,7 @@
       year: 1984
       kind: paper
       url: https://doi.org/10.1145/357401.357402
+      side: "distributed systems"
       layer: systems
       does: [move]
       builds_on:
@@ -1861,6 +1952,7 @@
       year: 1985
       kind: paper
       url: https://doi.org/10.1145/3149.214121
+      side: "distributed systems"
       layer: systems
       does: [move]
       note: "FLP: no deterministic protocol guarantees consensus in an asynchronous system if even one process may crash. What every protocol must work around."
@@ -1888,6 +1980,7 @@
       year: 1998
       kind: paper
       url: https://doi.org/10.1145/279227.279229
+      side: "distributed systems"
       layer: systems
       does: [store, move]
       builds_on:
@@ -1900,6 +1993,7 @@
       year: 2002
       kind: paper
       url: https://doi.org/10.1145/564585.564601
+      side: "distributed systems"
       layer: systems
       does: [store, move]
       builds_on:
@@ -1911,6 +2005,7 @@
       year: 2003
       kind: paper
       url: https://doi.org/10.1145/1165389.945450
+      side: "distributed systems"
       layer: systems
       does: [store]
       note: "Storage designed for commodity machines that fail all the time."
@@ -1920,6 +2015,7 @@
       year: 2004
       kind: paper
       url: https://doi.org/10.1109/CGO.2004.1281665
+      intro: true
       layer: systems
       does: [compute]
       note: "A reusable compiler infrastructure with one intermediate representation. Most modern compilers, ML compilers included, build on it."
@@ -1929,12 +2025,12 @@
       year: 2005
       kind: paper
       url: https://doi.org/10.1145/1070838.1070856
+      intro: true
       layer: systems
       does: [store]
       builds_on:
         - "The Working Set Model for Program Behavior"
       note: "Forty years of locality, by the person who formalised it. Why caches, virtual memory and tiling work at all."
-      route: 34
 
     - title: "Anatomy of High-Performance Matrix Multiplication"
       by: Kazushige Goto, Robert van de Geijn
@@ -1946,7 +2042,7 @@
       builds_on:
         - "A Set of Level 3 Basic Linear Algebra Subprograms"
       note: "How a fast GEMM is layered over registers, L1, L2 and TLB. The operation under all of deep learning, taken apart."
-      route: 37
+      route: 42
 
     - title: "Scalable Parallel Programming with CUDA"
       by: John Nickolls, Ian Buck, Michael Garland, Kevin Skadron
@@ -1975,6 +2071,7 @@
       year: 2008
       kind: paper
       url: https://doi.org/10.1145/1327452.1327492
+      side: "distributed systems"
       layer: systems
       does: [compute, move]
       builds_on:
@@ -2008,6 +2105,7 @@
       year: 2013
       kind: paper
       url: https://doi.org/10.1145/2408776.2408794
+      side: "distributed systems"
       layer: systems
       does: [move]
       builds_on:
@@ -2097,6 +2195,7 @@
       year: 2019
       kind: book
       url: https://doi.org/10.1007/978-3-031-01761-2
+      side: "distributed systems"
       layer: systems
       does: [compute, store, move]
       builds_on:
@@ -2161,14 +2260,26 @@
         - "I/O Complexity: The Red-Blue Pebble Game"
         - "Attention Is All You Need"
       note: "Same math, far fewer memory reads. A clear example of algorithm design driven by the hardware."
-      core: true
-      route: 16
-      circuit: 7
+      start: true
       focus: "Sketch standard and tiled attention. Mark which intermediate arrays reach external memory and which values the backward pass recomputes."
       refs:
         - title: "Reference implementation"
           url: https://github.com/Dao-AILab/flash-attention
           kind: code
+      circuit: 5
+      route: 13
+
+    - title: "FP8 Formats for Deep Learning"
+      by: Paulius Micikevicius et al.
+      year: 2022
+      kind: paper
+      url: https://arxiv.org/abs/2209.05433
+      layer: architecture
+      does: [compute, store]
+      builds_on:
+        - "Mixed Precision Training"
+        - "What Every Computer Scientist Should Know About Floating-Point Arithmetic"
+      note: "Two 8-bit floating-point formats for training and inference. Where precision went after FP16 and BF16."
 
     - title: "Efficient Memory Management for Large Language Model Serving with PagedAttention"
       by: Woosuk Kwon et al.
@@ -2194,6 +2305,9 @@
         - "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism"
         - "ZeRO: Memory Optimizations Toward Training Trillion Parameter Models"
       note: "Free. Rooflines, sharding and parallelism for training and serving LLMs on TPUs and GPUs."
+      focus: "Compute the arithmetic intensity of one transformer layer. Decide whether it is compute- or memory-bound at batch 1 and at batch 512."
+      circuit: 5
+      route: 14
 
 - id: science
   title: Computing the physical world
@@ -2209,6 +2323,7 @@
       year: 1922
       kind: book
       url: https://doi.org/10.1017/CBO9780511618291
+      side: "scientific computing"
       layer: algorithms
       does: [compute]
       note: "The first numerical weather forecast, by hand, with a vision of 64,000 human computers in a hall. Computation as a way to know the physical world."
@@ -2218,6 +2333,7 @@
       year: 1928
       kind: paper
       url: https://doi.org/10.1147/rd.112.0215
+      side: "scientific computing"
       layer: algorithms
       does: [compute]
       note: "The CFL condition: information must not travel faster in the simulation than in the physics. (English translation, 1967.)"
@@ -2227,6 +2343,7 @@
       year: 1950
       kind: paper
       url: https://doi.org/10.3402/tellusa.v2i4.8607
+      side: "scientific computing"
       layer: algorithms
       does: [compute]
       builds_on:
@@ -2234,7 +2351,6 @@
         - "On the Partial Difference Equations of Mathematical Physics"
         - "First Draft of a Report on the EDVAC"
       note: "The first computer weather forecast, on ENIAC. Physics was the first big workload, decades before AI."
-      route: 41
 
     - title: "Equation of State Calculations by Fast Computing Machines"
       by: Nicholas Metropolis et al.
@@ -2244,13 +2360,14 @@
       layer: algorithms
       does: [compute, search]
       note: "The Metropolis algorithm, run on MANIAC: random search through physical states. Markov chain Monte Carlo begins."
-      route: 40
+      route: 45
 
     - title: "Studies of Nonlinear Problems"
       by: Enrico Fermi, John Pasta, Stanislaw Ulam, Mary Tsingou
       year: 1955
       kind: paper
       url: https://doi.org/10.2172/4376203
+      side: "scientific computing"
       layer: algorithms
       does: [compute]
       note: "The first computer experiment: a simulation that surprised its authors and started the study of nonlinear dynamics."
@@ -2260,6 +2377,7 @@
       year: 1965
       kind: paper
       url: https://doi.org/10.1090/S0025-5718-1965-0178586-1
+      intro: true
       layer: algorithms
       does: [compute]
       note: "The FFT, from O(n²) to O(n log n). Signal processing, imaging, convolution and spectral GNNs all depend on it."
@@ -2269,6 +2387,7 @@
       year: 1986
       kind: paper
       url: https://doi.org/10.1038/324446a0
+      side: "scientific computing"
       layer: algorithms
       does: [compute]
       note: "Treat distant groups of bodies as one. Hierarchical approximation turns N-body from impossible to routine."
@@ -2278,6 +2397,7 @@
       year: 1987
       kind: paper
       url: https://doi.org/10.1016/0021-9991(87)90140-9
+      side: "scientific computing"
       layer: algorithms
       does: [compute]
       builds_on:
@@ -2289,11 +2409,10 @@
       year: 1991
       kind: paper
       url: https://doi.org/10.1145/103162.103163
+      intro: true
       layer: architecture
       does: [compute]
       note: "How real numbers are approximated in hardware, and how it goes wrong. Essential before mixed precision and FP8."
-      core: true
-      route: 27
       focus: "Work through one rounding example and one cancellation example. Explain which digits you can still trust."
 
     - title: "Numerical Linear Algebra"
@@ -2310,6 +2429,7 @@
       year: 2000
       kind: paper
       url: https://doi.org/10.1109/MCISE.2000.814652
+      side: "scientific computing"
       layer: algorithms
       does: [compute]
       builds_on:
@@ -2323,6 +2443,7 @@
       year: 2008
       kind: paper
       url: https://doi.org/10.1016/j.jcp.2008.01.047
+      side: "scientific computing"
       layer: systems
       does: [compute]
       builds_on:
@@ -2334,6 +2455,7 @@
       year: 2008
       kind: paper
       url: https://doi.org/10.1145/1364782.1364802
+      side: "scientific computing"
       layer: architecture
       does: [compute, move]
       builds_on:
@@ -2345,6 +2467,7 @@
       year: 2013
       kind: book
       url: https://doi.org/10.56021/9781421407944
+      side: "scientific computing"
       layer: algorithms
       does: [compute]
       note: "The reference for matrix algorithms and how to implement them well."
@@ -2391,10 +2514,12 @@
       builds_on:
         - "Equation of State Calculations by Fast Computing Machines"
       note: "Inferring parameters when you can simulate the world but cannot write its likelihood."
+      focus: "Pick one simulator from the paper. Say why its likelihood is intractable and what the neural estimator learns instead."
+      start: true
 
 - id: deep-learning
   title: Deep learning, learned
-  era: "1989 – 2016"
+  era: "1989 – today"
   track: learning
   stack: classical
   blurb: >-
@@ -2517,6 +2642,7 @@
       year: 2016
       kind: book
       url: https://www.deeplearningbook.org/
+      intro: true
       layer: learning
       does: [compute]
       note: "The classic textbook. Part I (math) and Part II (practice) hold up well."
@@ -2531,6 +2657,10 @@
       builds_on:
         - "The Nature of Statistical Learning Theory"
       note: "Networks memorise random labels yet generalise on real ones. Classical theory alone can't explain it."
+      focus: "Read the random-labels experiment. Say which classical generalisation bounds it rules out, and why explicit regularisation does not rescue them."
+      start: true
+      circuit: 1
+      route: 1
 
     - title: "Overcoming Catastrophic Forgetting in Neural Networks"
       by: James Kirkpatrick et al.
@@ -2553,6 +2683,9 @@
       builds_on:
         - "Support-Vector Networks"
       note: "Infinitely wide networks train like kernel machines. A bridge between deep learning and kernel theory (and quantum kernels)."
+      focus: "Write the kernel for a two-layer network. Explain why it stays fixed as width goes to infinity, and what that rules out."
+      circuit: 1
+      route: 3
 
     - title: "Reconciling Modern Machine-Learning Practice and the Bias-Variance Trade-off"
       by: Mikhail Belkin et al.
@@ -2564,6 +2697,9 @@
       builds_on:
         - "The Nature of Statistical Learning Theory"
       note: "Double descent: past the interpolation point, bigger models get better again."
+      focus: "Sketch test risk against capacity past the interpolation threshold. Say what the minimum-norm interpolant has to do with the second descent."
+      circuit: 1
+      route: 2
 
     - title: "Automatic Differentiation in Machine Learning: A Survey"
       by: Atılım Güneş Baydin et al.
@@ -2576,31 +2712,85 @@
         - "Learning Representations by Back-Propagating Errors"
       note: "Forward and reverse mode, and how frameworks compute gradients of programs. The machinery under backprop."
 
+    - title: "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks"
+      by: Jonathan Frankle, Michael Carbin
+      year: 2018
+      kind: paper
+      url: https://arxiv.org/abs/1803.03635
+      layer: learning
+      does: [compute]
+      note: "Dense networks contain sparse subnetworks that train to full accuracy from their original initialisation. A sharp question about what training actually finds."
+
+    - title: "Deep Double Descent: Where Bigger Models and More Data Hurt"
+      by: Preetum Nakkiran et al.
+      year: 2019
+      kind: paper
+      url: https://arxiv.org/abs/1912.02292
+      layer: learning
+      does: [compute]
+      builds_on:
+        - "Reconciling Modern Machine-Learning Practice and the Bias-Variance Trade-off"
+      note: "Test error falls, rises and falls again as models, data or training time grow. Bigger is not monotonically better."
+
+    - title: "Gradient Descent on Neural Networks Typically Occurs at the Edge of Stability"
+      by: Jeremy Cohen et al.
+      year: 2021
+      kind: paper
+      url: https://arxiv.org/abs/2103.00065
+      layer: learning
+      does: [compute]
+      note: "Full-batch gradient descent pushes the sharpness up to 2/η and then hovers there. Classical step-size theory says it should diverge."
+
     - title: "Neural Networks: Zero to Hero"
       by: Andrej Karpathy
       year: 2022
       kind: course
       url: https://karpathy.ai/zero-to-hero.html
+      intro: true
       layer: learning
       does: [compute]
       builds_on:
         - "Learning Representations by Back-Propagating Errors"
         - "Attention Is All You Need"
       note: "Build backprop, then a language model, then GPT, from scratch in Python. The most useful thing on this list to do rather than read."
-      core: true
-      route: 14
-      circuit: 6
       focus: "Work through the micrograd lesson until a finite-difference check agrees with a gradient you calculated by hand."
       refs:
         - title: "micrograd"
           url: https://github.com/karpathy/micrograd
           kind: code
 
+    - title: "Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets"
+      by: Alethea Power et al.
+      year: 2022
+      kind: paper
+      url: https://arxiv.org/abs/2201.02177
+      layer: learning
+      does: [compute]
+      builds_on:
+        - "Understanding Deep Learning Requires Rethinking Generalization"
+      note: "Small transformers memorise a modular arithmetic table, then generalise long after training loss hits zero. Generalisation as a late phase change."
+
+    - title: "Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer"
+      by: Greg Yang et al.
+      year: 2022
+      kind: paper
+      url: https://arxiv.org/abs/2203.03466
+      layer: learning
+      does: [compute]
+      builds_on:
+        - "Neural Tangent Kernel"
+        - "Scaling Laws for Neural Language Models"
+      note: "µP: a parametrisation in which the best hyperparameters of a small model transfer to a huge one. Infinite-width theory turned into a tuning recipe."
+      focus: "Say which hyperparameters transfer from a small proxy to a large model under µP, and which scaling of initialisation and learning rate makes that work."
+      circuit: 2
+      route: 6
+
     - title: "Understanding Deep Learning"
       by: Simon Prince
       year: 2023
       kind: book
       url: https://udlbook.github.io/udlbook/
+      intro: true
       layer: learning
       does: [compute]
       note: "Free, modern and very well illustrated. Covers everything from MLPs to transformers, GNNs and diffusion."
@@ -2610,6 +2800,7 @@
       year: 2024
       kind: book
       url: https://www.bishopbook.com/
+      intro: true
       layer: learning
       does: [compute]
       builds_on:
@@ -2672,7 +2863,7 @@
         - "Long Short-Term Memory"
         - "Neural Machine Translation by Jointly Learning to Align and Translate"
       note: "A network with a differentiable external memory and read/write heads. Computation and memory, learned end to end."
-      route: 45
+      route: 49
 
     - title: "Memory Networks"
       by: Jason Weston, Sumit Chopra, Antoine Bordes
@@ -2693,7 +2884,7 @@
       builds_on:
         - "Long Short-Term Memory"
       note: "Attention is born, as a way to let a decoder look back at the input."
-      route: 30
+      route: 36
 
     - title: "Sequence to Sequence Learning with Neural Networks"
       by: Ilya Sutskever, Oriol Vinyals, Quoc Le
@@ -2717,6 +2908,17 @@
         - "Neural Turing Machines"
       note: "The Differentiable Neural Computer: memory allocation and temporal links, solving graph traversal tasks."
 
+    - title: "Neural Machine Translation of Rare Words with Subword Units"
+      by: Rico Sennrich, Barry Haddow, Alexandra Birch
+      year: 2016
+      kind: paper
+      url: https://arxiv.org/abs/1508.07909
+      layer: learning
+      does: [store]
+      builds_on:
+        - "Neural Machine Translation by Jointly Learning to Align and Translate"
+      note: "Byte-pair encoding for words. The tokeniser under almost every language model, and the reason they spell badly."
+
     - title: "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer"
       by: Noam Shazeer et al.
       year: 2017
@@ -2737,15 +2939,16 @@
         - "Neural Machine Translation by Jointly Learning to Align and Translate"
         - "Deep Residual Learning for Image Recognition"
       note: "The transformer. Read it three times: once now, once after building one, and once after the graph section."
-      core: true
-      route: 31
+      start: true
       focus: "Follow one attention head. Compute the weights and output for a two-token example."
+      route: 37
 
     - title: "The Illustrated Transformer"
       by: Jay Alammar
       year: 2018
       kind: essay
       url: https://jalammar.github.io/illustrated-transformer/
+      intro: true
       layer: learning
       does: [store, search]
       builds_on:
@@ -2757,6 +2960,7 @@
       year: 2018
       kind: essay
       url: https://nlp.seas.harvard.edu/annotated-transformer/
+      intro: true
       layer: learning
       does: [store, search]
       builds_on:
@@ -2798,6 +3002,28 @@
         - "Attention Is All You Need"
       note: "GPT-2. A big enough next-token predictor starts doing tasks it was never trained on."
 
+    - title: "Fast Transformer Decoding: One Write-Head is All You Need"
+      by: Noam Shazeer
+      year: 2019
+      kind: paper
+      url: https://arxiv.org/abs/1911.02150
+      layer: learning
+      does: [move, store]
+      builds_on:
+        - "Attention Is All You Need"
+      note: "One shared key and value head for all queries. It shrinks the KV cache, the memory traffic that dominates decoding."
+
+    - title: "Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention"
+      by: Angelos Katharopoulos et al.
+      year: 2020
+      kind: paper
+      url: https://arxiv.org/abs/2006.16236
+      layer: learning
+      does: [store]
+      builds_on:
+        - "Attention Is All You Need"
+      note: "Replace the softmax with a kernel feature map and attention becomes a recurrence with constant memory per step. Transformers and RNNs meet."
+
     - title: "Efficiently Modeling Long Sequences with Structured State Spaces"
       by: Albert Gu, Karan Goel, Christopher Ré
       year: 2021
@@ -2808,6 +3034,28 @@
       builds_on:
         - "A New Approach to Linear Filtering and Prediction Problems"
       note: "S4. A serious alternative to attention, rooted in control theory and signal processing."
+
+    - title: "RoFormer: Enhanced Transformer with Rotary Position Embedding"
+      by: Jianlin Su et al.
+      year: 2021
+      kind: paper
+      url: https://arxiv.org/abs/2104.09864
+      layer: learning
+      does: [compute]
+      builds_on:
+        - "Attention Is All You Need"
+      note: "Position encoded as a rotation of queries and keys, so attention depends only on relative offset. The default in most open models."
+
+    - title: "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity"
+      by: William Fedus, Barret Zoph, Noam Shazeer
+      year: 2021
+      kind: paper
+      url: https://arxiv.org/abs/2101.03961
+      layer: learning
+      does: [compute, move]
+      builds_on:
+        - "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer"
+      note: "Route each token to a single expert. Mixture-of-experts simplified until it scaled to a trillion parameters."
 
     - title: "Mamba: Linear-Time Sequence Modeling with Selective State Spaces"
       by: Albert Gu, Tri Dao
@@ -2841,8 +3089,10 @@
       builds_on:
         - "Language Models are Unsupervised Multitask Learners"
       note: "Loss falls as a predictable power law in parameters, data and compute. This turned AI into an engineering and capital problem."
-      core: true
+      start: true
       focus: "Read the loss curves for model size, data and compute. State what is held fixed in each comparison."
+      circuit: 2
+      route: 4
 
     - title: "Language Models are Few-Shot Learners"
       by: Tom Brown et al.
@@ -2877,6 +3127,20 @@
       builds_on:
         - "Attention Is All You Need"
       note: "Reading a transformer as a residual stream that attention heads read from and write to. It changes how you see the architecture."
+      focus: "Write a one-layer attention-only transformer as a sum of paths. Identify the QK and OV circuits of one head."
+      circuit: 3
+      route: 7
+
+    - title: "LoRA: Low-Rank Adaptation of Large Language Models"
+      by: Edward Hu et al.
+      year: 2021
+      kind: paper
+      url: https://arxiv.org/abs/2106.09685
+      layer: learning
+      does: [store]
+      builds_on:
+        - "Language Models are Few-Shot Learners"
+      note: "Freeze the model and learn a low-rank update to each weight matrix. Fine-tuning with a tiny fraction of the parameters."
 
     - title: "Training Compute-Optimal Large Language Models"
       by: Jordan Hoffmann et al.
@@ -2888,6 +3152,9 @@
       builds_on:
         - "Scaling Laws for Neural Language Models"
       note: "Chinchilla. Most models were undertrained; data matters as much as parameters."
+      focus: "From the fitted law, derive how parameters and tokens should grow with compute. Compare with the Kaplan allocation."
+      circuit: 2
+      route: 5
 
     - title: "Training Language Models to Follow Instructions with Human Feedback"
       by: Long Ouyang et al.
@@ -2900,6 +3167,9 @@
         - "Language Models are Few-Shot Learners"
         - "Simple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning"
       note: "InstructGPT and RLHF. How a raw text predictor becomes an assistant."
+      focus: "Name the three training stages and the data each uses. Say where the KL penalty enters and why."
+      circuit: 6
+      route: 16
 
     - title: "Constitutional AI: Harmlessness from AI Feedback"
       by: Yuntao Bai et al.
@@ -2944,6 +3214,80 @@
       builds_on:
         - "A Mathematical Framework for Transformer Circuits"
       note: "Why neurons are hard to interpret: networks pack more features than they have dimensions."
+      focus: "Explain how five sparse features can share two dimensions. Say what sparsity does to the cost of interference."
+      circuit: 3
+      route: 9
+
+    - title: "In-context Learning and Induction Heads"
+      by: Catherine Olsson et al. (Anthropic)
+      year: 2022
+      kind: paper
+      url: https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html
+      layer: learning
+      does: [store, search]
+      builds_on:
+        - "A Mathematical Framework for Transformer Circuits"
+      note: "A two-head circuit that copies whatever followed the last occurrence of the current token, and evidence that it drives most in-context learning."
+      focus: "Draw the two heads of an induction circuit and the pattern [A][B] … [A] → [B] they complete. Say why it needs two layers."
+      circuit: 3
+      route: 8
+
+    - title: "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale"
+      by: Tim Dettmers et al.
+      year: 2022
+      kind: paper
+      url: https://arxiv.org/abs/2208.07339
+      layer: systems
+      does: [compute, store]
+      builds_on:
+        - "Mixed Precision Training"
+      note: "8-bit inference for large models, with the few outlier features kept in 16 bits. Why naive quantisation broke at scale."
+
+    - title: "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers"
+      by: Elias Frantar et al.
+      year: 2023
+      kind: paper
+      url: https://arxiv.org/abs/2210.17323
+      layer: systems
+      does: [store]
+      builds_on:
+        - "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale"
+      note: "Post-training quantisation to 3 or 4 bits, one layer at a time, using second-order information. How large models fit on one GPU."
+
+    - title: "Fast Inference from Transformers via Speculative Decoding"
+      by: Yaniv Leviathan, Matan Kalman, Yossi Matias
+      year: 2023
+      kind: paper
+      url: https://arxiv.org/abs/2211.17192
+      layer: systems
+      does: [compute, move]
+      builds_on:
+        - "Efficiently Scaling Transformer Inference"
+      note: "A small model drafts tokens and the large one verifies them in parallel, with the output distribution unchanged. Decoding is memory-bound, so the extra compute is nearly free."
+
+    - title: "Transformers Learn In-Context by Gradient Descent"
+      by: Johannes von Oswald et al.
+      year: 2023
+      kind: paper
+      url: https://arxiv.org/abs/2212.07677
+      layer: learning
+      does: [compute]
+      builds_on:
+        - "Language Models are Few-Shot Learners"
+        - "In-context Learning and Induction Heads"
+      note: "A linear self-attention layer can implement a gradient-descent step on the examples in its context. Learning inside the forward pass."
+
+    - title: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"
+      by: Rafael Rafailov et al.
+      year: 2023
+      kind: paper
+      url: https://arxiv.org/abs/2305.18290
+      layer: learning
+      does: [compute]
+      builds_on:
+        - "Training Language Models to Follow Instructions with Human Feedback"
+        - "Proximal Policy Optimization Algorithms"
+      note: "The RLHF objective rewritten as a classification loss on preference pairs. No reward model and no PPO loop."
 
     - title: "Scaling Monosemanticity"
       by: Adly Templeton et al. (Anthropic)
@@ -2957,6 +3301,18 @@
         - "Emergence of Simple-Cell Receptive Field Properties by Learning a Sparse Code for Natural Images"
       note: "Sparse autoencoders pull millions of readable features out of a production model."
 
+    - title: "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters"
+      by: Charlie Snell et al.
+      year: 2024
+      kind: paper
+      url: https://arxiv.org/abs/2408.03314
+      layer: learning
+      does: [search]
+      builds_on:
+        - "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models"
+        - "Training Compute-Optimal Large Language Models"
+      note: "Spending compute on search and revision at inference can beat a larger model. Scaling laws for thinking time."
+
     - title: "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning"
       by: DeepSeek-AI
       year: 2025
@@ -2968,6 +3324,9 @@
         - "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models"
         - "Simple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning"
       note: "Reasoning learned from reinforcement learning on checkable rewards, with the recipe published openly."
+      focus: "Describe the reward used for reasoning. Say what changes when the supervised warm-up is skipped."
+      circuit: 6
+      route: 17
 
 - id: graphs
   title: Graphs and relational inductive bias
@@ -2983,6 +3342,7 @@
       year: 1736
       kind: paper
       url: https://scholarlycommons.pacific.edu/euler-works/53/
+      intro: true
       layer: algorithms
       does: [search]
       note: "The seven bridges of Königsberg, and the first graph theory. Read an English translation for fun and for origins."
@@ -2992,6 +3352,7 @@
       year: 1959
       kind: paper
       url: https://snap.stanford.edu/class/cs224w-readings/erdos59random.pdf
+      side: "network science"
       layer: algorithms
       does: [move]
       builds_on:
@@ -3012,6 +3373,7 @@
       year: 1998
       kind: paper
       url: https://doi.org/10.1038/30918
+      side: "network science"
       layer: algorithms
       does: [move]
       builds_on:
@@ -3023,6 +3385,7 @@
       year: 1999
       kind: paper
       url: https://doi.org/10.1126/science.286.5439.509
+      side: "network science"
       layer: algorithms
       does: [move]
       builds_on:
@@ -3094,9 +3457,9 @@
       builds_on:
         - "Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering"
       note: "GCN. The paper that made GNNs simple enough to become mainstream."
-      core: true
-      route: 20
+      start: true
       focus: "Give four vertices scalar features and calculate one normalized graph-convolution update, including self-loops."
+      route: 31
 
     - title: "Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering"
       by: Michaël Defferrard, Xavier Bresson, Pierre Vandergheynst
@@ -3143,7 +3506,7 @@
         - "Semi-Supervised Classification with Graph Convolutional Networks"
         - "Attention Is All You Need"
       note: "Attention over a node's neighbours. Very close to a transformer restricted to graph edges."
-      route: 32
+      route: 38
 
     - title: "How Powerful are Graph Neural Networks?"
       by: Keyulu Xu et al.
@@ -3155,8 +3518,8 @@
       builds_on:
         - "Neural Message Passing for Quantum Chemistry"
       note: "Message-passing GNNs are at most as powerful as the Weisfeiler–Lehman graph isomorphism test. A key theory result."
-      route: 21
       focus: "Find two equal-feature vertices whose neighborhoods produce the same aggregate. Ask what another layer could distinguish."
+      route: 32
 
     - title: "Relational Inductive Biases, Deep Learning, and Graph Networks"
       by: Peter Battaglia et al.
@@ -3174,6 +3537,7 @@
       year: 2018
       kind: book
       url: https://doi.org/10.1093/oso/9780198805090.001.0001
+      side: "network science"
       layer: algorithms
       does: [move]
       builds_on:
@@ -3191,7 +3555,7 @@
         - "Semi-Supervised Classification with Graph Convolutional Networks"
         - "DeepWalk: Online Learning of Social Representations"
       note: "Free, short, and the clearest textbook on node embeddings, GNNs and graph generation."
-      route: 29
+      route: 35
 
     - title: "On the Bottleneck of Graph Neural Networks and its Practical Implications"
       by: Uri Alon, Eran Yahav
@@ -3220,6 +3584,7 @@
       year: 2021
       kind: interactive
       url: https://distill.pub/2021/gnn-intro/
+      intro: true
       layer: learning
       does: [move]
       builds_on:
@@ -3278,6 +3643,7 @@
       year: 2023
       kind: course
       url: https://web.stanford.edu/class/cs224w/
+      intro: true
       layer: learning
       does: [move]
       note: "The standard course, with lectures and PyG notebooks online."
@@ -3317,6 +3683,7 @@
       year: 1976
       kind: paper
       url: https://doi.org/10.1126/science.968482
+      side: "classical vision"
       layer: algorithms
       does: [compute]
       stack: brain
@@ -3327,6 +3694,7 @@
       year: 1981
       kind: paper
       url: https://doi.org/10.1016/0004-3702(81)90024-2
+      side: "classical vision"
       layer: algorithms
       does: [compute]
       note: "Motion from brightness change, as an energy minimisation."
@@ -3342,9 +3710,9 @@
       builds_on:
         - "Receptive Fields, Binocular Interaction and Functional Architecture in the Cat's Visual Cortex"
       note: "The three levels of analysis: computation, algorithm, implementation. The most useful frame for comparing brains, models and chips."
-      core: true
-      route: 46
+      start: true
       focus: "Read the discussion of the three levels. Describe a stereo-depth problem at each level."
+      route: 50
 
     - title: "Making the World Differentiable"
       by: Jürgen Schmidhuber
@@ -3362,6 +3730,7 @@
       year: 1991
       kind: paper
       url: https://doi.org/10.1038/scientificamerican0591-76
+      side: "neuromorphic hardware"
       layer: devices
       does: [compute]
       stack: brain
@@ -3397,6 +3766,7 @@
       year: 2001
       kind: paper
       url: https://doi.org/10.1109/CVPR.2001.990517
+      side: "classical vision"
       layer: algorithms
       does: [compute, search]
       note: "Real-time face detection on 2001 hardware: integral images and a cascade that rejects most windows early."
@@ -3418,6 +3788,7 @@
       year: 2004
       kind: paper
       url: https://doi.org/10.1023/B:VISI.0000029664.99615.94
+      side: "classical vision"
       layer: algorithms
       does: [compute, search]
       note: "SIFT: invariant local features and matching. The peak of hand-designed vision, and still a good lesson in invariance."
@@ -3427,6 +3798,7 @@
       year: 2004
       kind: book
       url: https://www.robots.ox.ac.uk/~vgg/hzbook/
+      side: "classical vision"
       layer: algorithms
       does: [compute]
       note: "Cameras, projection, epipolar geometry and 3D reconstruction. The geometry learned models are rediscovering."
@@ -3436,6 +3808,7 @@
       year: 2008
       kind: paper
       url: https://doi.org/10.1109/JSSC.2007.914337
+      side: "neuromorphic hardware"
       layer: devices
       does: [compute, move]
       stack: brain
@@ -3479,20 +3852,20 @@
         - "Auto-Encoding Variational Bayes"
         - "Long Short-Term Memory"
       note: "A VAE and an RNN learn the environment; the agent learns to act inside its own dream."
-      route: 48
+      route: 51
 
     - title: "Event-Based Vision: A Survey"
       by: Guillermo Gallego et al.
       year: 2019
       kind: paper
       url: https://arxiv.org/abs/1904.08405
+      side: "neuromorphic hardware"
       layer: algorithms
       does: [compute, move]
       stack: brain
       builds_on:
         - "A 128×128 120 dB 15 μs Latency Asynchronous Temporal Contrast Vision Sensor"
       note: "Event cameras and the algorithms for them: microsecond latency, high dynamic range, sparse data. Vision that does not look like LLM input."
-      route: 47
 
     - title: "Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model"
       by: Julian Schrittwieser et al.
@@ -3505,6 +3878,9 @@
         - "A General Reinforcement Learning Algorithm That Masters Chess, Shogi, and Go Through Self-Play"
         - "Dyna, an Integrated Architecture for Learning, Planning, and Reacting"
       note: "MuZero: tree search inside a learned model that predicts only what matters for planning."
+      focus: "List the three learned functions. Say what the model is trained to predict, and why it never reconstructs observations."
+      circuit: 7
+      route: 18
 
     - title: "Dream to Control: Learning Behaviors by Latent Imagination"
       by: Danijar Hafner et al.
@@ -3573,6 +3949,17 @@
         - "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"
       note: "Hide 75% of an image and reconstruct it. Self-supervised pre-training for vision, and how it differs from text."
 
+    - title: "Score-Based Generative Modeling through Stochastic Differential Equations"
+      by: Yang Song et al.
+      year: 2021
+      kind: paper
+      url: https://arxiv.org/abs/2011.13456
+      layer: learning
+      does: [compute]
+      builds_on:
+        - "Denoising Diffusion Probabilistic Models"
+      note: "Diffusion as a stochastic differential equation run backwards with a learned score. Unifies score matching and DDPM."
+
     - title: "A Path Towards Autonomous Machine Intelligence"
       by: Yann LeCun
       year: 2022
@@ -3590,6 +3977,7 @@
       year: 2022
       kind: book
       url: https://szeliski.org/Book/
+      intro: true
       layer: algorithms
       does: [compute]
       note: "Free. The broad textbook, from image formation to deep learning."
@@ -3615,6 +4003,9 @@
       builds_on:
         - "Dream to Control: Learning Behaviors by Latent Imagination"
       note: "DreamerV3: one world-model agent with fixed hyperparameters, across very different domains."
+      focus: "Follow one imagined rollout. Say which parts are trained on real data and which only in imagination."
+      circuit: 7
+      route: 19
 
     - title: "Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture"
       by: Mahmoud Assran et al.
@@ -3626,6 +4017,20 @@
       builds_on:
         - "A Path Towards Autonomous Machine Intelligence"
       note: "I-JEPA: predict representations, not pixels. LeCun's alternative to generative world models, made concrete."
+      focus: "Contrast predicting pixels with predicting embeddings of masked blocks. Say what keeps the representations from collapsing."
+      circuit: 7
+      route: 20
+
+    - title: "Flow Matching for Generative Modeling"
+      by: Yaron Lipman et al.
+      year: 2023
+      kind: paper
+      url: https://arxiv.org/abs/2210.02747
+      layer: learning
+      does: [compute]
+      builds_on:
+        - "Score-Based Generative Modeling through Stochastic Differential Equations"
+      note: "Learn a vector field that carries noise to data along simple paths. Diffusion-quality generation without simulating a stochastic process."
 
 - id: act
   title: Learning to act
@@ -3715,13 +4120,13 @@
       year: 2008
       kind: book
       url: https://www.cds.caltech.edu/~murray/books/AM08/pdf/am08-complete_22Feb09.pdf
+      side: "control theory"
       layer: algorithms
       does: [compute]
       builds_on:
         - "Cybernetics: Or Control and Communication in the Animal and the Machine"
         - "A New Approach to Linear Filtering and Prediction Problems"
       note: "Free. Modelling, stability, feedback and robustness, connecting biological dynamics, hardware and autonomous systems."
-      route: 61
 
     - title: "Human-Level Control Through Deep Reinforcement Learning"
       by: Volodymyr Mnih et al.
@@ -3735,6 +4140,20 @@
         - "ImageNet Classification with Deep Convolutional Neural Networks"
       note: "DQN plays Atari from pixels. Deep learning meets reinforcement learning."
 
+    - title: "Proximal Policy Optimization Algorithms"
+      by: John Schulman et al.
+      year: 2017
+      kind: paper
+      url: https://arxiv.org/abs/1707.06347
+      layer: learning
+      does: [search]
+      builds_on:
+        - "Simple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning"
+      note: "A clipped policy-gradient update that stays close to the old policy. The algorithm inside RLHF."
+      focus: "Write the clipped objective. Say what the clipping prevents compared with a plain policy-gradient step."
+      circuit: 6
+      route: 15
+
     - title: "Reinforcement Learning: An Introduction"
       by: Richard Sutton, Andrew Barto
       year: 2018
@@ -3746,9 +4165,9 @@
         - "Q-Learning"
         - "Learning to Predict by the Methods of Temporal Differences"
       note: "Free. Learning from reward: decision processes, value functions, exploration."
-      core: true
-      route: 42
+      start: true
       focus: "Read the introduction to finite Markov decision processes. Compute a state value for a two-step episode under a fixed policy."
+      route: 46
 
 - id: brain
   title: The brain and neuromorphic computing
@@ -3764,6 +4183,7 @@
       year: 1952
       kind: paper
       url: https://physoc.onlinelibrary.wiley.com/doi/10.1113/jphysiol.1952.sp004764
+      side: "computational neuroscience"
       layer: physics
       does: [compute]
       note: "The equations of the spike. Every spiking-neuron model is a simplification of this one."
@@ -3782,12 +4202,12 @@
       year: 1990
       kind: paper
       url: https://ieeexplore.ieee.org/document/58356
+      side: "neuromorphic hardware"
       layer: devices
       does: [compute]
       builds_on:
         - "Introduction to VLSI Systems"
       note: "The paper that started the field: analog transistors working like neurons, and an argument about why that is efficient."
-      route: 49
 
     - title: "Why There Are Complementary Learning Systems in the Hippocampus and Neocortex"
       by: James McClelland, Bruce McNaughton, Randall O'Reilly
@@ -3841,12 +4261,15 @@
       builds_on:
         - "A Quantitative Description of Membrane Current and its Application to Conduction and Excitation in Nerve"
       note: "The standard computational neuroscience textbook: neural coding, models and plasticity."
+      focus: "Read the chapter on plasticity. Write Hebb's rule and one stabilised variant, and say what each does to the weight norm."
+      start: true
 
     - title: "An Energy Budget for Signaling in the Grey Matter of the Brain"
       by: David Attwell, Simon Laughlin
       year: 2001
       kind: paper
       url: https://doi.org/10.1097/00004647-200110000-00001
+      side: "computational neuroscience"
       layer: physics
       does: [compute, move]
       builds_on:
@@ -3858,6 +4281,7 @@
       year: 2003
       kind: paper
       url: https://doi.org/10.1109/TNN.2003.820440
+      side: "computational neuroscience"
       layer: algorithms
       does: [compute]
       builds_on:
@@ -3869,6 +4293,7 @@
       year: 2003
       kind: paper
       url: https://doi.org/10.1126/science.1089662
+      side: "computational neuroscience"
       layer: architecture
       does: [move]
       builds_on:
@@ -3880,6 +4305,7 @@
       year: 2008
       kind: paper
       url: https://www.nature.com/articles/nature06932
+      side: "in-memory & analog"
       layer: devices
       does: [store]
       builds_on:
@@ -3903,6 +4329,7 @@
       year: 2011
       kind: paper
       url: https://doi.org/10.3389/fnins.2011.00073
+      side: "neuromorphic hardware"
       layer: devices
       does: [compute]
       builds_on:
@@ -3914,14 +4341,12 @@
       year: 2014
       kind: book
       url: https://neuronaldynamics.epfl.ch/
+      side: "computational neuroscience"
       layer: algorithms
       does: [compute]
       builds_on:
         - "A Quantitative Description of Membrane Current and its Application to Conduction and Excitation in Nerve"
       note: "Free online. From single neurons to networks, with the math you need for spiking models."
-      core: true
-      route: 6
-      circuit: 2
       focus: "Read the integrate-and-fire model in the opening chapter. Sketch how pulse spacing changes whether the neuron spikes."
 
     - title: "A Million Spiking-Neuron Integrated Circuit with a Scalable Communication Network and Interface"
@@ -3929,6 +4354,7 @@
       year: 2014
       kind: paper
       url: https://www.science.org/doi/10.1126/science.1254642
+      side: "neuromorphic hardware"
       layer: architecture
       does: [compute, move]
       builds_on:
@@ -3940,6 +4366,7 @@
       year: 2014
       kind: paper
       url: https://ieeexplore.ieee.org/document/6750072
+      side: "neuromorphic hardware"
       layer: architecture
       does: [move]
       note: "A million ARM cores wired together to simulate brain-scale spiking networks."
@@ -3949,6 +4376,7 @@
       year: 2015
       kind: book
       url: https://doi.org/10.7551/mitpress/9780262028707.001.0001
+      side: "computational neuroscience"
       layer: architecture
       does: [compute, store, move]
       builds_on:
@@ -3972,13 +4400,13 @@
       year: 2018
       kind: paper
       url: https://ieeexplore.ieee.org/document/8259423
+      side: "neuromorphic hardware"
       layer: architecture
       does: [compute, store]
       builds_on:
         - "A Million Spiking-Neuron Integrated Circuit with a Scalable Communication Network and Interface"
         - "Synaptic Modifications in Cultured Hippocampal Neurons"
       note: "Intel's research chip, with programmable learning rules on the chip itself."
-      route: 51
 
     - title: "Surrogate Gradient Learning in Spiking Neural Networks"
       by: Emre Neftci, Hesham Mostafa, Friedemann Zenke
@@ -3991,13 +4419,14 @@
         - "Learning Representations by Back-Propagating Errors"
         - "Networks of Spiking Neurons: The Third Generation of Neural Network Models"
       note: "Spikes are not differentiable. This trick makes them trainable with backprop."
-      route: 50
+      route: 52
 
     - title: "Towards Spike-Based Machine Intelligence with Neuromorphic Computing"
       by: Kaushik Roy, Akhilesh Jaiswal, Priyadarshini Panda
       year: 2019
       kind: paper
       url: https://www.nature.com/articles/s41586-019-1677-2
+      side: "neuromorphic hardware"
       layer: architecture
       does: [compute]
       builds_on:
@@ -4020,6 +4449,7 @@
       year: 2021
       kind: book
       url: https://www.basicbooks.com/titles/jeff-hawkins/a-thousand-brains/9781541675803/
+      intro: true
       layer: intelligence
       does: [store]
       note: "Cortical columns as thousands of model-builders voting. A different view of intelligence from deep learning's."
@@ -4029,6 +4459,7 @@
       year: 2022
       kind: paper
       url: https://www.nature.com/articles/s43588-021-00184-y
+      side: "neuromorphic hardware"
       layer: systems
       does: [compute]
       builds_on:
@@ -4050,6 +4481,7 @@
       year: 1935
       kind: paper
       url: https://doi.org/10.1103/PhysRev.47.777
+      side: "quantum foundations"
       layer: physics
       does: [move]
       note: "The EPR paradox: entanglement as an objection to quantum mechanics."
@@ -4059,6 +4491,7 @@
       year: 1964
       kind: paper
       url: https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195
+      side: "quantum foundations"
       layer: physics
       does: [move]
       builds_on:
@@ -4073,25 +4506,26 @@
       layer: physics
       does: [compute]
       note: "Nature is quantum, so simulating it efficiently needs a quantum computer. Where the field began."
-      route: 52
+      route: 53
 
     - title: "A Single Quantum Cannot Be Cloned"
       by: William Wootters, Wojciech Zurek
       year: 1982
       kind: paper
       url: https://doi.org/10.1038/299802a0
+      side: "quantum foundations"
       layer: physics
       does: [store]
       builds_on:
         - "Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?"
       note: "No-cloning: unknown quantum states cannot be copied. Quantum memory cannot be read like classical memory."
-      route: 55
 
     - title: "Quantum Theory, the Church–Turing Principle and the Universal Quantum Computer"
       by: David Deutsch
       year: 1985
       kind: paper
       url: https://royalsocietypublishing.org/doi/10.1098/rspa.1985.0070
+      side: "quantum foundations"
       layer: algorithms
       does: [compute]
       builds_on:
@@ -4116,6 +4550,7 @@
       year: 1995
       kind: paper
       url: https://doi.org/10.1103/PhysRevA.52.R2493
+      side: "quantum hardware & error correction"
       layer: algorithms
       does: [store]
       builds_on:
@@ -4139,6 +4574,7 @@
       year: 1996
       kind: paper
       url: https://doi.org/10.1126/science.273.5278.1073
+      side: "quantum foundations"
       layer: algorithms
       does: [compute]
       builds_on:
@@ -4150,6 +4586,7 @@
       year: 1997
       kind: paper
       url: https://arxiv.org/abs/quant-ph/9707021
+      side: "quantum hardware & error correction"
       layer: physics
       does: [store]
       builds_on:
@@ -4161,6 +4598,7 @@
       year: 1997
       kind: paper
       url: https://arxiv.org/abs/quant-ph/9611025
+      side: "quantum hardware & error correction"
       layer: algorithms
       does: [store]
       builds_on:
@@ -4172,6 +4610,7 @@
       year: 1997
       kind: paper
       url: https://arxiv.org/abs/quant-ph/9705052
+      side: "quantum hardware & error correction"
       layer: algorithms
       does: [store]
       builds_on:
@@ -4183,6 +4622,7 @@
       year: 1998
       kind: paper
       url: https://arxiv.org/abs/quant-ph/9807006
+      side: "quantum foundations"
       layer: algorithms
       does: [compute]
       builds_on:
@@ -4200,13 +4640,14 @@
         - "Quantum Theory, the Church–Turing Principle and the Universal Quantum Computer"
         - "Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer"
       note: "'Mike and Ike', the standard textbook. Chapters 1, 2, 4 and 5 are the core."
-      route: 53
+      route: 54
 
     - title: "The Physical Implementation of Quantum Computation"
       by: David DiVincenzo
       year: 2000
       kind: paper
       url: https://arxiv.org/abs/quant-ph/0002077
+      side: "quantum hardware & error correction"
       layer: architecture
       does: [compute]
       note: "The DiVincenzo criteria: the five requirements any quantum hardware must meet."
@@ -4216,6 +4657,7 @@
       year: 2001
       kind: paper
       url: https://arxiv.org/abs/quant-ph/0010033
+      side: "quantum foundations"
       layer: architecture
       does: [compute]
       builds_on:
@@ -4227,6 +4669,7 @@
       year: 2002
       kind: paper
       url: https://arxiv.org/abs/quant-ph/0110143
+      side: "quantum hardware & error correction"
       layer: architecture
       does: [store]
       builds_on:
@@ -4238,6 +4681,7 @@
       year: 2007
       kind: book
       url: https://doi.org/10.1017/CBO9780511813870
+      side: "quantum foundations"
       layer: algorithms
       does: [compute]
       note: "Quantum computing for computer scientists, with no physics prerequisites. Shorter and gentler than Nielsen & Chuang."
@@ -4261,13 +4705,14 @@
       layer: architecture
       does: [store]
       note: "Bucket-brigade QRAM: querying memory in superposition. Many QML speed-ups quietly assume it exists."
-      route: 56
+      route: 55
 
     - title: "Quantum Annealing with Manufactured Spins"
       by: Mark Johnson et al.
       year: 2011
       kind: paper
       url: https://doi.org/10.1038/nature10012
+      side: "quantum hardware & error correction"
       layer: devices
       does: [search]
       builds_on:
@@ -4279,6 +4724,7 @@
       year: 2012
       kind: paper
       url: https://arxiv.org/abs/1208.0928
+      side: "quantum hardware & error correction"
       layer: architecture
       does: [store]
       builds_on:
@@ -4290,6 +4736,7 @@
       year: 2013
       kind: book
       url: https://www.scottaaronson.com/democritus/
+      side: "quantum foundations"
       layer: algorithms
       does: [compute]
       note: "Complexity theory, quantum mechanics and philosophy, with a lot of wit. Good for knowing what quantum computers cannot do."
@@ -4308,6 +4755,7 @@
       year: 2013
       kind: paper
       url: https://doi.org/10.1126/science.1231930
+      side: "quantum hardware & error correction"
       layer: devices
       does: [store]
       note: "The roadmap of superconducting quantum hardware, from the people who built much of it."
@@ -4333,12 +4781,15 @@
       builds_on:
         - "Quantum Algorithm for Solving Linear Systems of Equations"
       note: "The conditions hidden in HHL-style speed-ups. Read straight after HHL."
+      focus: "List the caveats on HHL. Take one quantum machine learning claim and find which caveat it assumes away."
+      start: true
 
     - title: "Quantum Error Correction for Quantum Memories"
       by: Barbara Terhal
       year: 2015
       kind: paper
       url: https://arxiv.org/abs/1302.3428
+      side: "quantum hardware & error correction"
       layer: architecture
       does: [store]
       builds_on:
@@ -4377,7 +4828,7 @@
       builds_on:
         - "Support-Vector Networks"
       note: "Quantum circuits as kernel methods. The clearest way to think about variational QML."
-      route: 57
+      route: 56
 
     - title: "Supervised Learning with Quantum-Enhanced Feature Spaces"
       by: Vojtěch Havlíček et al. (IBM)
@@ -4400,7 +4851,7 @@
       builds_on:
         - "A Variational Eigenvalue Solver on a Quantum Processor"
       note: "Gradients vanish exponentially in random quantum circuits. Vanishing gradients again, in a new form."
-      route: 58
+      route: 57
 
     - title: "A Quantum-Inspired Classical Algorithm for Recommendation Systems"
       by: Ewin Tang
@@ -4418,6 +4869,7 @@
       year: 2018
       kind: book
       url: https://cs.uwaterloo.ca/~watrous/TQI/
+      side: "quantum foundations"
       layer: algorithms
       does: [compute]
       note: "Free. The rigorous mathematics of quantum states, channels and measurement."
@@ -4427,12 +4879,10 @@
       year: 2019
       kind: interactive
       url: https://quantum.country/
+      intro: true
       layer: algorithms
       does: [compute]
       note: "An essay with built-in spaced repetition. The gentlest serious introduction to qubits, gates and algorithms."
-      core: true
-      route: 12
-      circuit: 5
       focus: "Read the qubit and gate sections of the first essay. Starting from zero, predict a computational-basis measurement after one Hadamard and after two."
 
     - title: "Quantum Supremacy Using a Programmable Superconducting Processor"
@@ -4440,6 +4890,7 @@
       year: 2019
       kind: paper
       url: https://www.nature.com/articles/s41586-019-1666-5
+      side: "quantum hardware & error correction"
       layer: devices
       does: [compute]
       builds_on:
@@ -4451,19 +4902,20 @@
       year: 2019
       kind: paper
       url: https://arxiv.org/abs/1905.09749
+      side: "quantum hardware & error correction"
       layer: systems
       does: [compute]
       builds_on:
         - "Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer"
         - "Surface Codes: Towards Practical Large-Scale Quantum Computation"
       note: "Resource estimation done properly: qubits, time, error correction and routing for a real algorithm. Engineering, not hype."
-      route: 60
 
     - title: "A Quantum Engineer's Guide to Superconducting Qubits"
       by: Philip Krantz et al.
       year: 2019
       kind: paper
       url: https://arxiv.org/abs/1904.06560
+      side: "quantum hardware & error correction"
       layer: devices
       does: [compute]
       builds_on:
@@ -4475,6 +4927,7 @@
       year: 2019
       kind: paper
       url: https://arxiv.org/abs/1904.04178
+      side: "quantum hardware & error correction"
       layer: devices
       does: [compute]
       note: "The main alternative platform: long coherence and high fidelity, with slow gates."
@@ -4512,7 +4965,7 @@
       builds_on:
         - "Quantum Machine Learning"
       note: "What a quantum advantage in learning actually counts and assumes, depending on how data is accessed."
-      route: 59
+      route: 58
 
     - title: "Does Provable Absence of Barren Plateaus Imply Classical Simulability?"
       by: Marco Cerezo et al.
@@ -4541,6 +4994,7 @@
       year: 2023
       kind: paper
       url: https://doi.org/10.1038/s41586-023-06927-3
+      side: "quantum hardware & error correction"
       layer: architecture
       does: [compute]
       builds_on:
@@ -4552,6 +5006,7 @@
       year: 2024
       kind: paper
       url: https://arxiv.org/abs/2408.13687
+      side: "quantum hardware & error correction"
       layer: architecture
       does: [store]
       builds_on:
@@ -4563,6 +5018,7 @@
       year: 2024
       kind: course
       url: https://learning.quantum.ibm.com/
+      intro: true
       layer: algorithms
       does: [compute]
       note: "Hands-on Qiskit courses that run on real quantum hardware."
@@ -4630,7 +5086,7 @@
         - "Attention Is All You Need"
       note: "Transformer attention is the update rule of a modern Hopfield network. Links 1982 to 2017."
       question: "What is stored, what changes during retrieval, and where is the energy function defined?"
-      route: 33
+      route: 39
 
     - title: "Transformers are Graph Neural Networks"
       by: Chaitanya Joshi
@@ -4657,10 +5113,10 @@
         - "Can Programming Be Liberated from the von Neumann Style?"
       note: "Ideas win when they suit the available hardware, not only when they are best. The counterweight to the Bitter Lesson."
       question: "Which ideas on this list lost because of hardware rather than merit, and what hardware would revive them?"
-      core: true
-      route: 18
-      circuit: 8
+      start: true
       focus: "Pick one example in the paper. Identify a hardware constraint and an algorithm that benefited from it."
+      circuit: 9
+      route: 25
 
     - title: "Backpropagation and the Brain"
       by: Timothy Lillicrap et al.
@@ -4716,6 +5172,9 @@
       layer: algorithms
       does: [store]
       note: "Induction as compression and the universal prior. The theoretical ideal that next-token prediction approximates."
+      focus: "State the universal prior in one line. Explain why short programs dominate it and why it cannot be computed."
+      circuit: 8
+      route: 21
 
     - title: "Computer Science as Empirical Inquiry: Symbols and Search"
       by: Allen Newell, Herbert Simon
@@ -4733,6 +5192,7 @@
       year: 1979
       kind: book
       url: https://www.basicbooks.com/titles/douglas-r-hofstadter/godel-escher-bach/9780465026562/
+      intro: true
       layer: intelligence
       does: []
       note: "Self-reference, formal systems and minds. Not a technical book, but it has inspired many who build these systems."
@@ -4767,8 +5227,10 @@
       builds_on:
         - "A Formal Theory of Inductive Inference"
       note: "Intelligence as efficiency at acquiring new skills, not skill itself. The origin of the ARC benchmark."
-      core: true
+      start: true
       focus: "Read the definition of skill-acquisition efficiency. Compare two learners with equal final scores but different prior experience."
+      circuit: 8
+      route: 23
 
     - title: "ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness"
       by: Robert Geirhos et al.
@@ -4780,6 +5242,22 @@
       builds_on:
         - "ImageNet Classification with Deep Convolutional Neural Networks"
       note: "Cue-conflict images (a cat shape with elephant skin) suggest ImageNet CNNs classify by texture. A widely cited claim about what a classifier actually learns."
+
+    - title: "Language Modeling Is Compression"
+      by: Grégoire Delétang et al.
+      year: 2024
+      kind: paper
+      url: https://arxiv.org/abs/2309.10668
+      layer: intelligence
+      does: [store]
+      builds_on:
+        - "A Mathematical Theory of Communication"
+        - "A Formal Theory of Inductive Inference"
+        - "Scaling Laws for Neural Language Models"
+      note: "Prediction is compression: a language model with arithmetic coding beats gzip, even on images and audio. Shannon and Solomonoff applied to LLMs."
+      focus: "Turn a log-loss in nats per token into a compressed size for a 1 MB text. Say why the size of the model has to be counted."
+      circuit: 8
+      route: 22
 
     - title: "ImageNet-trained CNNs are not biased towards texture: Revisiting feature reliance through controlled suppression"
       by: Tom Burgert, Oliver Stoll, Paolo Rota, Begum Demir

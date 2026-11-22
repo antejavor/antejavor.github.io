@@ -11,12 +11,14 @@
 {%- assign key = include.si | append: '-' | append: include.ii -%}
 {%- assign did = 'd-' | append: include.view | append: '-' | append: key -%}
 {%- assign st = it.stack | default: s.stack -%}
+{%- if it.intro -%}{%- assign tier = 'intro' -%}{%- elsif it.side -%}{%- assign tier = 'side' -%}{%- else -%}{%- assign tier = 'core' -%}{%- endif -%}
 <li
-  class="reading-item{% if it.core %} is-core{% endif %}{% if it.read %} is-read{% endif %}"
+  class="reading-item is-{{ tier }}{% if it.start %} is-start{% endif %}{% if it.read %} is-read{% endif %}"
   {% if include.view == 'stages' %}
     id="p-{{ key }}"
   {% endif %}
   data-key="{{ key }}"
+  data-tier="{{ tier }}"
   data-track="{{ s.track }}"
   data-layer="{{ it.layer }}"
   data-does="{{ it.does | join: ' ' }}"
@@ -34,8 +36,14 @@
         </span>
         <span class="reading-meta">
           <span>{{ it.year }}</span> · <span>{{ it.by }}</span> · <span>{{ it.kind }}</span>
-          {%- if it.core %}
-            <span class="reading-badge is-core">core</span>
+          {%- if it.start %}
+            <span class="reading-badge is-start">start here</span>
+          {%- endif %}
+          {%- if it.side %}
+            <span class="reading-badge is-side">side · {{ it.side }}</span>
+          {%- endif %}
+          {%- if it.intro %}
+            <span class="reading-badge is-intro">intro</span>
           {%- endif %}
           {%- if it.circuit and include.view == 'stages' %}
             <span class="reading-badge">stop {{ it.circuit }}</span>

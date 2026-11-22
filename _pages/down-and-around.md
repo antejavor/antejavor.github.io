@@ -69,6 +69,12 @@ noindex: true
   <figcaption>Each cell is a layer of the stack against one of the four questions: walked / total, with one dot per step. Click a cell to list its steps. Math and history sit beside the stack, so they aren't counted here.</figcaption>
 </figure>
 
+<p class="reading-legend">
+  <span class="reading-badge is-core">core</span> is the deep-AI path; the circuit and the route use only core readings.
+  <span class="reading-badge is-side">side</span> tracks go deep into a neighbouring field and name it.
+  <span class="reading-badge is-intro">intro</span> readings are beginner-friendly or refreshers, hidden until you switch them on.
+</p>
+
 <div class="reading-controls" id="reading-controls">
   <div class="reading-views" role="tablist" aria-label="How to walk the list">
     <button type="button" class="reading-view active" role="tab" aria-selected="true" data-view="stages">stages</button>
@@ -90,7 +96,12 @@ noindex: true
     <button type="button" class="reading-chip" data-track="crossroads">crossroads</button>
   </div>
   <div class="reading-switches">
-    <label class="reading-toggle"><input type="checkbox" id="reading-core-only"> core only</label>
+    <div class="reading-depth" role="group" aria-label="Depth">
+      <button type="button" class="reading-chip reading-depth-chip is-core active" data-tier="core" aria-pressed="true">core</button>
+      <button type="button" class="reading-chip reading-depth-chip is-side active" data-tier="side" aria-pressed="true">side tracks</button>
+      <button type="button" class="reading-chip reading-depth-chip is-intro" data-tier="intro" aria-pressed="false">intro</button>
+    </div>
+    <label class="reading-toggle"><input type="checkbox" id="reading-start-only"> start here only</label>
     <label class="reading-toggle"><input type="checkbox" id="reading-todo-only"> not walked yet</label>
     <button type="button" class="reading-chip reading-cell-filter active" id="reading-cell-filter" hidden></button>
   </div>
@@ -120,7 +131,7 @@ noindex: true
 </div>
 
 <div class="reading-view-panel" data-view="circuit" hidden>
-<p class="reading-view-lead">The opening stretch of the route: {{ circuit_stops.size }} stops that cross the stack from switches to scaling. Do the task at each station before moving on.</p>
+<p class="reading-view-lead">The opening stretch of the route: {{ circuit_stops.size }} stops, from why deep networks generalise to what intelligence is, by way of scaling, interpretability, the cost of a bit and the hardware. Do the task at each station before moving on.</p>
 {% for stop in circuit_stops %}
 {% assign n = forloop.index %}
 <section class="reading-stage">
@@ -141,7 +152,7 @@ noindex: true
 </div>
 
 <div class="reading-view-panel" data-view="route" hidden>
-<p class="reading-view-lead">Every step of the suggested route in order, the dashed line on the map. After the circuit comes a thread through graphs: draw a four-vertex graph, run Dijkstra from one vertex, then reuse it for a convolution. Which vertices can you tell apart after one round of aggregation?</p>
+<p class="reading-view-lead">Every step of the suggested route in order, the dashed line on the map. Core readings only: side tracks and intro readings stay in their stages.</p>
 <section class="reading-stage">
   <ul class="reading-items">
     {% for rk in route_keys %}
@@ -190,7 +201,8 @@ noindex: true
       s.items.forEach(function (it, ii) {
         nodes.push({
           si: si, ii: ii, track: s.track, stack: it.stack || s.stack, layer: it.layer || null, does: it.does || [],
-          title: it.title, note: it.note || null, core: !!it.core,
+          title: it.title, note: it.note || null, start: !!it.start,
+          tier: it.intro ? "intro" : it.side ? "side" : "core",
           read: it.read ? String(it.read).slice(0, 10) : null, route: it.route || null,
           buildsOn: it.builds_on || [], inEdges: [], outEdges: [],
           x: sx[si].left + Math.floor(ii / ROWMAX) * SUB, y: TOP + (ii % ROWMAX) * ROW
@@ -204,7 +216,7 @@ noindex: true
       function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
       nodes.forEach(function (n) {
         var p = n.si <= 4 ? 0.4 : n.si <= 9 ? 0.22 : 0.1;
-        if (rnd() < p * (n.core ? 1.6 : 1)) n.order = n.si + rnd() * 3;
+        if (n.tier === "core" && rnd() < p * (n.start ? 1.6 : 1)) n.order = n.si + rnd() * 3;
       });
       var d0 = new Date("2026-11-18");
       nodes.filter(function (n) { return n.order !== undefined; })
@@ -274,8 +286,8 @@ noindex: true
 
     // Item dots
     nodes.forEach(function (n) {
-      var a = el("a", { href: "#p-" + n.si + "-" + n.ii, class: "path-node" + (n.read ? " is-read" : "") + (n.core ? " is-core" : "") });
-      el("circle", { cx: n.x, cy: n.y, r: n.core ? 4.2 : 2.8 }, a);
+      var a = el("a", { href: "#p-" + n.si + "-" + n.ii, class: "path-node is-" + n.tier + (n.read ? " is-read" : "") + (n.start ? " is-start" : "") });
+      el("circle", { cx: n.x, cy: n.y, r: n.start ? 4.2 : n.tier === "intro" ? 2.1 : 2.8 }, a);
       var t = el("title", {}, a);
       t.textContent = n.title + (n.layer ? " · " + n.layer : "") + (n.read ? " (walked " + n.read + ")" : "") +
         (n.note ? "\n" + n.note : "") +
@@ -305,8 +317,8 @@ noindex: true
     label.textContent = walk.length ? "you are here" : "start";
 
     // Stats
-    var total = nodes.length, core = nodes.filter(function (n) { return n.core; }).length;
-    var coreDone = walk.filter(function (n) { return n.core; }).length;
+    var total = nodes.length, core = nodes.filter(function (n) { return n.tier === "core"; }).length;
+    var coreDone = walk.filter(function (n) { return n.tier === "core"; }).length;
     var stats = document.getElementById("path-stats");
     if (walk.length) {
       stats.textContent = walk.length + " / " + total + " walked · " + coreDone + " / " + core + " core · since " +
@@ -318,7 +330,7 @@ noindex: true
     if (walk.length) stats.textContent += " · " + edgeCount + " connections (hover a dot)";
 
     // ---------------------------------------------------------------- the stack grid
-    var state = { track: "all", stack: "all", cell: null };
+    var state = { track: "all", stack: "all", cell: null, tiers: { core: true, side: true, intro: false } };
     var grid = document.getElementById("path-stack-grid");
 
     function renderGrid() {
@@ -337,7 +349,8 @@ noindex: true
         grid.appendChild(lab);
         DOES.forEach(function (does) {
           var inCell = nodes.filter(function (n) {
-            return n.layer === layer && n.does.indexOf(does) >= 0 && (state.stack === "all" || n.stack === state.stack);
+            return n.layer === layer && n.does.indexOf(does) >= 0 && state.tiers[n.tier] &&
+              (state.stack === "all" || n.stack === state.stack);
           });
           var walked = inCell.filter(function (n) { return n.read; }).length;
           var b = document.createElement("button");
@@ -372,15 +385,15 @@ noindex: true
     }
 
     // ---------------------------------------------------------------- filters and views
-    var coreOnly = document.getElementById("reading-core-only");
+    var startOnly = document.getElementById("reading-start-only");
     var todoOnly = document.getElementById("reading-todo-only");
     var cellChip = document.getElementById("reading-cell-filter");
     var panels = document.querySelectorAll(".reading-view-panel");
     var viewTabs = document.querySelectorAll(".reading-view");
     state.view = "stages";
 
-    function matches(track, stack, layer, does) {
-      return (state.track === "all" || track === state.track) &&
+    function matches(track, stack, layer, does, tier) {
+      return state.tiers[tier] && (state.track === "all" || track === state.track) &&
         (state.stack === "all" || stack === state.stack) &&
         (!state.cell || (layer === state.cell.layer && does.indexOf(state.cell.does) >= 0));
     }
@@ -388,15 +401,15 @@ noindex: true
     function update() {
       document.querySelectorAll(".reading-item").forEach(function (li) {
         var does = li.dataset.does ? li.dataset.does.split(" ") : [];
-        li.hidden = !(matches(li.dataset.track, li.dataset.stack, li.dataset.layer, does) &&
-          (!coreOnly.checked || li.classList.contains("is-core")) &&
+        li.hidden = !(matches(li.dataset.track, li.dataset.stack, li.dataset.layer, does, li.dataset.tier) &&
+          (!startOnly.checked || li.classList.contains("is-start")) &&
           (!todoOnly.checked || !li.classList.contains("is-read")));
       });
       document.querySelectorAll(".reading-stage").forEach(function (sec) {
         sec.hidden = !sec.querySelector(".reading-item:not([hidden])");
       });
       nodes.forEach(function (n) {
-        var on = matches(n.track, n.stack, n.layer, n.does);
+        var on = matches(n.track, n.stack, n.layer, n.does, n.tier);
         n.els.forEach(function (e) { e.classList.toggle("is-dim", !on); });
       });
       svg.querySelectorAll(".path-stage").forEach(function (g) {
@@ -433,7 +446,21 @@ noindex: true
       });
     });
     cellChip.addEventListener("click", function () { state.cell = null; renderGrid(); update(); });
-    coreOnly.addEventListener("change", update);
+    startOnly.addEventListener("change", update);
+
+    var depthChips = document.querySelectorAll(".reading-depth-chip");
+    function setTier(tier, on) {
+      state.tiers[tier] = on;
+      depthChips.forEach(function (c) {
+        if (c.dataset.tier !== tier) return;
+        c.classList.toggle("active", on);
+        c.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      try { localStorage.setItem("down-and-around:tiers", JSON.stringify(state.tiers)); } catch (e) {}
+    }
+    depthChips.forEach(function (c) {
+      c.addEventListener("click", function () { setTier(c.dataset.tier, !state.tiers[c.dataset.tier]); renderGrid(); update(); });
+    });
     todoOnly.addEventListener("change", update);
 
     // ---------------------------------------------------------------- stations
@@ -496,7 +523,8 @@ noindex: true
       if (!m) return;
       if (state.view !== "stages") setView("stages");
       if (m.hidden) {
-        state.track = "all"; state.cell = null; coreOnly.checked = false; todoOnly.checked = false;
+        state.track = "all"; state.cell = null; startOnly.checked = false; todoOnly.checked = false;
+        setTier(m.dataset.tier, true);
         document.querySelectorAll(".reading-tracks .reading-chip").forEach(function (c) { c.classList.toggle("active", c.dataset.track === "all"); });
         renderGrid(); update();
       }
@@ -515,6 +543,10 @@ noindex: true
     var saved = null;
     try { saved = localStorage.getItem("down-and-around:view"); } catch (e) {}
     if (saved && document.querySelector('.reading-view-panel[data-view="' + saved + '"]')) setView(saved);
+    try {
+      var savedTiers = JSON.parse(localStorage.getItem("down-and-around:tiers") || "null");
+      if (savedTiers) ["core", "side", "intro"].forEach(function (t) { if (typeof savedTiers[t] === "boolean") setTier(t, savedTiers[t]); });
+    } catch (e) {}
     renderGrid();
     update();
     if (location.hash) reveal(location.hash);

@@ -446,9 +446,20 @@ footer:not(.fixed-bottom) {
   border-radius: 50%;
   border: 1.5px solid var(--global-text-color-light);
 
-  .is-core & {
+  .is-start & {
     border-color: var(--global-theme-color);
     box-shadow: 0 0 0 3px var(--global-code-bg-color);
+  }
+
+  .is-side & {
+    border-style: dashed;
+  }
+
+  .is-intro & {
+    width: 0.45rem;
+    height: 0.45rem;
+    margin: 0.55rem 0.07rem 0;
+    opacity: 0.6;
   }
 
   .is-read & {
@@ -495,9 +506,55 @@ footer:not(.fixed-bottom) {
   border-radius: 3px;
   white-space: nowrap;
 
+  // start here: the stage's entry point; core: the deep path (legend only)
+  &.is-start,
   &.is-core {
     color: var(--global-theme-color);
     border-color: var(--global-theme-color);
+  }
+
+  // side track: depth in a neighbouring field
+  &.is-side {
+    border-style: dashed;
+  }
+
+  // intro: beginner-friendly or refresher
+  &.is-intro {
+    border-color: transparent;
+    background: var(--global-divider-color);
+  }
+}
+
+// Intro rows read as secondary
+.reading-item.is-intro .reading-title {
+  font-weight: 500;
+  color: var(--global-text-color-light);
+}
+
+.reading-legend {
+  margin: 2rem 0 0;
+  font-size: 0.9rem;
+  color: var(--global-text-color-light);
+
+  .reading-badge {
+    margin-left: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+}
+
+.reading-legend + .reading-controls {
+  margin-top: 0.75rem;
+}
+
+.reading-depth {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.reading-depth-chip {
+  &.is-side {
+    border-style: dashed;
   }
 }
 
@@ -964,6 +1021,20 @@ footer:not(.fixed-bottom) {
     stroke: var(--global-text-color-light);
     stroke-width: 1;
     opacity: 0.7;
+  }
+
+  &.is-side circle {
+    stroke-dasharray: 1.5 1.2;
+  }
+
+  &.is-intro circle {
+    opacity: 0.4;
+  }
+
+  &.is-start circle {
+    stroke: var(--global-theme-color);
+    stroke-width: 1.4;
+    opacity: 1;
   }
 
   &.is-read circle {
