@@ -18,6 +18,16 @@
   pass: ["The Bitter Lesson", "On the Measure of Intelligence"]
   prompt: "Sutton bets on general methods that scale; Chollet measures how efficiently a system acquires new skills. Which of them do today's language models vindicate?"
 
+- id: evidence
+  title: Experiments & evidence
+  question: How do you know a result about an AI system is real?
+  blurb: >-
+    Treat a model as an empirical system: error bars, held-out data, baselines, ablations and the many ways a
+    benchmark can mislead. The method you bring to every other chapter.
+  start: "Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations"
+  pass: ["Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations", "Do ImageNet Classifiers Generalize to ImageNet?"]
+  prompt: "Take one result from another chapter. What would you need to see (samples, seeds, held-out data, a baseline) before you believed it?"
+
 - id: information
   title: Information & compression
   question: Is prediction the same as understanding?

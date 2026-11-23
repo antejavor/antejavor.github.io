@@ -153,6 +153,108 @@
   note: "The whole stack in 160 pages, from logic and Boolean switches to parallel machines, learning and emergence. The best first map of what lies underneath."
   focus: "Follow the path from a switch to a logic gate. Sketch how gates can select between two signals."
 
+# ---------------------------------------------------------------- chapter: Experiments & evidence
+
+- title: "Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations"
+  by: Evan Miller
+  year: 2024
+  kind: paper
+  url: https://arxiv.org/abs/2411.00640
+  home: evidence
+  layer: learning
+  does: [search]
+  note: "Evaluations are experiments, so treat them as such: standard errors, clustered questions, paired comparisons and power analysis for language model evals."
+  focus: "Take a benchmark score of 72% on 500 questions. Compute its standard error, then say how many questions you need to tell 72% from 74% reliably."
+
+- title: "Deep Reinforcement Learning that Matters"
+  by: Peter Henderson et al.
+  year: 2018
+  kind: paper
+  url: https://arxiv.org/abs/1709.06560
+  home: evidence
+  layer: learning
+  does: [search]
+  builds_on:
+    - "Human-Level Control Through Deep Reinforcement Learning"
+  note: "Random seeds, implementations and hyperparameters can move RL results more than the method being proposed. A field-wide reproducibility check."
+  focus: "Pick one of the paper's figures where seeds alone separate the curves. Say how many runs you would need before claiming one method beats another."
+
+- title: "Do ImageNet Classifiers Generalize to ImageNet?"
+  by: Benjamin Recht, Rebecca Roelofs, Ludwig Schmidt, Vaishaal Shankar
+  year: 2019
+  kind: paper
+  url: https://arxiv.org/abs/1902.10811
+  home: evidence
+  layer: learning
+  does: [search]
+  builds_on:
+    - "ImageNet Classification with Deep Convolutional Neural Networks"
+  note: "Rebuild the ImageNet test set from scratch and accuracy drops by 11 to 14 points, yet the ranking of models barely changes. What a benchmark does and does not measure."
+  focus: "Say why the models lost accuracy but kept their order. Decide whether that is evidence of overfitting to the test set, and what would distinguish the two explanations."
+
+- title: "Show Your Work: Improved Reporting of Experimental Results"
+  by: Jesse Dodge et al.
+  year: 2019
+  kind: paper
+  url: https://arxiv.org/abs/1909.03004
+  home: evidence
+  layer: learning
+  does: [compute]
+  note: "Report expected validation performance as a function of the tuning budget, not a single best number. Which model wins depends on how much search you can afford."
+  focus: "Sketch expected best accuracy against number of tuning trials for two models whose curves cross. Say which one you would report as better, and why that depends on budget."
+
+- title: "Shortcut Learning in Deep Neural Networks"
+  by: Robert Geirhos et al.
+  year: 2020
+  kind: paper
+  url: https://arxiv.org/abs/2004.07780
+  home: evidence
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness"
+  note: "Models solve benchmarks with decision rules that fail out of distribution: watermarks, backgrounds, texture. A catalogue of how high scores can mislead."
+  focus: "Pick one example from the paper. Design an out-of-distribution test that the shortcut would fail and the intended solution would pass."
+
+- title: "Accounting for Variance in Machine Learning Benchmarks"
+  by: Xavier Bouthillier et al.
+  year: 2021
+  kind: paper
+  url: https://arxiv.org/abs/2103.03098
+  home: evidence
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Show Your Work: Improved Reporting of Experimental Results"
+  note: "Data splits, initialisation, data order and hyperparameter search all add variance to a benchmark result. Randomise more of them and you need fewer runs to draw a reliable conclusion."
+  focus: "List the sources of variance the paper measures. For one experiment of your own, say which of them you would randomise and which you would hold fixed."
+
+- title: "Holistic Evaluation of Language Models"
+  by: Percy Liang et al.
+  year: 2022
+  kind: paper
+  url: https://arxiv.org/abs/2211.09110
+  home: evidence
+  layer: learning
+  does: [search]
+  builds_on:
+    - "Language Models are Few-Shot Learners"
+  note: "Evaluate language models on many scenarios and many metrics at once, including calibration, robustness and efficiency, under one standard protocol."
+  focus: "Pick two models and two metrics where the models swap ranks. Say what that implies about reporting a single leaderboard number."
+
+- title: "Leakage and the Reproducibility Crisis in Machine-Learning-Based Science"
+  by: Sayash Kapoor, Arvind Narayanan
+  year: 2023
+  kind: paper
+  url: https://doi.org/10.1016/j.patter.2023.100804
+  home: evidence
+  layer: learning
+  does: [search]
+  builds_on:
+    - "Do ImageNet Classifiers Generalize to ImageNet?"
+  note: "Data leakage across hundreds of papers in many fields, and a taxonomy of how it happens. Most of it is invisible unless you look for it on purpose."
+  focus: "Go through the leakage taxonomy and pick the type most likely in an LLM evaluation. Say how you would test for it."
+
 # ---------------------------------------------------------------- chapter: Information & compression
 
 - title: "A Mathematical Theory of Communication"
@@ -3310,6 +3412,166 @@
   builds_on:
     - "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?"
   note: "Design the interface the agent works through, not only the agent. A purpose-built interface lifts results on SWE-bench."
+
+# ---------------------------------------------------------------- branch: Correct systems
+
+- title: "How Amazon Web Services Uses Formal Methods"
+  by: Chris Newcombe et al.
+  year: 2015
+  kind: paper
+  url: https://doi.org/10.1145/2699417
+  home: correct-systems
+  layer: systems
+  does: [search]
+  builds_on:
+    - "Specifying Systems"
+  note: "Engineers at AWS used TLA+ on real systems and found serious design bugs that testing had missed. The case for formal methods from industry, not academia."
+  focus: "Pick one bug the paper describes. Say why tests missed it and what the model checker explored that the tests did not."
+
+- title: "QuickCheck: A Lightweight Tool for Random Testing of Haskell Programs"
+  by: Koen Claessen, John Hughes
+  year: 2000
+  kind: paper
+  url: https://doi.org/10.1145/351240.351266
+  home: correct-systems
+  layer: systems
+  does: [search]
+  note: "State properties instead of examples and let the tool generate random cases that try to break them. The origin of property-based testing."
+
+- title: "Specifying Systems"
+  by: Leslie Lamport
+  year: 2002
+  kind: book
+  url: https://lamport.azurewebsites.net/tla/book.html
+  home: correct-systems
+  layer: systems
+  does: [search]
+  builds_on:
+    - "Time, Clocks, and the Ordering of Events in a Distributed System"
+  note: "Free. The TLA+ book by its author: specify a system as a state machine, then check that every behaviour satisfies its properties."
+
+- title: "Why Programs Fail: A Guide to Systematic Debugging"
+  by: Andreas Zeller
+  year: 2009
+  kind: book
+  url: https://www.whyprogramsfail.com/
+  home: correct-systems
+  layer: systems
+  does: [search]
+  note: "Debugging as a scientific method: observe, hypothesise, experiment, and narrow the cause automatically with delta debugging. Second edition."
+
+- title: "Engineering a Safer World: Systems Thinking Applied to Safety"
+  by: Nancy Leveson
+  year: 2012
+  kind: book
+  url: https://doi.org/10.7551/mitpress/8179.001.0001
+  home: correct-systems
+  layer: intelligence
+  does: []
+  note: "Open access. Accidents come from unsafe interactions between components, not only from parts failing. A systems view of safety that carries over to AI."
+
+- title: "Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems"
+  by: Ding Yuan et al.
+  year: 2014
+  kind: paper
+  url: https://www.usenix.org/conference/osdi14/technical-sessions/presentation/yuan
+  home: correct-systems
+  layer: systems
+  does: [search]
+  note: "Most catastrophic failures in real distributed systems come from mishandled errors that simple tests would have caught. Where testing effort pays off."
+
+- title: "Metamorphic Testing: A Review of Challenges and Opportunities"
+  by: Tsong Yueh Chen et al.
+  year: 2018
+  kind: paper
+  url: https://doi.org/10.1145/3143561
+  home: correct-systems
+  layer: systems
+  does: [search]
+  builds_on:
+    - "QuickCheck: A Lightweight Tool for Random Testing of Haskell Programs"
+  note: "Test a program without knowing the right answer, by checking how outputs must relate when inputs change in known ways. A natural fit for testing models."
+
+- title: "Practical TLA+: Planning Driven Development"
+  by: Hillel Wayne
+  year: 2018
+  kind: book
+  url: https://doi.org/10.1007/978-1-4842-3829-5
+  home: correct-systems
+  layer: systems
+  does: [search]
+  builds_on:
+    - "Specifying Systems"
+  note: "A practical introduction to TLA+ through PlusCal, written for working engineers. The quickest way to model-checking your own designs."
+
+- title: "FoundationDB: A Distributed Unbundled Transactional Key Value Store"
+  by: Jingyu Zhou et al.
+  year: 2021
+  kind: paper
+  url: https://doi.org/10.1145/3448016.3457559
+  home: correct-systems
+  layer: systems
+  does: [store]
+  builds_on:
+    - "Time, Clocks, and the Ordering of Events in a Distributed System"
+  note: "A database built for deterministic simulation testing from the start: the whole cluster runs in one process with simulated failures, and any bug can be replayed exactly."
+
+# ---------------------------------------------------------------- branch: Measuring systems
+
+- title: "The Art of Computer Systems Performance Analysis"
+  by: Raj Jain
+  year: 1991
+  kind: book
+  url: https://www.cse.wustl.edu/~jain/books/perfbook.htm
+  home: measuring
+  layer: systems
+  does: [compute]
+  note: "Measurement, simulation and modelling of computer systems, with the experimental design and statistics to back them. The method chapters apply to any experiment."
+  focus: "Read the chapter on experimental design. Lay out a two-factor design for one of your own experiments and say how many runs it needs."
+
+- title: "Statistically Rigorous Java Performance Evaluation"
+  by: Andy Georges, Dries Buytaert, Lieven Eeckhout
+  year: 2007
+  kind: paper
+  url: https://doi.org/10.1145/1297027.1297033
+  home: measuring
+  layer: systems
+  does: [compute]
+  builds_on:
+    - "The Art of Computer Systems Performance Analysis"
+  note: "Common ways of reporting benchmark results, such as best of N or mean of N, lead to wrong conclusions. Confidence intervals and the right number of repetitions fix it."
+
+- title: "Producing Wrong Data Without Doing Anything Obviously Wrong!"
+  by: Todd Mytkowicz, Amer Diwan, Matthias Hauswirth, Peter Sweeney
+  year: 2009
+  kind: paper
+  url: https://doi.org/10.1145/1508244.1508275
+  home: measuring
+  layer: systems
+  does: [compute]
+  note: "The size of the UNIX environment or the link order can change a measured speed-up by more than the effect being studied. Measurement bias, shown experimentally."
+
+- title: "STABILIZER: Statistically Sound Performance Evaluation"
+  by: Charlie Curtsinger, Emery Berger
+  year: 2013
+  kind: paper
+  url: https://doi.org/10.1145/2451116.2451141
+  home: measuring
+  layer: systems
+  does: [compute]
+  builds_on:
+    - "Producing Wrong Data Without Doing Anything Obviously Wrong!"
+  note: "Randomise memory layout during execution so that layout effects average out, then use ordinary statistics. An answer to measurement bias."
+
+- title: "Systems Performance: Enterprise and the Cloud"
+  by: Brendan Gregg
+  year: 2020
+  kind: book
+  url: https://www.brendangregg.com/systems-performance-2nd-edition-book.html
+  home: measuring
+  layer: systems
+  does: [compute, move]
+  note: "Methods for finding where time goes in a real system: the USE method, profiling and tracing, from CPUs and memory to disks and networks. Second edition."
 
 # ---------------------------------------------------------------- branch: Computation & complexity
 

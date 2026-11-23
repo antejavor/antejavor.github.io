@@ -73,6 +73,24 @@
   rejoin: memory
   start: "Toolformer: Language Models Can Teach Themselves to Use Tools"
 
+# ---- off Experiments & evidence
+- id: correct-systems
+  title: Correct systems
+  question: When the experiment is itself a system, how do you know it behaves as designed?
+  blurb: >-
+    Specifications, model checking and property-based testing: catching design bugs before they turn into bad data.
+    Most useful when an experiment involves agents, pipelines or distributed state.
+  from: evidence
+  rejoin: scale
+  start: "How Amazon Web Services Uses Formal Methods"
+
+- id: measuring
+  title: Measuring systems
+  question: How do you measure a computer system without fooling yourself?
+  from: evidence
+  rejoin: scale
+  start: "The Art of Computer Systems Performance Analysis"
+
 # ---- off Information & compression
 - id: computation
   title: Computation & complexity
