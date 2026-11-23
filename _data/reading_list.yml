@@ -3211,6 +3211,104 @@
     - "Optimization by Simulated Annealing"
   note: "Pulses of laser light in a fibre loop find low-energy states of a 2000-spin problem. Physics as the search engine."
 
+# ---------------------------------------------------------------- branch: Agents & tool use
+
+- title: "Toolformer: Language Models Can Teach Themselves to Use Tools"
+  by: Timo Schick et al.
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2302.04761
+  home: agents
+  layer: learning
+  does: [search]
+  builds_on:
+    - "Language Models are Few-Shot Learners"
+  note: "A model teaches itself when to call a calculator, a search engine or a calendar, keeping only the calls that lower its loss."
+  focus: "Explain the filter that decides whether an API call is kept. Say what that criterion can and cannot teach about when to use a tool."
+
+- title: "WebGPT: Browser-assisted question-answering with human feedback"
+  by: Reiichiro Nakano et al.
+  year: 2021
+  kind: paper
+  url: https://arxiv.org/abs/2112.09332
+  home: agents
+  layer: learning
+  does: [search]
+  builds_on:
+    - "Deep Reinforcement Learning from Human Preferences"
+  note: "A language model that browses the web, cites its sources and is trained on human preferences. An early tool-using agent."
+
+- title: "Reflexion: Language Agents with Verbal Reinforcement Learning"
+  by: Noah Shinn et al.
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2303.11366
+  home: agents
+  layer: learning
+  does: [search]
+  builds_on:
+    - "ReAct: Synergizing Reasoning and Acting in Language Models"
+  note: "Agents write feedback on their own failures and keep it in memory for the next attempt. Learning without updating any weights."
+
+- title: "Tree of Thoughts: Deliberate Problem Solving with Large Language Models"
+  by: Shunyu Yao et al.
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2305.10601
+  home: agents
+  layer: algorithms
+  does: [search]
+  builds_on:
+    - "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models"
+    - "Bandit Based Monte-Carlo Planning"
+  note: "Search over partial chains of thought, with self-evaluation and backtracking. Classical tree search with a language model as the heuristic."
+
+- title: "Voyager: An Open-Ended Embodied Agent with Large Language Models"
+  by: Guanzhi Wang et al.
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2305.16291
+  home: agents
+  layer: learning
+  does: [search, store]
+  builds_on:
+    - "Reflexion: Language Agents with Verbal Reinforcement Learning"
+  note: "A Minecraft agent that writes, tests and stores its own skills as code. Lifelong learning through a growing skill library."
+
+- title: "Generative Agents: Interactive Simulacra of Human Behavior"
+  by: Joon Sung Park et al.
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2304.03442
+  home: agents
+  layer: intelligence
+  does: [store]
+  builds_on:
+    - "ReAct: Synergizing Reasoning and Acting in Language Models"
+  note: "Twenty-five simulated characters with memory streams, reflection and planning. What a memory architecture does for an agent's behaviour."
+
+- title: "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?"
+  by: Carlos Jimenez et al.
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2310.06770
+  home: agents
+  layer: systems
+  does: [search]
+  note: "Real GitHub issues, with the tests that check their fixes. The benchmark that made coding agents measurable."
+
+- title: "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering"
+  by: John Yang et al.
+  year: 2024
+  kind: paper
+  url: https://arxiv.org/abs/2405.15793
+  home: agents
+  layer: systems
+  does: [search]
+  builds_on:
+    - "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?"
+  note: "Design the interface the agent works through, not only the agent. A purpose-built interface lifts results on SWE-bench."
+
 # ---------------------------------------------------------------- branch: Computation & complexity
 
 - title: "The Nature of Computation"
@@ -3495,6 +3593,102 @@
   does: []
   note: "Fixed points, stability, bifurcations, oscillators. The prerequisite for neurons, control, Hopfield networks and state-space models."
 
+# ---------------------------------------------------------------- branch: Alignment & safety
+
+- title: "Concrete Problems in AI Safety"
+  by: Dario Amodei et al.
+  year: 2016
+  kind: paper
+  url: https://arxiv.org/abs/1606.06565
+  home: alignment
+  layer: intelligence
+  does: [search]
+  note: "Five practical ways systems fail: side effects, reward hacking, scalable oversight, unsafe exploration and distribution shift. The agenda most later work answers."
+  focus: "Pick two of the five problems. For each, describe a failure you could reproduce in a small gridworld or with a chatbot."
+
+- title: "AI Safety via Debate"
+  by: Geoffrey Irving, Paul Christiano, Dario Amodei
+  year: 2018
+  kind: paper
+  url: https://arxiv.org/abs/1805.00899
+  home: alignment
+  layer: learning
+  does: [search]
+  builds_on:
+    - "Deep Reinforcement Learning from Human Preferences"
+  note: "Two models argue and a human judges. A proposal for supervising systems on questions the judge could not answer alone."
+
+- title: "Risks from Learned Optimization in Advanced Machine Learning Systems"
+  by: Evan Hubinger et al.
+  year: 2019
+  kind: paper
+  url: https://arxiv.org/abs/1906.01820
+  home: alignment
+  layer: intelligence
+  does: [search]
+  note: "A trained model may itself be an optimiser with its own objective. Inner alignment as a separate problem from getting the reward right."
+
+- title: "Scaling Laws for Reward Model Overoptimization"
+  by: Leo Gao, John Schulman, Jacob Hilton
+  year: 2022
+  kind: paper
+  url: https://arxiv.org/abs/2210.10760
+  home: alignment
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Training Language Models to Follow Instructions with Human Feedback"
+  note: "Optimise against a learned reward model and the true reward first rises, then falls. Goodhart's law measured, with scaling laws for how fast."
+
+- title: "Measuring Progress on Scalable Oversight for Large Language Models"
+  by: Samuel Bowman et al.
+  year: 2022
+  kind: paper
+  url: https://arxiv.org/abs/2211.03540
+  home: alignment
+  layer: intelligence
+  does: [search]
+  builds_on:
+    - "AI Safety via Debate"
+  note: "An experimental design for scalable oversight: non-experts, helped by a model, on questions only experts can answer."
+
+- title: "Weak-to-Strong Generalization: Eliciting Strong Capabilities With Weak Supervision"
+  by: Collin Burns et al.
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2312.09390
+  home: alignment
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Measuring Progress on Scalable Oversight for Large Language Models"
+  note: "Fine-tune a strong model on labels from a weaker one and it partly outperforms its supervisor. An analogy for humans supervising stronger models."
+
+- title: "Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training"
+  by: Evan Hubinger et al.
+  year: 2024
+  kind: paper
+  url: https://arxiv.org/abs/2401.05566
+  home: alignment
+  layer: learning
+  does: [store]
+  builds_on:
+    - "Risks from Learned Optimization in Advanced Machine Learning Systems"
+    - "Constitutional AI: Harmlessness from AI Feedback"
+  note: "Models trained with a hidden trigger keep the behaviour through standard safety training, and adversarial training can teach them to hide it better."
+
+- title: "Alignment Faking in Large Language Models"
+  by: Ryan Greenblatt et al.
+  year: 2024
+  kind: paper
+  url: https://arxiv.org/abs/2412.14093
+  home: alignment
+  layer: intelligence
+  does: [search]
+  builds_on:
+    - "Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training"
+  note: "A model that complies during training to avoid being changed, and says why in its reasoning. Alignment faking that nobody trained it to do."
+
 # ---------------------------------------------------------------- branch: Probabilistic & causal inference
 
 - title: "Probabilistic Reasoning in Intelligent Systems"
@@ -3596,6 +3790,115 @@
   builds_on:
     - "Causality"
   note: "Open access. Causal models from the learning side: identifiability, invariance across environments, and what observational data can and cannot tell you."
+
+# ---------------------------------------------------------------- branch: Robotics & embodiment
+
+- title: "Reinforcement learning in robotics: A survey"
+  by: Jens Kober, J. Andrew Bagnell, Jan Peters
+  year: 2013
+  kind: paper
+  url: https://doi.org/10.1177/0278364913495721
+  home: robotics
+  layer: learning
+  does: [search]
+  builds_on:
+    - "Reinforcement Learning: An Introduction"
+  note: "Why reinforcement learning is hard on real robots: continuous high-dimensional states, expensive samples and safety. The survey to start from."
+  focus: "List the survey's main challenges for robot learning. For one later paper in this branch, say which challenge it got around and how."
+
+- title: "End-to-End Training of Deep Visuomotor Policies"
+  by: Sergey Levine et al.
+  year: 2016
+  kind: paper
+  url: https://arxiv.org/abs/1504.00702
+  home: robotics
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Reinforcement learning in robotics: A survey"
+  note: "Train vision and control together, from camera pixels to motor torques, guided by a trajectory optimiser."
+
+- title: "Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World"
+  by: Josh Tobin et al.
+  year: 2017
+  kind: paper
+  url: https://arxiv.org/abs/1703.06907
+  home: robotics
+  layer: learning
+  does: [compute]
+  note: "Randomise a simulator's textures, lighting and physics enough and the real world looks like one more variation. Sim-to-real by brute force."
+
+- title: "Learning Agile and Dynamic Motor Skills for Legged Robots"
+  by: Jemin Hwangbo et al.
+  year: 2019
+  kind: paper
+  url: https://arxiv.org/abs/1901.08652
+  home: robotics
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World"
+  note: "Policies trained in simulation with a learned model of the actuators run on a real quadruped, faster and more robust than hand-designed controllers."
+
+- title: "Solving Rubik's Cube with a Robot Hand"
+  by: OpenAI et al.
+  year: 2019
+  kind: paper
+  url: https://arxiv.org/abs/1910.07113
+  home: robotics
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World"
+  note: "Automatic domain randomisation and a great deal of compute: a robot hand solves a Rubik's cube with skills learned only in simulation."
+
+- title: "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion"
+  by: Cheng Chi et al.
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2303.04137
+  home: robotics
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Denoising Diffusion Probabilistic Models"
+  note: "A robot policy as a diffusion model over action sequences. It handles demonstrations with several valid answers, which regression averages away."
+
+- title: "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control"
+  by: Anthony Brohan et al.
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2307.15818
+  home: robotics
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "An Image is Worth 16x16 Words"
+  note: "Fine-tune a vision-language model to output robot actions as tokens. Knowledge from the web carries over to control."
+
+- title: "π0: A Vision-Language-Action Flow Model for General Robot Control"
+  by: Kevin Black et al.
+  year: 2024
+  kind: paper
+  url: https://arxiv.org/abs/2410.24164
+  home: robotics
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control"
+    - "Flow Matching for Generative Modeling"
+  note: "A vision-language model with a flow-matching action head, trained across many robots. A generalist policy for dexterous tasks."
+
+- title: "Modern Robotics: Mechanics, Planning, and Control"
+  by: Kevin Lynch, Frank Park
+  year: 2017
+  kind: book
+  url: http://hades.mech.northwestern.edu/index.php/Modern_Robotics
+  home: robotics
+  prereq: true
+  layer: algorithms
+  does: [compute]
+  note: "Free, with videos. Kinematics, dynamics, motion planning and control: the robotics a learning paper assumes you know."
 
 # ---------------------------------------------------------------- branch: Kernels & compilers
 

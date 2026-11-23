@@ -66,6 +66,13 @@
   rejoin: substrates
   start: "Ising Machines as Hardware Solvers of Combinatorial Optimization Problems"
 
+- id: agents
+  title: Agents & tool use
+  question: What does it take for a language model to act over many steps, with tools?
+  from: search
+  rejoin: memory
+  start: "Toolformer: Language Models Can Teach Themselves to Use Tools"
+
 # ---- off Information & compression
 - id: computation
   title: Computation & complexity
@@ -84,6 +91,13 @@
   rejoin: world
   start: "Feedback Systems: An Introduction for Scientists and Engineers"
 
+- id: alignment
+  title: Alignment & safety
+  question: How do you make a system do what you meant, and check that it does?
+  from: reward
+  rejoin: inside
+  start: "Concrete Problems in AI Safety"
+
 # ---- off Generative & probabilistic
 - id: bayesian
   title: Probabilistic & causal inference
@@ -91,6 +105,14 @@
   from: generative
   rejoin: world
   start: "Probabilistic Reasoning in Intelligent Systems"
+
+# ---- off World models
+- id: robotics
+  title: Robotics & embodiment
+  question: What changes when the model has a body and the world pushes back?
+  from: world
+  rejoin: reward
+  start: "Reinforcement learning in robotics: A survey"
 
 # ---- off Scale & cost: down the stack
 - id: kernels
