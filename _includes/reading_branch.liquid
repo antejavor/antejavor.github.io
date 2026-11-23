@@ -1,0 +1,44 @@
+{%- comment -%}
+  One branch (side track) on the down-and-around page: a collapsible block under the chapter it leaves from.
+  include.b      the branch from _data/branches.yml
+  include.level  0 when it leaves a chapter, 1 or 2 when it leaves another branch
+{%- endcomment -%}
+{%- assign br = include.b -%}
+{%- assign br_readings = site.data.reading_list -%}
+{%- assign br_mine = br_readings | where: 'home', br.id -%}
+{%- assign br_core = br_mine | where_exp: 'r', 'r.prereq != true' -%}
+{%- assign br_pre = br_mine | where: 'prereq', true -%}
+{%- assign rejoin = site.data.chapters | where: 'id', br.rejoin | first -%}
+<details class="reading-branch" id="b-{{ br.id }}" data-level="{{ include.level }}">
+  <summary>
+    <span class="reading-branch-head">
+      <span class="reading-branch-title">{{ br.title }}</span>
+      <span class="reading-branch-meta">{{ br_core.size }} readings · rejoins at {{ rejoin.title }}</span>
+    </span>
+    <span class="reading-branch-q">{{ br.question }}</span>
+  </summary>
+  {%- if br.blurb %}
+    <p class="reading-blurb">{{ br.blurb }}</p>
+  {%- endif %}
+  {%- if br_pre.size > 0 %}
+    <details class="reading-prereq">
+      <summary>Refresh first · {{ br_pre.size }}</summary>
+      <ul class="reading-items">
+        {%- for br_it in br_readings -%}
+          {%- if br_it.home == br.id and br_it.prereq -%}
+            {% include reading_station.liquid it=br_it key=forloop.index0 view="chapters" tier="prereq" %}
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </details>
+  {%- endif %}
+  <ul class="reading-items">
+    {%- for br_it in br_readings -%}
+      {%- if br_it.home == br.id and br_it.prereq != true -%}
+        {%- assign br_start = false -%}
+        {%- if br_it.title == br.start -%}{%- assign br_start = true -%}{%- endif -%}
+        {% include reading_station.liquid it=br_it key=forloop.index0 view="chapters" tier="branch" start=br_start %}
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</details>

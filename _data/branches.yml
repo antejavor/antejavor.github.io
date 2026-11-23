@@ -1,0 +1,199 @@
+# Side tracks: depth in one topic, branching off a core chapter (or another branch) and rejoining the core.
+# A reading belongs to a branch when its `home` in reading_list.yml is the branch's id.
+#   id        -> referenced by readings (home) and other branches (from)
+#   title     -> the topic
+#   question  -> what the branch goes deep on
+#   blurb     -> optional; two sentences at most
+#   from      -> chapter or branch id it leaves from
+#   rejoin    -> chapter id where it returns to the core
+#   start     -> exact title of the branch's entry reading; must live in this branch
+# Aim for 8–15 readings; a branch can be smaller while it is new.
+
+# ---- off Learning from data
+- id: learning-theory
+  title: Learning theory
+  question: What can be learned, from how much data, and with which guarantees?
+  from: learning
+  rejoin: structure
+  start: "A Theory of the Learnable"
+
+- id: optimisation
+  title: Optimisation
+  question: Why does gradient descent find good solutions in non-convex landscapes?
+  from: learning
+  rejoin: scale
+  start: "Gradient Descent on Neural Networks Typically Occurs at the Edge of Stability"
+
+# ---- off Structure as prior
+- id: graphs
+  title: Graphs & networks
+  question: How do you learn on relational data, and what can message passing not see?
+  blurb: >-
+    The world is made of entities and relations. Graph neural networks and network science work on that structure directly, and seen from here, transformers are a special case.
+  from: structure
+  rejoin: memory
+  start: "Semi-Supervised Classification with Graph Convolutional Networks"
+
+- id: vision
+  title: Vision & 3D
+  question: How do you recover a scene from images?
+  from: structure
+  rejoin: world
+  start: "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis"
+
+# ---- off Memory & sequence
+- id: memory-architectures
+  title: Memory architectures beyond attention
+  question: What other ways are there to give a network memory, and what do they trade?
+  from: memory
+  rejoin: inside
+  start: "Efficiently Modeling Long Sequences with Structured State Spaces"
+
+# ---- off Search & planning
+- id: retrieval
+  title: Retrieval & vector search
+  question: How do you find the right thing in a billion items, and hand it to a model?
+  blurb: >-
+    Finding the right thing in a huge collection: inverted indexes, nearest-neighbour graphs, quantisation, and how retrieval feeds a model's context.
+  from: search
+  rejoin: memory
+  start: "Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs"
+
+- id: solvers
+  title: Combinatorial solvers
+  question: How do SAT, evolution, annealing and Ising machines search huge discrete spaces?
+  from: search
+  rejoin: substrates
+  start: "Ising Machines as Hardware Solvers of Combinatorial Optimization Problems"
+
+# ---- off Information & compression
+- id: computation
+  title: Computation & complexity
+  question: What is computable, at what cost in time, space and data movement?
+  blurb: >-
+    What can be computed, and how much it costs in time, space and data movement. The theory under every layer of every stack.
+  from: information
+  rejoin: search
+  start: "The Nature of Computation"
+
+# ---- off Reward & control
+- id: control
+  title: Control theory
+  question: What did feedback control know about acting before reinforcement learning?
+  from: reward
+  rejoin: world
+  start: "Feedback Systems: An Introduction for Scientists and Engineers"
+
+# ---- off Generative & probabilistic
+- id: bayesian
+  title: Probabilistic & causal inference
+  question: How do you reason under uncertainty, and when can you say "because"?
+  from: generative
+  rejoin: world
+  start: "Probabilistic Reasoning in Intelligent Systems"
+
+# ---- off Scale & cost: down the stack
+- id: kernels
+  title: Kernels & compilers
+  question: How does a tensor program become fast code on a GPU?
+  from: scale
+  rejoin: scale
+  start: "Making Deep Learning Go Brrrr From First Principles"
+
+- id: training-serving
+  title: Training & serving at scale
+  question: How do you split a model across thousands of chips, and serve it cheaply?
+  from: scale
+  rejoin: scale
+  start: "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism"
+
+- id: distributed
+  title: Distributed systems
+  question: What do clusters guarantee, and what does that cost?
+  blurb: >-
+    Clocks, consensus, replication and failure: what a cluster can promise, and what training and serving at scale assume about it.
+  from: training-serving
+  rejoin: scale
+  start: "Time, Clocks, and the Ordering of Events in a Distributed System"
+
+- id: accelerators
+  title: Architecture & accelerators
+  question: Why do chips for AI look the way they do?
+  blurb: >-
+    How devices are organised into machines: caches, vectors, systolic arrays, GPUs and accelerators. Where compute meets the memory wall.
+  from: scale
+  rejoin: substrates
+  start: "A New Golden Age for Computer Architecture"
+
+- id: devices
+  title: Devices & electronics
+  question: What does a transistor, a memory cell and a wire actually cost?
+  blurb: >-
+    Transistors, memory cells and the scaling laws that turned physics into cheap logic and storage, and what happens now that the easy scaling is over.
+  from: accelerators
+  rejoin: substrates
+  start: "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions"
+
+- id: physics
+  title: Physics of computation
+  question: What are the physical limits on computing, storing and erasing a bit?
+  blurb: >-
+    The bottom of the stack. Information is physical: what it costs to erase a bit, and how fast matter can compute.
+  from: devices
+  rejoin: substrates
+  start: "Logical Reversibility of Computation"
+
+- id: numerics
+  title: Scientific computing & ML for science
+  question: How did simulation shape computing, and what is learning doing to simulation?
+  blurb: >-
+    Simulation drove computing long before AI did: weather on ENIAC, Monte Carlo at Los Alamos, molecular dynamics on GPUs. The methods and machines behind it, and where learning now joins in.
+  from: scale
+  rejoin: crossroads
+  start: "Machine Learning and the Physical Sciences"
+
+# ---- off Other substrates: around the stack
+- id: quantum
+  title: Quantum computing
+  question: What can a quantum computer do, and why?
+  blurb: >-
+    From entanglement to qubits to the few algorithms with real speed-ups, and what memory means when states can't be copied.
+  from: substrates
+  rejoin: crossroads
+  start: "Quantum Computation and Quantum Information"
+
+- id: qml
+  title: Quantum machine learning
+  question: Where could quantum computers help learning, and where do the speed-ups disappear?
+  from: quantum
+  rejoin: crossroads
+  start: "Quantum Machine Learning"
+
+- id: quantum-hardware
+  title: Quantum hardware & error correction
+  question: How do you build reliable qubits from unreliable ones?
+  from: quantum
+  rejoin: substrates
+  start: "Surface Codes: Towards Practical Large-Scale Quantum Computation"
+
+- id: neuromorphic
+  title: Neuromorphic hardware
+  question: What happens when you build chips that compute like neurons?
+  from: substrates
+  rejoin: brains
+  start: "Neuromorphic Electronic Systems"
+
+- id: analog
+  title: Analog & in-memory computing
+  question: Can computing happen where the data is stored?
+  from: substrates
+  rejoin: brains
+  start: "Memory Devices and Applications for In-Memory Computing"
+
+# ---- off Brains
+- id: neuroscience
+  title: Computational neuroscience
+  question: How do real neurons compute, and at what energy cost?
+  from: brains
+  rejoin: crossroads
+  start: "Neuronal Dynamics"

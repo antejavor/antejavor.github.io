@@ -284,12 +284,6 @@ footer:not(.fixed-bottom) {
   }
 }
 
-.reading-tracks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-
 .reading-switches {
   display: flex;
   flex-wrap: wrap;
@@ -357,30 +351,133 @@ footer:not(.fixed-bottom) {
   color: var(--global-text-color-light);
 }
 
+.reading-q {
+  margin: 0.35rem 0 0;
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+// Refresh first: background reading for a chapter or branch, collapsed
+.reading-prereq {
+  margin: 0.25rem 0 0.5rem;
+
+  > summary {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--global-text-color-light);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--global-theme-color);
+    }
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+// Branches: side tracks under the chapter they leave from; sub-branches step in
+.reading-branches {
+  margin-top: 1.25rem;
+}
+
+.reading-branches-title {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--global-theme-color);
+}
+
+.reading-branch {
+  margin: 0 0 0.5rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px dashed var(--global-divider-color);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--global-card-bg-color) 70%, transparent);
+  scroll-margin-top: 9rem;
+
+  &[data-level="1"] {
+    margin-left: 1.25rem;
+  }
+
+  &[data-level="2"] {
+    margin-left: 2.5rem;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  > summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    cursor: pointer;
+    list-style: none;
+    border-radius: 6px;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--global-theme-color);
+      outline-offset: 2px;
+    }
+
+    &.is-flash {
+      animation: reading-flash 1.6s ease-out;
+    }
+  }
+
+  &[open] > summary {
+    margin-bottom: 0.35rem;
+  }
+
+  .reading-blurb {
+    margin-top: 0;
+  }
+}
+
+.reading-branch-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+}
+
+.reading-branch-title {
+  font-weight: 600;
+
+  &::before {
+    content: "↳ ";
+    color: var(--global-theme-color);
+  }
+
+  .reading-branch > summary:hover & {
+    color: var(--global-theme-color);
+  }
+}
+
+.reading-branch-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--global-text-color-light);
+}
+
+.reading-branch-q {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--global-text-color-light);
+}
+
 .reading-stop-prompt {
   margin: 0.75rem 0 0;
   padding: 0.4rem 0.9rem;
   border-left: 2px solid var(--global-theme-color);
   font-style: italic;
-}
-
-.reading-checklist {
-  margin: 0 0 0.75rem;
-  padding: 0.6rem 0.9rem;
-  border-left: 2px solid var(--global-theme-color);
-  background: var(--global-code-bg-color);
-  font-size: 0.88rem;
-
-  ul {
-    margin: 0.3rem 0 0;
-    padding-left: 1.1rem;
-  }
-}
-
-.reading-checklist-title {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--global-theme-color);
 }
 
 // A station: a collapsed row; pointing previews its detail, clicking pins it open
@@ -451,11 +548,11 @@ footer:not(.fixed-bottom) {
     box-shadow: 0 0 0 3px var(--global-code-bg-color);
   }
 
-  .is-side & {
+  .is-branch & {
     border-style: dashed;
   }
 
-  .is-intro & {
+  .is-prereq & {
     width: 0.45rem;
     height: 0.45rem;
     margin: 0.55rem 0.07rem 0;
@@ -483,14 +580,6 @@ footer:not(.fixed-bottom) {
   }
 }
 
-.reading-num {
-  margin-right: 0.55rem;
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 0.8rem;
-  color: var(--global-theme-color);
-}
-
 .reading-meta {
   display: block;
   margin-top: 0.1rem;
@@ -506,65 +595,17 @@ footer:not(.fixed-bottom) {
   border-radius: 3px;
   white-space: nowrap;
 
-  // start here: the stage's entry point; core: the deep path (legend only)
-  &.is-start,
-  &.is-core {
+  // start here: the entry reading of a chapter or branch
+  &.is-start {
     color: var(--global-theme-color);
     border-color: var(--global-theme-color);
   }
-
-  // side track: depth in a neighbouring field
-  &.is-side {
-    border-style: dashed;
-  }
-
-  // intro: beginner-friendly or refresher
-  &.is-intro {
-    border-color: transparent;
-    background: var(--global-divider-color);
-  }
 }
 
-// Intro rows read as secondary
-.reading-item.is-intro .reading-title {
+// Prerequisites read as secondary
+.reading-item.is-prereq .reading-title {
   font-weight: 500;
   color: var(--global-text-color-light);
-}
-
-.reading-legend {
-  margin: 2rem 0 0;
-  font-size: 0.9rem;
-  color: var(--global-text-color-light);
-
-  .reading-badge {
-    margin-left: 0;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-  }
-}
-
-.reading-legend + .reading-controls {
-  margin-top: 0.75rem;
-}
-
-.reading-depth {
-  display: flex;
-  gap: 0.35rem;
-}
-
-.reading-depth-chip {
-  &.is-side {
-    border-style: dashed;
-  }
-}
-
-.reading-from {
-  margin-left: 0.35rem;
-  white-space: nowrap;
-
-  &::before {
-    content: "in ";
-  }
 }
 
 .reading-walked {
@@ -856,12 +897,6 @@ footer:not(.fixed-bottom) {
   color: var(--global-theme-color);
 }
 
-.path-stack-picks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-
 .path-stack-grid {
   display: grid;
   grid-template-columns: minmax(5.5rem, auto) repeat(4, minmax(0, 1fr));
@@ -980,11 +1015,61 @@ footer:not(.fixed-bottom) {
   }
 }
 
-.path-planned {
+// Metro map: the core line through the chapter stations, branches hanging below
+.path-core-line {
   fill: none;
-  stroke: var(--global-divider-color);
-  stroke-width: 2;
-  stroke-dasharray: 4 5;
+  stroke: var(--global-theme-color);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+.path-branch-line,
+.path-branch-spine {
+  fill: none;
+  stroke: var(--global-text-color-light);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  opacity: 0.45;
+  transition:
+    opacity 0.15s,
+    stroke 0.15s;
+}
+
+.path-branch-spine {
+  stroke-dasharray: 2 3;
+}
+
+.path-branch-hit {
+  fill: transparent;
+}
+
+.path-rejoin {
+  fill: none;
+  stroke: var(--global-theme-color);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.path-branch.is-hot {
+  .path-branch-line,
+  .path-branch-spine {
+    stroke: var(--global-theme-color);
+    opacity: 1;
+  }
+
+  .path-rejoin {
+    opacity: 0.8;
+  }
+}
+
+.path-map-key {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  color: var(--global-text-color-light);
 }
 
 .path-stage {
@@ -1023,11 +1108,11 @@ footer:not(.fixed-bottom) {
     opacity: 0.7;
   }
 
-  &.is-side circle {
+  &.is-branch circle {
     stroke-dasharray: 1.5 1.2;
   }
 
-  &.is-intro circle {
+  &.is-prereq circle {
     opacity: 0.4;
   }
 
