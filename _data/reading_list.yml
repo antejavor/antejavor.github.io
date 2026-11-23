@@ -455,6 +455,32 @@
     - "Understanding Deep Learning Requires Rethinking Generalization"
   note: "Small transformers memorise a modular arithmetic table, then generalise long after training loss hits zero. Generalisation as a late phase change."
 
+- title: "The Principles of Deep Learning Theory"
+  by: Daniel Roberts, Sho Yaida, Boris Hanin
+  year: 2022
+  kind: book
+  url: https://arxiv.org/abs/2106.10165
+  home: learning
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Neural Tangent Kernel"
+  note: "An effective theory of deep networks, in the physicist's style: expand in depth over width and compute what the infinite-width limit leaves out."
+  focus: "Read the chapter on the infinite-width limit. Say which quantity the depth-to-width corrections track, and why representation learning needs them."
+
+- title: "Patterns, Predictions, and Actions"
+  by: Moritz Hardt, Benjamin Recht
+  year: 2022
+  kind: book
+  url: https://mlstory.org/
+  home: learning
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Statistical Modeling: The Two Cultures"
+  note: "Free. Machine learning from prediction and generalisation to causality and sequential decisions, with its history and its datasets taken seriously."
+  focus: "Read the chapter on datasets. Pick one benchmark and say what repeated reuse of its test set implies about its leaderboard."
+
 - title: "Essence of Linear Algebra & Neural Networks series"
   by: Grant Sanderson (3Blue1Brown)
   year: 2016
@@ -639,6 +665,17 @@
     - "The Graph Neural Network Model"
     - "Semi-Supervised Classification with Graph Convolutional Networks"
   note: "Message passing as the common framework for most GNNs, applied to molecules."
+
+- title: "Deep Sets"
+  by: Manzil Zaheer et al.
+  year: 2017
+  kind: paper
+  url: https://arxiv.org/abs/1703.06114
+  home: structure
+  layer: learning
+  does: [compute]
+  note: "Every permutation-invariant function of a set can be written as a sum of embeddings passed through a network. The smallest case of building a symmetry into an architecture."
+  focus: "Write the sum decomposition. Say why mean or max pooling also works, and what a set network cannot represent that attention can."
 
 - title: "Relational Inductive Biases, Deep Learning, and Graph Networks"
   by: Peter Battaglia et al.
@@ -855,6 +892,19 @@
   note: "GPT-3 and in-context learning: the prompt as a program."
   focus: "Read the in-context learning setup. Say what changes between zero-, one- and few-shot prompting, and what never changes."
 
+- title: "Speech and Language Processing"
+  by: Dan Jurafsky, James H. Martin
+  year: 2026
+  kind: book
+  url: https://web.stanford.edu/~jurafsky/slp3/
+  home: memory
+  layer: learning
+  does: [store]
+  builds_on:
+    - "A Neural Probabilistic Language Model"
+  note: "Free. The standard NLP textbook, third edition: from n-grams and embeddings to transformers, large language models and speech."
+  focus: "Read the chapter on n-gram language models. Compute the perplexity of a short sentence under a bigram model, then say what a transformer changes."
+
 - title: "The Illustrated Transformer"
   by: Jay Alammar
   year: 2018
@@ -908,6 +958,19 @@
     - "ImageNet Classification with Deep Convolutional Neural Networks"
   note: "Cue-conflict images (a cat shape with elephant skin) suggest ImageNet CNNs classify by texture. A widely cited claim about what a classifier actually learns."
 
+- title: "Zoom In: An Introduction to Circuits"
+  by: Chris Olah et al.
+  year: 2020
+  kind: interactive
+  url: https://distill.pub/2020/circuits/zoom-in/
+  home: inside
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "ImageNet Classification with Deep Convolutional Neural Networks"
+  note: "The opening claims of the circuits programme: features are real directions, they connect into circuits, and both recur across models."
+  focus: "Take the curve-detector example. Say what evidence shows it really detects curves, and which of the three claims that evidence supports."
+
 - title: "Toy Models of Superposition"
   by: Nelson Elhage et al. (Anthropic)
   year: 2022
@@ -933,6 +996,20 @@
     - "A Mathematical Framework for Transformer Circuits"
   note: "A two-head circuit that copies whatever followed the last occurrence of the current token, and evidence that it drives most in-context learning."
   focus: "Draw the two heads of an induction circuit and the pattern [A][B] … [A] → [B] they complete. Say why it needs two layers."
+
+- title: "Locating and Editing Factual Associations in GPT"
+  by: Kevin Meng et al.
+  year: 2022
+  kind: paper
+  url: https://arxiv.org/abs/2202.05262
+  home: inside
+  layer: learning
+  does: [store]
+  builds_on:
+    - "Language Models are Few-Shot Learners"
+    - "A Mathematical Framework for Transformer Circuits"
+  note: "Causal tracing finds where a fact is stored, and a rank-one edit changes it. Knowledge in a language model as something you can locate and rewrite."
+  focus: "Describe causal tracing on one prompt. Say which layers it points to, and what a good edit has to change and what it has to leave alone."
 
 - title: "Transformers Learn In-Context by Gradient Descent"
   by: Johannes von Oswald et al.
@@ -1069,6 +1146,33 @@
   builds_on:
     - "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models"
   note: "Interleaving thoughts and tool calls. The basic loop behind agents."
+
+- title: "Algorithms for Decision Making"
+  by: Mykel Kochenderfer, Tim Wheeler, Kyle Wray
+  year: 2022
+  kind: book
+  url: https://algorithmsbook.com/
+  home: search
+  layer: algorithms
+  does: [search]
+  builds_on:
+    - "On the Theory of Dynamic Programming"
+  note: "Free. Decisions under uncertainty, from Bayesian networks and MDPs to online planning, POMDPs and multiple agents, with code throughout."
+  focus: "Read the chapter on online planning. Run two iterations of Monte Carlo tree search by hand on a small MDP."
+
+- title: "Let's Verify Step by Step"
+  by: Hunter Lightman et al.
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2305.20050
+  home: search
+  layer: learning
+  does: [search]
+  builds_on:
+    - "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models"
+    - "Training Language Models to Follow Instructions with Human Feedback"
+  note: "Reward models that grade each step of a solution beat ones that grade only the final answer. Verification as the search signal for reasoning."
+  focus: "Compare outcome and process supervision in the same best-of-N search. Say why grading steps helps search more than grading answers."
 
 - title: "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters"
   by: Charlie Snell et al.
@@ -1238,6 +1342,20 @@
   note: "A clipped policy-gradient update that stays close to the old policy. The algorithm inside RLHF."
   focus: "Write the clipped objective. Say what the clipping prevents compared with a plain policy-gradient step."
 
+- title: "Deep Reinforcement Learning from Human Preferences"
+  by: Paul Christiano et al.
+  year: 2017
+  kind: paper
+  url: https://arxiv.org/abs/1706.03741
+  home: reward
+  layer: learning
+  does: [search]
+  builds_on:
+    - "Human-Level Control Through Deep Reinforcement Learning"
+    - "Simple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning"
+  note: "Learn the reward from human comparisons between pairs of behaviours, then optimise it. The origin of RLHF, five years before InstructGPT."
+  focus: "Write the loss on one pair of compared clips. Say why comparisons work better than asking people for scores, and how few it took to learn a backflip."
+
 - title: "Training Language Models to Follow Instructions with Human Feedback"
   by: Long Ouyang et al.
   year: 2022
@@ -1377,6 +1495,20 @@
   note: "Diffusion as a stochastic differential equation run backwards with a learned score. Unifies score matching and DDPM."
   focus: "Write the forward SDE and its reverse. Say which term the network learns, and how DDPM appears as one discretisation."
 
+- title: "High-Resolution Image Synthesis with Latent Diffusion Models"
+  by: Robin Rombach et al.
+  year: 2022
+  kind: paper
+  url: https://arxiv.org/abs/2112.10752
+  home: generative
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Denoising Diffusion Probabilistic Models"
+    - "Auto-Encoding Variational Bayes"
+  note: "Run diffusion in the latent space of an autoencoder instead of on pixels. The reason image generation became cheap enough to run on one GPU."
+  focus: "Say what the autoencoder compresses away and what the diffusion model still has to learn. Estimate the compute saved by a latent downsampled 8 times."
+
 - title: "Flow Matching for Generative Modeling"
   by: Yaron Lipman et al.
   year: 2023
@@ -1388,6 +1520,19 @@
   builds_on:
     - "Score-Based Generative Modeling through Stochastic Differential Equations"
   note: "Learn a vector field that carries noise to data along simple paths. Diffusion-quality generation without simulating a stochastic process."
+
+- title: "Probabilistic Machine Learning: Advanced Topics"
+  by: Kevin Murphy
+  year: 2023
+  kind: book
+  url: https://probml.github.io/pml-book/book2.html
+  home: generative
+  layer: learning
+  does: []
+  builds_on:
+    - "Pattern Recognition and Machine Learning"
+  note: "Free. Graduate-level probabilistic ML: inference, generative models, causality and decision making. The follow-up to Bishop and the introduction volume."
+  focus: "Read the chapter on variational inference. Say which approximation the evidence lower bound makes, and what amortising it over a dataset changes."
 
 - title: "Pattern Recognition and Machine Learning"
   by: Christopher Bishop
@@ -1690,6 +1835,34 @@
     - "Scaling Laws for Neural Language Models"
   note: "Chinchilla. Most models were undertrained; data matters as much as parameters."
   focus: "From the fitted law, derive how parameters and tokens should grow with compute. Compare with the Kaplan allocation."
+
+- title: "Emergent Abilities of Large Language Models"
+  by: Jason Wei et al.
+  year: 2022
+  kind: paper
+  url: https://arxiv.org/abs/2206.07682
+  home: scale
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Scaling Laws for Neural Language Models"
+    - "Language Models are Few-Shot Learners"
+  note: "Abilities absent in small models that appear abruptly at scale. Half of a debate: read it with the mirage paper."
+  focus: "Pick one emergent task. Note the metric it is scored with, then predict what the curve would look like under a smoother metric."
+
+- title: "Are Emergent Abilities of Large Language Models a Mirage?"
+  by: Rylan Schaeffer, Brando Miranda, Sanmi Koyejo
+  year: 2023
+  kind: paper
+  url: https://arxiv.org/abs/2304.15004
+  home: scale
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Emergent Abilities of Large Language Models"
+  note: "The rebuttal: much of the emergence comes from all-or-nothing metrics like exact match, and smooth metrics show smooth improvement."
+  focus: "If per-token accuracy rises smoothly from 0.5 to 0.95, compute exact-match accuracy on a five-token answer at each end. Say what that does to the curve."
+  question: "Is an ability emergent if every token improves smoothly but the task only counts complete answers?"
 
 - title: "AI and Memory Wall"
   by: Amir Gholami et al.
@@ -3194,18 +3367,6 @@
   builds_on:
     - "Probabilistic Reasoning in Intelligent Systems"
   note: "Causal graphs and the do-calculus. What correlation-learning models can and cannot answer."
-
-- title: "Probabilistic Machine Learning: Advanced Topics"
-  by: Kevin Murphy
-  year: 2023
-  kind: book
-  url: https://probml.github.io/pml-book/book2.html
-  home: bayesian
-  layer: learning
-  does: []
-  builds_on:
-    - "Pattern Recognition and Machine Learning"
-  note: "Free. Graduate-level probabilistic ML: inference, generative models, causality and decision making. The follow-up to Bishop and the introduction volume."
 
 # ---------------------------------------------------------------- branch: Kernels & compilers
 
