@@ -13,6 +13,9 @@
 - id: learning-theory
   title: Learning theory
   question: What can be learned, from how much data, and with which guarantees?
+  blurb: >-
+    Compare two ways of combining weak predictors. In boosting, follow the weight of a misclassified example.
+    In a random forest, follow the correlation between the errors of two trees.
   from: learning
   rejoin: structure
   start: "A Theory of the Learnable"
@@ -50,6 +53,16 @@
   start: "Efficiently Modeling Long Sequences with Structured State Spaces"
 
 # ---- off Search & planning
+- id: symbolic
+  title: Symbolic reasoning, planning & program induction
+  question: Who supplies the action rules, and when can a learner infer a program from examples?
+  blurb: >-
+    Trace a delivery plan in STRIPS, evaluate a symbolic expression in Lisp, then infer the strokes that could
+    have produced a handwritten character. Return to world models and ask where their transition rules come from.
+  from: search
+  rejoin: world
+  start: "STRIPS: A New Approach to the Application of Theorem Proving to Problem Solving"
+
 - id: retrieval
   title: Retrieval & vector search
   question: How do you find the right thing in a billion items, and hand it to a model?
@@ -120,9 +133,22 @@
 - id: bayesian
   title: Probabilistic & causal inference
   question: How do you reason under uncertainty, and when can you say "because"?
+  blurb: >-
+    For intervention and identifiability, read Pearl on changing a variable, then Peters, Janzing and Schölkopf
+    on what observations can identify. Carry that distinction into causal tracing in GPT and action prediction in world models.
   from: generative
   rejoin: world
   start: "Probabilistic Reasoning in Intelligent Systems"
+
+- id: latent-state
+  title: Latent state & message passing
+  question: How do local observations change a belief about hidden state?
+  blurb: >-
+    Follow one posterior from a hidden Markov chain to messages on a factor graph.
+    Use the same prediction and update steps to localize a robot.
+  from: bayesian
+  rejoin: world
+  start: "A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition"
 
 # ---- off World models
 - id: robotics

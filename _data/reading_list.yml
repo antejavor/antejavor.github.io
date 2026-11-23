@@ -612,6 +612,7 @@
   prereq: true
   does: []
   note: "Strang's linear algebra aimed at deep learning, with the MIT 18.065 lectures online."
+  focus: "Start the representation sequence with PCA. Center four two-dimensional points, find the direction of largest sample variance, and keep the centered matrix for the low-rank exercise in Numerical Linear Algebra."
 
 - title: "Mathematics for Machine Learning"
   by: Marc Deisenroth, Aldo Faisal, Cheng Soon Ong
@@ -1070,6 +1071,7 @@
   layer: learning
   does: [compute]
   builds_on:
+    - "Emergence of Simple-Cell Receptive Field Properties by Learning a Sparse Code for Natural Images"
     - "A Mathematical Framework for Transformer Circuits"
   note: "Why neurons are hard to interpret: networks pack more features than they have dimensions."
   focus: "Explain how five sparse features can share two dimensions. Say what sparsity does to the cost of interference."
@@ -1096,6 +1098,7 @@
   layer: learning
   does: [store]
   builds_on:
+    - "Causality"
     - "Language Models are Few-Shot Learners"
     - "A Mathematical Framework for Transformer Circuits"
   note: "Causal tracing finds where a fact is stored, and a rank-one edit changes it. Knowledge in a language model as something you can locate and rewrite."
@@ -2161,6 +2164,7 @@
   builds_on:
     - "Receptive Fields, Binocular Interaction and Functional Architecture in the Cat's Visual Cortex"
   note: "Sparse coding of natural images reproduces V1 receptive fields. Statistics of the world shape the representation."
+  focus: "Continue from the low-rank approximation. Write the image-patch reconstruction loss with a sparsity penalty. What changes when the dictionary has more columns than there are pixel values in a patch?"
 
 - title: "Networks of Spiking Neurons: The Third Generation of Neural Network Models"
   by: Wolfgang Maass
@@ -2429,6 +2433,30 @@
     - "The Nature of Statistical Learning Theory"
   note: "Maximum-margin classifiers and the kernel trick. Needed to understand quantum kernels and the neural tangent kernel."
 
+- title: "A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting"
+  by: Yoav Freund, Robert Schapire
+  year: 1997
+  kind: paper
+  url: https://doi.org/10.1006/jcss.1997.1504
+  home: learning-theory
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "A Theory of the Learnable"
+  note: "AdaBoost trains successive classifiers on reweighted examples and combines their decisions by a weighted vote."
+  focus: "Start with four equally weighted examples and a stump that misses one. Compute its vote weight and the normalized example weights for the next round."
+
+- title: "Random Forests"
+  by: Leo Breiman
+  year: 2001
+  kind: paper
+  url: https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf
+  home: learning-theory
+  layer: learning
+  does: [compute]
+  note: "Bootstrap samples and random feature selection produce diverse trees whose votes can be aggregated. Compare their correlated errors with boosting’s emphasis on hard examples."
+  focus: "Fit ten trees to bootstrap samples of one dataset. Repeat with fewer candidate features per split. Compare individual accuracy, agreement of errors and forest accuracy on the same held-out cases."
+
 - title: "Statistical Mechanics of Learning"
   by: Andreas Engel, Christian Van den Broeck
   year: 2001
@@ -2636,6 +2664,17 @@
     - "Solutio problematis ad geometriam situs pertinentis"
   note: "The null model of networks, and the phase transition to a giant component."
 
+- title: "Spectral Graph Theory"
+  by: Fan Chung
+  year: 1997
+  kind: book
+  url: https://fanchung.ucsd.edu/research/outline.html
+  home: graphs
+  layer: algorithms
+  does: [compute]
+  note: "The Laplacian assigns an energy to a graph signal. Its small eigenvalues reveal directions in which values can change slowly across edges."
+  focus: "On a three-vertex path, expand xᵀ(D−A)x as a sum of squared edge differences. Then use the book’s normalized Laplacian and find its zero eigenvector. Explain where vertex degree enters."
+
 - title: "Collective Dynamics of 'Small-World' Networks"
   by: Duncan Watts, Steven Strogatz
   year: 1998
@@ -2681,6 +2720,7 @@
   layer: learning
   does: [compute]
   builds_on:
+    - "Spectral Graph Theory"
     - "Gradient-Based Learning Applied to Document Recognition"
   note: "Convolution defined through the graph Laplacian's eigenvectors, the root of GCN's derivation."
 
@@ -3031,6 +3071,41 @@
     - "Long Short-Term Memory"
   note: "Selective state spaces, designed together with the GPU kernel that makes them fast."
 
+# ---------------------------------------------------------------- branch: Symbolic reasoning, planning & program induction
+
+- title: "STRIPS: A New Approach to the Application of Theorem Proving to Problem Solving"
+  by: Richard Fikes, Nils Nilsson
+  year: 1971
+  kind: paper
+  url: https://ijcai.org/proceedings/1971/63
+  home: symbolic
+  layer: algorithms
+  does: [search]
+  note: "A planner searches over actions with explicit preconditions and effects. The representation determines which plans it can discover."
+  focus: "Write move, pick-up and drop actions for a two-room delivery. Walk a plan, then change a precondition and find the first step that fails."
+
+- title: "Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I"
+  by: John McCarthy
+  year: 1960
+  kind: paper
+  url: https://www-formal.stanford.edu/jmc/recursive.html
+  home: symbolic
+  layer: algorithms
+  does: [compute]
+  note: "A symbolic expression can describe either data or a program. An evaluator written in the same language makes that relationship concrete."
+  focus: "Read the definitions of eval and apply. Trace evaluation of (CAR (QUOTE (A B))) and mark where quotation stops recursive evaluation."
+
+- title: "Human-level Concept Learning Through Probabilistic Program Induction"
+  by: Brenden Lake, Ruslan Salakhutdinov, Joshua Tenenbaum
+  year: 2015
+  kind: paper
+  url: https://doi.org/10.1126/science.aab3050
+  home: symbolic
+  layer: learning
+  does: [search]
+  note: "A character is generated by a program that composes strokes. Inferring such a program from one example supports both recognition and the production of new examples."
+  focus: "Draw two stroke programs consistent with one handwritten character. Generate a second example from each and list the prior knowledge that constrained your choices."
+
 # ---------------------------------------------------------------- branch: Retrieval & vector search
 
 - title: "Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs"
@@ -3329,6 +3404,17 @@
     - "Language Models are Few-Shot Learners"
   note: "A model teaches itself when to call a calculator, a search engine or a calendar, keeping only the calls that lower its loss."
   focus: "Explain the filter that decides whether an API call is kept. Say what that criterion can and cannot teach about when to use a tool."
+
+- title: "Multiagent Systems: Algorithmic, Game-Theoretic, and Logical Foundations"
+  by: Yoav Shoham, Kevin Leyton-Brown
+  year: 2009
+  kind: book
+  url: https://www.masfoundations.org/
+  home: agents
+  layer: algorithms
+  does: [search]
+  note: "An agent’s best action can depend on how another agent responds. Normal-form games make that dependence explicit."
+  focus: "Read the sections on best responses and mixed strategies. Write the payoff matrix for matching pennies, derive the equilibrium probabilities, and predict the best response to a biased opponent."
 
 - title: "WebGPT: Browser-assisted question-answering with human feedback"
   by: Reiichiro Nakano et al.
@@ -3997,6 +4083,7 @@
   builds_on:
     - "Probabilistic Reasoning in Intelligent Systems"
   note: "Causal graphs and the do-calculus. What correlation-learning models can and cannot answer."
+  focus: "Draw rain → sprinkler use, rain → wet grass and sprinkler use → wet grass. Which variable would you adjust for to estimate the effect of switching the sprinkler on? State the assumptions behind that adjustment."
 
 - title: "Probabilistic Graphical Models: Principles and Techniques"
   by: Daphne Koller, Nir Friedman
@@ -4045,6 +4132,7 @@
   builds_on:
     - "Causality"
   note: "Open access. Causal models from the learning side: identifiability, invariance across environments, and what observational data can and cannot tell you."
+  focus: "Use a fair binary X and set Y = X. Reverse the generating direction with the same observational distribution. Predict Y after setting X to one in each model. Which additional evidence could identify the direction?"
 
 - title: "Probability Theory: The Logic of Science"
   by: E. T. Jaynes
@@ -4055,6 +4143,46 @@
   prereq: true
   does: []
   note: "Probability as extended logic. Opinionated and deep; it changes how you read every Bayesian argument afterwards."
+
+# ---------------------------------------------------------------- branch: Latent state & message passing
+
+- title: "A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition"
+  by: Lawrence Rabiner
+  year: 1989
+  kind: paper
+  url: https://doi.org/10.1109/5.18626
+  home: latent-state
+  layer: algorithms
+  does: [compute, store]
+  note: "A chain with hidden states and noisy observations gives three distinct inference problems: sequence likelihood, state marginals and the most likely path."
+  focus: "Use two states, equal initial odds, a 0.8 chance of staying put and a sensor that reports the state correctly with probability 0.9. For observations A then B, enumerate four paths and compute the likelihood, first-state posterior and most likely path."
+
+- title: "Factor Graphs and the Sum-Product Algorithm"
+  by: Frank Kschischang, Brendan Frey, Hans-Andrea Loeliger
+  year: 2001
+  kind: paper
+  url: https://doi.org/10.1109/18.910572
+  home: latent-state
+  layer: algorithms
+  does: [compute, move]
+  builds_on:
+    - "A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition"
+    - "Probabilistic Reasoning in Intelligent Systems"
+  note: "Local messages compute exact marginals on a tree. The same rule explains forward–backward on a chain and decoding on a cycle-free factor graph."
+  focus: "Redraw the two-state example as a factor graph. Send messages to the first state and check its posterior against enumeration. Compare one message with a GCN update: what does each component represent?"
+
+- title: "Probabilistic Robotics"
+  by: Sebastian Thrun, Wolfram Burgard, Dieter Fox
+  year: 2005
+  kind: book
+  url: https://mitpress.mit.edu/9780262201629/probabilistic-robotics/
+  home: latent-state
+  layer: algorithms
+  does: [compute, store]
+  builds_on:
+    - "A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition"
+  note: "A robot maintains a belief over its location as it acts and senses. Two places that look alike can both remain plausible."
+  focus: "Read the Bayes filter and grid localization sections. Put equal mass on two identical corridors, predict one motion step, then update after seeing a doorway visible from only one predicted location."
 
 # ---------------------------------------------------------------- branch: Robotics & embodiment
 
@@ -5416,6 +5544,7 @@
   layer: algorithms
   does: [compute]
   note: "SVD, QR, conditioning and stability in 40 short lectures. The mathematics GPUs spend their lives doing."
+  focus: "For the centered PCA example, form the rank-one truncated SVD. Check that its right singular vector is the first principal direction and its squared Frobenius reconstruction error is the sum of the discarded squared singular values."
 
 - title: "The Top 10 Algorithms"
   by: Jack Dongarra, Francis Sullivan
@@ -5638,6 +5767,19 @@
     - "Quantum Theory, the Church–Turing Principle and the Universal Quantum Computer"
     - "On the Computational Complexity of Algorithms"
   note: "Defines BQP and the quantum Turing machine: the class of problems quantum computers solve efficiently."
+
+- title: "Strengths and Weaknesses of Quantum Computing"
+  by: Charles Bennett, Ethan Bernstein, Gilles Brassard, Umesh Vazirani
+  year: 1997
+  kind: paper
+  url: https://arxiv.org/abs/quant-ph/9701001
+  home: quantum
+  layer: algorithms
+  does: [search]
+  builds_on:
+    - "A Fast Quantum Mechanical Algorithm for Database Search"
+  note: "An oracle lower bound explains why Grover’s square-root query count is the right scale for unstructured search. The input-access model is part of the claim."
+  focus: "Read the hybrid argument alongside Grover. Identify what one query can change, then explain why the lower bound leaves room for faster search on structured inputs."
 
 - title: "The Heisenberg Representation of Quantum Computers"
   by: Daniel Gottesman
@@ -6087,6 +6229,19 @@
   builds_on:
     - "Neuromorphic Electronic Systems"
   note: "An analog chip that adapts and reports change like a retina. Neuromorphic vision begins."
+
+- title: "Real-Time Computing Without Stable States: A New Framework for Neural Computation Based on Perturbations"
+  by: Wolfgang Maass, Thomas Natschläger, Henry Markram
+  year: 2002
+  kind: paper
+  url: https://doi.org/10.1162/089976602760407955
+  home: neuromorphic
+  layer: architecture
+  does: [compute, store]
+  builds_on:
+    - "Networks of Spiking Neurons: The Third Generation of Neural Network Models"
+  note: "A liquid-state machine turns a recent input history into transient recurrent activity. A trained readout can use that activity while the reservoir stays fixed."
+  focus: "Draw two input streams with identical final spikes but different earlier spikes. Describe the state separation a readout needs to distinguish them and what happens as the earlier input fades."
 
 - title: "A 128×128 120 dB 15 μs Latency Asynchronous Temporal Contrast Vision Sensor"
   by: Patrick Lichtsteiner, Christoph Posch, Tobi Delbruck
