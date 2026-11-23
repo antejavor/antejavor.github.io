@@ -1,0 +1,129 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Checks the "all the way down and around" data: _data/reading_list.yml, _data/chapters.yml, _data/branches.yml.
+# Errors (exit 1) break the page or the structure; warnings flag size limits that are editorial, not fatal.
+#
+#   bin/check-reading-list
+#
+# layer is optional: readings without one (the math books) sit beside the stack grid.
+
+require "yaml"
+require "date"
+
+ROOT = File.expand_path("..", __dir__)
+def load(name)
+  YAML.safe_load(File.read(File.join(ROOT, "_data", name)), permitted_classes: [Date])
+end
+
+readings = load("reading_list.yml")
+chapters = load("chapters.yml")
+branches = load("branches.yml")
+errors = []
+warnings = []
+
+KINDS = %w[paper book course essay video interactive].freeze
+LAYERS = %w[physics devices architecture systems algorithms learning intelligence].freeze
+DOES = %w[compute store move search].freeze
+CORE_RANGE = (8..15).freeze
+BRANCH_MAX = 15
+CORE_TOTAL_MAX = 160
+
+chapter_ids = chapters.map { |c| c["id"] }
+branch_ids = branches.map { |b| b["id"] }
+home_ids = chapter_ids + branch_ids
+dupes = home_ids.group_by { |i| i }.select { |_, v| v.size > 1 }.keys
+errors << "duplicate chapter/branch ids: #{dupes.join(', ')}" unless dupes.empty?
+
+# ---- readings
+titles = readings.map { |r| r["title"] }
+titles.group_by { |t| t }.each { |t, v| errors << "title appears #{v.size} times: #{t}" if v.size > 1 }
+by_title = readings.each_with_object({}) { |r, h| h[r["title"]] = r }
+
+readings.each do |r|
+  t = r["title"] || "(untitled)"
+  %w[title by year kind url home note].each { |k| errors << "#{t}: missing #{k}" if r[k].nil? || r[k].to_s.strip.empty? }
+  errors << "#{t}: kind #{r['kind'].inspect} not one of #{KINDS.join(', ')}" if r["kind"] && !KINDS.include?(r["kind"])
+  errors << "#{t}: layer #{r['layer'].inspect} not one of #{LAYERS.join(', ')}" if r["layer"] && !LAYERS.include?(r["layer"])
+  errors << "#{t}: does must be a list" unless r["does"].is_a?(Array)
+  Array(r["does"]).each { |d| errors << "#{t}: does #{d.inspect} not one of #{DOES.join(', ')}" unless DOES.include?(d) }
+  errors << "#{t}: home #{r['home'].inspect} is not a chapter or branch" if r["home"] && !home_ids.include?(r["home"])
+  Array(r["builds_on"]).each { |b| errors << "#{t}: builds_on #{b.inspect} matches no reading" unless by_title.key?(b) }
+end
+# Every core reading should carry a task; older ones predate the rule, so this is counted, not fatal
+untasked = readings.select { |r| chapter_ids.include?(r["home"]) && !r["prereq"] && !r["focus"] }
+untasked.group_by { |r| r["home"] }.each do |home, rs|
+  warnings << "chapter #{home}: #{rs.size} core reading#{rs.size == 1 ? '' : 's'} without a task"
+end
+
+def walk(readings, id)
+  readings.select { |r| r["home"] == id && !r["prereq"] }
+end
+
+# ---- chapters
+core_total = 0
+chapters.each do |c|
+  id = c["id"]
+  %w[id title question start pass].each { |k| errors << "chapter #{id}: missing #{k}" unless c[k] }
+  core = walk(readings, id)
+  core_total += core.size
+  start = by_title[c["start"]]
+  if start.nil? || start["home"] != id || start["prereq"]
+    errors << "chapter #{id}: start #{c['start'].inspect} is not a core reading of this chapter"
+  elsif !start["focus"]
+    errors << "chapter #{id}: start has no focus"
+  end
+  pass = Array(c["pass"])
+  errors << "chapter #{id}: pass needs 2 readings, has #{pass.size}" unless pass.size == 2
+  errors << "chapter #{id}: pass must begin with the start" unless pass.first == c["start"]
+  pass.each do |t|
+    r = by_title[t]
+    errors << "chapter #{id}: pass reading #{t.inspect} is not a core reading of this chapter" if r.nil? || r["home"] != id || r["prereq"]
+  end
+  warnings << "chapter #{id}: #{core.size} core readings (aim for #{CORE_RANGE.first}–#{CORE_RANGE.last})" unless CORE_RANGE.cover?(core.size)
+end
+warnings << "#{core_total} core readings in total (aim for at most #{CORE_TOTAL_MAX})" if core_total > CORE_TOTAL_MAX
+
+# ---- branches
+branches.each do |b|
+  id = b["id"]
+  %w[id title question from rejoin start].each { |k| errors << "branch #{id}: missing #{k}" unless b[k] }
+  errors << "branch #{id}: from #{b['from'].inspect} is not a chapter or branch" unless home_ids.include?(b["from"])
+  errors << "branch #{id}: from cannot be itself" if b["from"] == id
+  errors << "branch #{id}: rejoin #{b['rejoin'].inspect} is not a chapter" unless chapter_ids.include?(b["rejoin"])
+  start = by_title[b["start"]]
+  if start.nil? || start["home"] != id || start["prereq"]
+    errors << "branch #{id}: start #{b['start'].inspect} is not a reading of this branch"
+  elsif !start["focus"]
+    errors << "branch #{id}: start has no focus"
+  end
+  n = walk(readings, id).size
+  warnings << "branch #{id}: #{n} readings (split above #{BRANCH_MAX})" if n > BRANCH_MAX
+  warnings << "branch #{id}: only #{n} readings" if n < 3
+end
+
+# Branch chains must end at a chapter (no cycles)
+branch_by_id = branches.each_with_object({}) { |b, h| h[b["id"]] = b }
+branches.each do |b|
+  seen = []
+  cur = b
+  while cur && branch_by_id.key?(cur["id"])
+    if seen.include?(cur["id"])
+      errors << "branch #{b['id']}: from-chain loops (#{seen.join(' → ')})"
+      break
+    end
+    seen << cur["id"]
+    cur = branch_by_id[cur["from"]]
+  end
+end
+
+# ---- file order: grouped by home, in chapter then branch order
+order = readings.map { |r| r["home"] }.chunk_while { |a, b| a == b }.map(&:first)
+warnings << "reading_list.yml is not grouped by home in chapter/branch order" unless order == home_ids.select { |h| order.include?(h) }
+
+puts "#{readings.size} readings: #{core_total} core in #{chapters.size} chapters, " \
+     "#{readings.count { |r| branch_ids.include?(r['home']) && !r['prereq'] }} in #{branches.size} branches, " \
+     "#{readings.count { |r| r['prereq'] }} prerequisites"
+warnings.each { |w| puts "warning: #{w}" }
+errors.each { |e| puts "error: #{e}" }
+exit(errors.empty? ? 0 : 1)
