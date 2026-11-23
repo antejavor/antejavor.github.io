@@ -26,7 +26,7 @@ noindex: true
     <li><strong>Objects.</strong> The mathematical objects involved.</li>
     <li><strong>Mechanism.</strong> The central idea, in my own words.</li>
     <li><strong>Assumptions.</strong> Which still shape how we think today?</li>
-    <li><strong>One derivation</strong>, done by hand.</li>
+    <li><strong>The math behind it.</strong> The one equation or argument the idea rests on, worked through once, and only as far as the idea needs.</li>
     <li><strong>One experiment</strong> that can be reproduced.</li>
     <li><strong>One rival explanation.</strong> What experiment would tell the authors' explanation apart from another one for the same result?</li>
     <li><strong>Next question</strong> it raises, with links to earlier steps.</li>

@@ -215,17 +215,6 @@
   note: "Free. Information theory and learning as one subject. Read it after Shannon."
   focus: "Use the entropy examples to connect the biased coin to the expected compressed length of a long sequence."
 
-- title: "Elements of Information Theory"
-  by: Thomas Cover, Joy Thomas
-  year: 2006
-  kind: book
-  url: https://doi.org/10.1002/047174882X
-  home: information
-  does: []
-  builds_on:
-    - "A Mathematical Theory of Communication"
-  note: "The rigorous companion to MacKay: entropy, mutual information, channel capacity, rate–distortion."
-
 - title: "Language Modeling Is Compression"
   by: Grégoire Delétang et al.
   year: 2024
@@ -293,6 +282,18 @@
     - "A Method for the Construction of Minimum-Redundancy Codes"
     - "Three Approaches to the Quantitative Definition of Information"
   note: "LZ77: compression that learns its dictionary from the data itself. Inside gzip, and a working form of Kolmogorov's idea."
+
+- title: "Elements of Information Theory"
+  by: Thomas Cover, Joy Thomas
+  year: 2006
+  kind: book
+  url: https://doi.org/10.1002/047174882X
+  home: information
+  prereq: true
+  does: []
+  builds_on:
+    - "A Mathematical Theory of Communication"
+  note: "The rigorous companion to MacKay: entropy, mutual information, channel capacity, rate–distortion."
 
 # ---------------------------------------------------------------- chapter: Learning from data
 
@@ -454,19 +455,6 @@
   builds_on:
     - "Understanding Deep Learning Requires Rethinking Generalization"
   note: "Small transformers memorise a modular arithmetic table, then generalise long after training loss hits zero. Generalisation as a late phase change."
-
-- title: "The Principles of Deep Learning Theory"
-  by: Daniel Roberts, Sho Yaida, Boris Hanin
-  year: 2022
-  kind: book
-  url: https://arxiv.org/abs/2106.10165
-  home: learning
-  layer: learning
-  does: [compute]
-  builds_on:
-    - "Neural Tangent Kernel"
-  note: "An effective theory of deep networks, in the physicist's style: expand in depth over width and compute what the infinite-width limit leaves out."
-  focus: "Read the chapter on the infinite-width limit. Say which quantity the depth-to-width corrections track, and why representation learning needs them."
 
 - title: "Patterns, Predictions, and Actions"
   by: Moritz Hardt, Benjamin Recht
@@ -2401,6 +2389,19 @@
     - "Understanding Deep Learning Requires Rethinking Generalization"
   note: "Optimise a PAC-Bayes bound directly and get a guarantee for a real network that is not vacuous. Bounds that finally say something about deep nets."
 
+- title: "The Principles of Deep Learning Theory"
+  by: Daniel Roberts, Sho Yaida, Boris Hanin
+  year: 2022
+  kind: book
+  url: https://arxiv.org/abs/2106.10165
+  home: learning-theory
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Neural Tangent Kernel"
+  note: "An effective theory of deep networks, in the physicist's style: expand in depth over width and compute what the infinite-width limit leaves out."
+  focus: "Read the chapter on the infinite-width limit. Say which quantity the depth-to-width corrections track, and why representation learning needs them."
+
 # ---------------------------------------------------------------- branch: Optimisation
 
 - title: "Gradient Descent on Neural Networks Typically Occurs at the Edge of Stability"
@@ -2423,15 +2424,6 @@
   layer: algorithms
   does: [search]
   note: "Finding a root from noisy measurements with shrinking steps. The mathematical origin of stochastic gradient descent."
-
-- title: "Convex Optimization"
-  by: Stephen Boyd, Lieven Vandenberghe
-  year: 2004
-  kind: book
-  url: https://web.stanford.edu/~boyd/cvxbook/
-  home: optimisation
-  does: []
-  note: "Free. Objectives, constraints and duality. Training is non-convex, but this is the language optimisation is described in."
 
 - title: "Understanding the Difficulty of Training Deep Feedforward Neural Networks"
   by: Xavier Glorot, Yoshua Bengio
@@ -2504,6 +2496,16 @@
   builds_on:
     - "Understanding Deep Learning Requires Rethinking Generalization"
   note: "Minimise the worst loss in a small neighbourhood instead of the loss at a point. Flatness turned into an explicit training objective."
+
+- title: "Convex Optimization"
+  by: Stephen Boyd, Lieven Vandenberghe
+  year: 2004
+  kind: book
+  url: https://web.stanford.edu/~boyd/cvxbook/
+  home: optimisation
+  prereq: true
+  does: []
+  note: "Free. Objectives, constraints and duality. Training is non-convex, but this is the language optimisation is described in."
 
 # ---------------------------------------------------------------- branch: Graphs & networks
 
@@ -3712,15 +3714,6 @@
   does: [compute, search]
   note: "The Metropolis algorithm, run on MANIAC: random search through physical states. Markov chain Monte Carlo begins."
 
-- title: "Probability Theory: The Logic of Science"
-  by: E. T. Jaynes
-  year: 2003
-  kind: book
-  url: https://doi.org/10.1017/CBO9780511790423
-  home: bayesian
-  does: []
-  note: "Probability as extended logic. Opinionated and deep; it changes how you read every Bayesian argument afterwards."
-
 - title: "Gaussian Processes for Machine Learning"
   by: Carl Edward Rasmussen, Christopher Williams
   year: 2006
@@ -3790,6 +3783,16 @@
   builds_on:
     - "Causality"
   note: "Open access. Causal models from the learning side: identifiability, invariance across environments, and what observational data can and cannot tell you."
+
+- title: "Probability Theory: The Logic of Science"
+  by: E. T. Jaynes
+  year: 2003
+  kind: book
+  url: https://doi.org/10.1017/CBO9780511790423
+  home: bayesian
+  prereq: true
+  does: []
+  note: "Probability as extended logic. Opinionated and deep; it changes how you read every Bayesian argument afterwards."
 
 # ---------------------------------------------------------------- branch: Robotics & embodiment
 
