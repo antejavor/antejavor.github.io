@@ -14,8 +14,8 @@
   title: Learning theory
   question: What can be learned, from how much data, and with which guarantees?
   blurb: >-
-    Compare two ways of combining weak predictors. In boosting, follow the weight of a misclassified example.
-    In a random forest, follow the correlation between the errors of two trees.
+    What a learner can promise before it sees the test set: PAC bounds, capacity, margins and generalisation.
+    Boosting and random forests show the theory at work, turning many weak predictors into one strong one.
   from: learning
   rejoin: structure
   start: "A Theory of the Learnable"
@@ -134,8 +134,8 @@
   title: Probabilistic & causal inference
   question: How do you reason under uncertainty, and when can you say "because"?
   blurb: >-
-    For intervention and identifiability, read Pearl on changing a variable, then Peters, Janzing and Schölkopf
-    on what observations can identify. Carry that distinction into causal tracing in GPT and action prediction in world models.
+    Uncertainty as probability, and causes as interventions: graphical models, inference, and what observational
+    data can and cannot tell you about cause and effect.
   from: generative
   rejoin: world
   start: "Probabilistic Reasoning in Intelligent Systems"
