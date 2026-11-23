@@ -2339,6 +2339,68 @@
     - "The Nature of Statistical Learning Theory"
   note: "Maximum-margin classifiers and the kernel trick. Needed to understand quantum kernels and the neural tangent kernel."
 
+- title: "Statistical Mechanics of Learning"
+  by: Andreas Engel, Christian Van den Broeck
+  year: 2001
+  kind: book
+  url: https://doi.org/10.1017/CBO9781139164542
+  home: learning-theory
+  layer: learning
+  does: []
+  builds_on:
+    - "The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain"
+    - "Neural Networks and Physical Systems with Emergent Collective Computational Abilities"
+  note: "Learning curves computed with the replica method, and generalisation as a phase transition. The physicist's learning theory."
+
+- title: "Rademacher and Gaussian Complexities: Risk Bounds and Structural Results"
+  by: Peter Bartlett, Shahar Mendelson
+  year: 2002
+  kind: paper
+  url: https://www.jmlr.org/papers/v3/bartlett02a.html
+  home: learning-theory
+  layer: learning
+  does: []
+  builds_on:
+    - "The Nature of Statistical Learning Theory"
+  note: "Measure a hypothesis class by how well it fits random signs. Data-dependent bounds that later deep-learning bounds build on."
+
+- title: "Understanding Machine Learning: From Theory to Algorithms"
+  by: Shai Shalev-Shwartz, Shai Ben-David
+  year: 2014
+  kind: book
+  url: https://doi.org/10.1017/CBO9781107298019
+  home: learning-theory
+  layer: learning
+  does: []
+  builds_on:
+    - "A Theory of the Learnable"
+  note: "The graduate textbook: PAC learning, VC dimension, Rademacher complexity, stability and online learning, with the proofs."
+
+- title: "Spectrally-normalized margin bounds for neural networks"
+  by: Peter Bartlett, Dylan Foster, Matus Telgarsky
+  year: 2017
+  kind: paper
+  url: https://arxiv.org/abs/1706.08498
+  home: learning-theory
+  layer: learning
+  does: []
+  builds_on:
+    - "Rademacher and Gaussian Complexities: Risk Bounds and Structural Results"
+    - "Understanding Deep Learning Requires Rethinking Generalization"
+  note: "A margin bound that scales with the product of the layers' spectral norms. One of the first answers to the random-labels challenge."
+
+- title: "Computing Nonvacuous Generalization Bounds for Deep (Stochastic) Neural Networks with Many More Parameters than Training Data"
+  by: Gintare Karolina Dziugaite, Daniel Roy
+  year: 2017
+  kind: paper
+  url: https://arxiv.org/abs/1703.11008
+  home: learning-theory
+  layer: learning
+  does: []
+  builds_on:
+    - "Understanding Deep Learning Requires Rethinking Generalization"
+  note: "Optimise a PAC-Bayes bound directly and get a guarantee for a real network that is not vacuous. Bounds that finally say something about deep nets."
+
 # ---------------------------------------------------------------- branch: Optimisation
 
 - title: "Gradient Descent on Neural Networks Typically Occurs at the Edge of Stability"
@@ -2371,6 +2433,30 @@
   does: []
   note: "Free. Objectives, constraints and duality. Training is non-convex, but this is the language optimisation is described in."
 
+- title: "Understanding the Difficulty of Training Deep Feedforward Neural Networks"
+  by: Xavier Glorot, Yoshua Bengio
+  year: 2010
+  kind: paper
+  url: https://proceedings.mlr.press/v9/glorot10a.html
+  home: optimisation
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Learning Long-Term Dependencies with Gradient Descent is Difficult"
+  note: "Why deep networks were hard to train: activations and gradients shrink or blow up layer by layer. The variance argument behind Xavier initialisation."
+
+- title: "On the Importance of Initialization and Momentum in Deep Learning"
+  by: Ilya Sutskever, James Martens, George Dahl, Geoffrey Hinton
+  year: 2013
+  kind: paper
+  url: https://proceedings.mlr.press/v28/sutskever13.html
+  home: optimisation
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Understanding the Difficulty of Training Deep Feedforward Neural Networks"
+  note: "With good initialisation and a momentum schedule, plain SGD trains deep and recurrent networks that were thought to need second-order methods."
+
 - title: "Adam: A Method for Stochastic Optimization"
   by: Diederik Kingma, Jimmy Ba
   year: 2014
@@ -2382,6 +2468,42 @@
   builds_on:
     - "A Stochastic Approximation Method"
   note: "The optimizer nearly everyone still uses. Short and worth understanding properly."
+
+- title: "Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour"
+  by: Priya Goyal et al.
+  year: 2017
+  kind: paper
+  url: https://arxiv.org/abs/1706.02677
+  home: optimisation
+  layer: systems
+  does: [compute]
+  builds_on:
+    - "Deep Residual Learning for Image Recognition"
+  note: "Scale the learning rate linearly with the batch size and warm it up. How ImageNet training came down to an hour on 256 GPUs."
+
+- title: "Decoupled Weight Decay Regularization"
+  by: Ilya Loshchilov, Frank Hutter
+  year: 2019
+  kind: paper
+  url: https://arxiv.org/abs/1711.05101
+  home: optimisation
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Adam: A Method for Stochastic Optimization"
+  note: "Under Adam, L2 regularisation and weight decay are not the same thing. Decouple them: almost every large model is now trained with the result."
+
+- title: "Sharpness-Aware Minimization for Efficiently Improving Generalization"
+  by: Pierre Foret et al.
+  year: 2021
+  kind: paper
+  url: https://arxiv.org/abs/2010.01412
+  home: optimisation
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Understanding Deep Learning Requires Rethinking Generalization"
+  note: "Minimise the worst loss in a small neighbourhood instead of the loss at a point. Flatness turned into an explicit training objective."
 
 # ---------------------------------------------------------------- branch: Graphs & networks
 
@@ -3314,6 +3436,55 @@
     - "Cybernetics: Or Control and Communication in the Animal and the Machine"
   note: "The Kalman filter: optimal state estimation from noisy measurements. Also the linear state-space model that S4 and Mamba revisit."
 
+- title: "Constrained Model Predictive Control: Stability and Optimality"
+  by: David Mayne et al.
+  year: 2000
+  kind: paper
+  url: https://doi.org/10.1016/S0005-1098(99)00214-9
+  home: control
+  layer: algorithms
+  does: [search]
+  builds_on:
+    - "On the Theory of Dynamic Programming"
+  note: "Model predictive control: re-solve a finite-horizon problem at every step and apply only the first action. Stability under constraints made rigorous."
+
+- title: "Optimal Feedback Control as a Theory of Motor Coordination"
+  by: Emanuel Todorov, Michael Jordan
+  year: 2002
+  kind: paper
+  url: https://doi.org/10.1038/nn963
+  home: control
+  layer: intelligence
+  does: [compute]
+  builds_on:
+    - "A New Approach to Linear Filtering and Prediction Problems"
+  note: "Movement as optimal feedback control: the nervous system corrects only the errors that matter for the task. Control theory as a theory of the brain."
+
+- title: "Dynamic Programming and Optimal Control"
+  by: Dimitri Bertsekas
+  year: 2017
+  kind: book
+  url: http://www.athenasc.com/dpbook.html
+  home: control
+  layer: algorithms
+  does: [search]
+  builds_on:
+    - "On the Theory of Dynamic Programming"
+  note: "The reference on dynamic programming, from finite-horizon problems to approximate dynamic programming, which is reinforcement learning by another name."
+
+- title: "A Tour of Reinforcement Learning: The View from Continuous Control"
+  by: Benjamin Recht
+  year: 2018
+  kind: paper
+  url: https://arxiv.org/abs/1806.09460
+  home: control
+  layer: learning
+  does: [search]
+  builds_on:
+    - "Reinforcement Learning: An Introduction"
+    - "A New Approach to Linear Filtering and Prediction Problems"
+  note: "Reinforcement learning tested on the linear quadratic regulator, where the optimal answer is known. Model-based methods win on sample efficiency."
+
 - title: "Nonlinear Dynamics and Chaos"
   by: Steven Strogatz
   year: 2018
@@ -3356,6 +3527,16 @@
   does: []
   note: "Probability as extended logic. Opinionated and deep; it changes how you read every Bayesian argument afterwards."
 
+- title: "Gaussian Processes for Machine Learning"
+  by: Carl Edward Rasmussen, Christopher Williams
+  year: 2006
+  kind: book
+  url: http://gaussianprocess.org/gpml/
+  home: bayesian
+  layer: learning
+  does: [compute]
+  note: "Free. Bayesian inference over functions, exact for regression. The kernel view behind the neural tangent kernel and Bayesian optimisation."
+
 - title: "Causality"
   by: Judea Pearl
   year: 2009
@@ -3367,6 +3548,54 @@
   builds_on:
     - "Probabilistic Reasoning in Intelligent Systems"
   note: "Causal graphs and the do-calculus. What correlation-learning models can and cannot answer."
+
+- title: "Probabilistic Graphical Models: Principles and Techniques"
+  by: Daphne Koller, Nir Friedman
+  year: 2009
+  kind: book
+  url: https://mitpress.mit.edu/9780262013192/probabilistic-graphical-models/
+  home: bayesian
+  layer: algorithms
+  does: [search]
+  builds_on:
+    - "Probabilistic Reasoning in Intelligent Systems"
+  note: "The comprehensive textbook on graphical models: representation, exact and approximate inference, and learning."
+
+- title: "Dropout as a Bayesian Approximation: Representing Model Uncertainty in Deep Learning"
+  by: Yarin Gal, Zoubin Ghahramani
+  year: 2016
+  kind: paper
+  url: https://arxiv.org/abs/1506.02142
+  home: bayesian
+  layer: learning
+  does: [compute]
+  builds_on:
+    - "Gaussian Processes for Machine Learning"
+  note: "Dropout left on at test time approximates Bayesian inference in a deep Gaussian process. Uncertainty from networks you already train."
+
+- title: "Variational Inference: A Review for Statisticians"
+  by: David Blei, Alp Kucukelbir, Jon McAuliffe
+  year: 2017
+  kind: paper
+  url: https://arxiv.org/abs/1601.00670
+  home: bayesian
+  layer: algorithms
+  does: [compute]
+  builds_on:
+    - "Maximum Likelihood from Incomplete Data via the EM Algorithm"
+  note: "Turn inference into optimisation: choose a tractable family and minimise the KL divergence to the posterior. The review behind VAEs and modern Bayesian deep learning."
+
+- title: "Elements of Causal Inference: Foundations and Learning Algorithms"
+  by: Jonas Peters, Dominik Janzing, Bernhard Schölkopf
+  year: 2017
+  kind: book
+  url: https://mitpress.mit.edu/9780262037310/elements-of-causal-inference/
+  home: bayesian
+  layer: intelligence
+  does: []
+  builds_on:
+    - "Causality"
+  note: "Open access. Causal models from the learning side: identifiability, invariance across environments, and what observational data can and cannot tell you."
 
 # ---------------------------------------------------------------- branch: Kernels & compilers
 
@@ -5511,6 +5740,18 @@
   does: [compute]
   note: "The equations of the spike. Every spiking-neuron model is a simplification of this one."
 
+- title: "Spikes: Exploring the Neural Code"
+  by: Fred Rieke, David Warland, Rob de Ruyter van Steveninck, William Bialek
+  year: 1997
+  kind: book
+  url: https://mitpress.mit.edu/9780262681087/spikes/
+  home: neuroscience
+  layer: algorithms
+  does: [move]
+  builds_on:
+    - "A Mathematical Theory of Communication"
+  note: "How much information a spike train carries, measured. Information theory applied to real neurons."
+
 - title: "An Energy Budget for Signaling in the Grey Matter of the Brain"
   by: David Attwell, Simon Laughlin
   year: 2001
@@ -5546,6 +5787,38 @@
   builds_on:
     - "An Energy Budget for Signaling in the Grey Matter of the Brain"
   note: "Wiring, energy and timing as the constraints that shape brain networks. Data movement, on the brain's stack."
+
+- title: "Variability, Compensation and Homeostasis in Neuron and Network Function"
+  by: Eve Marder, Jean-Marc Goaillard
+  year: 2006
+  kind: paper
+  url: https://doi.org/10.1038/nrn1949
+  home: neuroscience
+  layer: architecture
+  does: [compute]
+  note: "Neurons and circuits with very different parameters produce the same behaviour. Why there is no single correct model of a neuron."
+
+- title: "Rhythms of the Brain"
+  by: György Buzsáki
+  year: 2006
+  kind: book
+  url: https://doi.org/10.1093/acprof:oso/9780195301069.001.0001
+  home: neuroscience
+  layer: architecture
+  does: [move]
+  note: "Oscillations as the brain's timing system, coordinating neurons within and across regions. A kind of computation with no counterpart in transformers."
+
+- title: "The Self-Tuning Neuron: Synaptic Scaling of Excitatory Synapses"
+  by: Gina Turrigiano
+  year: 2008
+  kind: paper
+  url: https://doi.org/10.1016/j.cell.2008.10.008
+  home: neuroscience
+  layer: learning
+  does: [store]
+  builds_on:
+    - "Synaptic Modifications in Cultured Hippocampal Neurons"
+  note: "Neurons scale all their synapses up or down to hold their firing rate steady. The brain's answer to runaway Hebbian learning, and a cousin of normalisation layers."
 
 - title: "Principles of Neural Design"
   by: Peter Sterling, Simon Laughlin
