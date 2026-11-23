@@ -115,7 +115,15 @@
     {
       "name": "Reading",
       "icon": "fa-solid fa-book",
-      "keywords": []
+      "keywords": [
+        "Foundations of computation & memory",
+        "Neural networks, from McCulloch–Pitts to transformers",
+        "Graphs & graph neural networks",
+        "Neuromorphic & AI hardware",
+        "Quantum computing"
+      ],
+      "url": "/down-and-around/",
+      "url_label": "All the way down and around →"
     }
   ],
   "references": [],

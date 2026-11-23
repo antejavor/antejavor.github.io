@@ -1,0 +1,156 @@
+# Core chapters: one approach to intelligence each, in reading order. Together they are the core line on the map.
+# A reading belongs to a chapter when its `home` in reading_list.yml is the chapter's id.
+#   id        -> referenced by readings (home) and branches (from, rejoin)
+#   title     -> the approach
+#   question  -> what the chapter is trying to answer
+#   blurb     -> two sentences at most on what the chapter covers
+#   start     -> exact title of the chapter's entry reading; lives in this chapter and has a focus
+#   pass      -> the two readings for the first pass through every chapter; the first is the start
+#   prompt    -> optional closing question, shown after the chapter's readings
+
+- id: building
+  title: What we're building
+  question: What counts as intelligence, and how would we know?
+  blurb: >-
+    Arguments about what we are trying to build and how we would recognise it. Read them early to form a view, and
+    again at the end to test it.
+  start: "The Bitter Lesson"
+  pass: ["The Bitter Lesson", "On the Measure of Intelligence"]
+  prompt: "Sutton bets on general methods that scale; Chollet measures how efficiently a system acquires new skills. Which of them do today's language models vindicate?"
+
+- id: evidence
+  title: Experiments & evidence
+  question: How do you know a result about an AI system is real?
+  blurb: >-
+    Treat a model as an empirical system: error bars, held-out data, baselines, ablations and the many ways a
+    benchmark can mislead. The method you bring to every other chapter.
+  start: "Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations"
+  pass: ["Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations", "Do ImageNet Classifiers Generalize to ImageNet?"]
+  prompt: "Take one result from another chapter. What would you need to see (samples, seeds, held-out data, a baseline) before you believed it?"
+
+- id: information
+  title: Information & compression
+  question: Is prediction the same as understanding?
+  blurb: >-
+    Shannon's entropy, Kolmogorov's complexity and Solomonoff's prior: three ways of saying that predicting well and
+    compressing well are the same skill.
+  start: "A Mathematical Theory of Communication"
+  pass: ["A Mathematical Theory of Communication", "Language Modeling Is Compression"]
+  prompt: "If prediction is compression, what does skill-acquisition efficiency add that a compression ratio misses?"
+
+- id: learning
+  title: Learning from data
+  question: Why does fitting the training data generalise?
+  blurb: >-
+    Classical theory said large models should overfit. They don't, and the explanations (implicit regularisation,
+    interpolation, kernels, late phase changes) are still being argued.
+  start: "Understanding Deep Learning Requires Rethinking Generalization"
+  pass:
+    ["Understanding Deep Learning Requires Rethinking Generalization", "Reconciling Modern Machine-Learning Practice and the Bias-Variance Trade-off"]
+  prompt: "Which explanation predicts the second descent, and which would have predicted the random-labels result?"
+
+- id: structure
+  title: Structure as prior
+  question: What should a model assume about its input?
+  blurb: >-
+    Convolutions, message passing and attention are each a guess about the symmetries of the data. A good guess saves
+    data; the geometric view says which guess fits which domain.
+  start: "Geometric Deep Learning: Grids, Groups, Graphs, Geodesics, and Gauges"
+  pass: ["Geometric Deep Learning: Grids, Groups, Graphs, Geodesics, and Gauges", "Relational Inductive Biases, Deep Learning, and Graph Networks"]
+
+- id: memory
+  title: Memory & sequence
+  question: How does a model hold context?
+  blurb: >-
+    From associative memory and recurrence to attention as differentiable lookup: how a model keeps what it has seen,
+    and what in-context learning does with it.
+  start: "Attention Is All You Need"
+  pass: ["Attention Is All You Need", "Language Models are Few-Shot Learners"]
+
+- id: inside
+  title: Inside the model
+  question: What did it actually learn?
+  blurb: >-
+    Circuits, superposition and the arguments about what networks rely on, with the experiments that test a claimed
+    explanation.
+  start: "A Mathematical Framework for Transformer Circuits"
+  pass: ["A Mathematical Framework for Transformer Circuits", "In-context Learning and Induction Heads"]
+
+- id: search
+  title: Search & planning
+  question: When should a system think instead of recall?
+  blurb: >-
+    Search and learning are the two methods that scale with compute, and search is the half that usually gets skipped.
+    From game-tree search to spending compute at inference time.
+  start: "A General Reinforcement Learning Algorithm That Masters Chess, Shogi, and Go Through Self-Play"
+  pass:
+    [
+      "A General Reinforcement Learning Algorithm That Masters Chess, Shogi, and Go Through Self-Play",
+      "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters",
+    ]
+
+- id: reward
+  title: Reward & control
+  question: How does a system learn what to do?
+  blurb: >-
+    Representation is half the story. A system that acts also needs values, exploration and credit assignment, and
+    language models are now trained this way too.
+  start: "Reinforcement Learning: An Introduction"
+  pass: ["Reinforcement Learning: An Introduction", "Training Language Models to Follow Instructions with Human Feedback"]
+  prompt: "Where does the reward come from at each step, and what stops the policy from exploiting it?"
+
+- id: generative
+  title: Generative & probabilistic
+  question: How do you model the data itself?
+  blurb: >-
+    Modelling the whole data distribution: energy-based models, variational inference, adversarial training and
+    diffusion.
+  start: "Denoising Diffusion Probabilistic Models"
+  pass: ["Denoising Diffusion Probabilistic Models", "Score-Based Generative Modeling through Stochastic Differential Equations"]
+
+- id: world
+  title: World models
+  question: How does a system predict the consequences of acting?
+  blurb: >-
+    Seeing and imagining are continuous, physical and high-bandwidth. Models that predict what happens next, and where
+    the language-model recipe may not transfer.
+  start: "World Models"
+  pass: ["World Models", "Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model"]
+
+- id: scale
+  title: Scale & cost
+  question: What does intelligence cost to compute, and who pays?
+  blurb: >-
+    The compute, memory and energy a model needs, and how that shapes which models get built. The branches below go
+    down the stack one layer at a time.
+  start: "Scaling Laws for Neural Language Models"
+  pass: ["Scaling Laws for Neural Language Models", "Computing's Energy Problem (and What We Can Do About It)"]
+  prompt: "Take one model you know. Is its training limited by compute, by memory bandwidth or by energy, and which reading tells you?"
+
+- id: substrates
+  title: Other substrates
+  question: Does intelligence need this hardware?
+  blurb: >-
+    Light, analog devices, spikes and qubits. Other ways to compute, read with scepticism about the advantages
+    claimed for them.
+  start: "Deep Physical Neural Networks Trained with Backpropagation"
+  pass: ["Deep Physical Neural Networks Trained with Backpropagation", "Read the Fine Print"]
+
+- id: brains
+  title: Brains
+  question: What does the other existence proof show?
+  blurb: >-
+    The brain runs on about 20 watts. Synapses, spikes and local learning rules, and what they suggest about learning
+    without backpropagation.
+  start: "Theoretical Neuroscience"
+  pass: ["Theoretical Neuroscience", "Predictive Coding in the Visual Cortex"]
+
+- id: crossroads
+  title: Crossroads
+  question: Where do the approaches meet?
+  blurb: >-
+    Papers that connect the approaches: memory and attention, graphs and transformers, physics and learning,
+    algorithms and the hardware they run on. Read these last; they make more sense then.
+  start: "The Hardware Lottery"
+  pass: ["The Hardware Lottery", "Hopfield Networks is All You Need"]
+  prompt: "Take one algorithm from this path through The Bitter Lesson and The Hardware Lottery. How would its prospects change on different hardware?"

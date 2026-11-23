@@ -232,6 +232,945 @@ footer:not(.fixed-bottom) {
   }
 }
 
+// Reading list
+.reading-intro {
+  color: var(--global-text-color-light);
+}
+
+.reading-controls {
+  position: sticky;
+  top: 3.6rem;
+  z-index: 6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  align-items: center;
+  margin: 2rem 0 0.5rem;
+  padding: 0.7rem 0;
+  background: color-mix(in srgb, var(--global-bg-color) 90%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px dashed var(--global-divider-color);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+// stages | first circuit | full route
+.reading-views {
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 999px;
+}
+
+.reading-view {
+  font: inherit;
+  color: var(--global-text-color-light);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.2rem 0.85rem;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+
+  &:hover {
+    color: var(--global-theme-color);
+  }
+
+  &.active {
+    color: var(--global-bg-color);
+    background: var(--global-theme-color);
+  }
+}
+
+.reading-switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  align-items: center;
+}
+
+.reading-chip {
+  font: inherit;
+  color: var(--global-text-color-light);
+  background: transparent;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 999px;
+  padding: 0.15rem 0.65rem;
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+  }
+}
+
+.reading-toggle {
+  margin: 0;
+  color: var(--global-text-color-light);
+  cursor: pointer;
+}
+
+.reading-view-lead {
+  margin: 1.5rem 0 0;
+  color: var(--global-text-color-light);
+}
+
+.reading-stage {
+  margin-top: 2.5rem;
+  scroll-margin-top: 9rem;
+
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.35rem;
+  }
+}
+
+.reading-stage-num,
+.reading-era {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--global-theme-color);
+}
+
+.reading-era {
+  color: var(--global-text-color-light);
+}
+
+.reading-blurb {
+  margin: 0.5rem 0 0.75rem;
+  color: var(--global-text-color-light);
+}
+
+.reading-q {
+  margin: 0.35rem 0 0;
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+// Refresh first: background reading for a chapter or branch, collapsed
+.reading-prereq {
+  margin: 0.25rem 0 0.5rem;
+
+  > summary {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--global-text-color-light);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--global-theme-color);
+    }
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+// Branches: side tracks under the chapter they leave from; sub-branches step in
+.reading-branches {
+  margin-top: 1.25rem;
+}
+
+.reading-branches-title {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--global-theme-color);
+}
+
+.reading-branch {
+  margin: 0 0 0.5rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px dashed var(--global-divider-color);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--global-card-bg-color) 70%, transparent);
+  scroll-margin-top: 9rem;
+
+  &[data-level="1"] {
+    margin-left: 1.25rem;
+  }
+
+  &[data-level="2"] {
+    margin-left: 2.5rem;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  > summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    cursor: pointer;
+    list-style: none;
+    border-radius: 6px;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--global-theme-color);
+      outline-offset: 2px;
+    }
+
+    &.is-flash {
+      animation: reading-flash 1.6s ease-out;
+    }
+  }
+
+  &[open] > summary {
+    margin-bottom: 0.35rem;
+  }
+
+  .reading-blurb {
+    margin-top: 0;
+  }
+}
+
+.reading-branch-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+}
+
+.reading-branch-title {
+  font-weight: 600;
+
+  &::before {
+    content: "↳ ";
+    color: var(--global-theme-color);
+  }
+
+  .reading-branch > summary:hover & {
+    color: var(--global-theme-color);
+  }
+}
+
+.reading-branch-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--global-text-color-light);
+}
+
+.reading-branch-q {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--global-text-color-light);
+}
+
+.reading-stop-prompt {
+  margin: 0.75rem 0 0;
+  padding: 0.4rem 0.9rem;
+  border-left: 2px solid var(--global-theme-color);
+  font-style: italic;
+}
+
+// A station: a collapsed row; pointing previews its detail, clicking pins it open
+.reading-items {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding-left: 0;
+}
+
+.reading-item {
+  position: relative;
+  border-bottom: 1px dashed var(--global-divider-color);
+  scroll-margin-top: 9rem;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &.is-flash .reading-row {
+    animation: reading-flash 1.6s ease-out;
+  }
+}
+
+.reading-row {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 6px;
+  transition: background 0.15s;
+
+  .reading-item:hover > &,
+  .reading-item.is-open > & {
+    background: var(--global-code-bg-color);
+  }
+}
+
+.reading-open {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.55rem 0.4rem;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: -2px;
+    border-radius: 6px;
+  }
+}
+
+.reading-dot {
+  flex: 0 0 auto;
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-top: 0.45rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--global-text-color-light);
+
+  .is-start & {
+    border-color: var(--global-theme-color);
+    box-shadow: 0 0 0 3px var(--global-code-bg-color);
+  }
+
+  .is-branch & {
+    border-style: dashed;
+  }
+
+  .is-prereq & {
+    width: 0.45rem;
+    height: 0.45rem;
+    margin: 0.55rem 0.07rem 0;
+    opacity: 0.6;
+  }
+
+  .is-read & {
+    background: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+  }
+}
+
+.reading-head {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.reading-title {
+  display: block;
+  font-weight: 600;
+  transition: color 0.15s;
+
+  .reading-open:hover & {
+    color: var(--global-theme-color);
+  }
+}
+
+.reading-meta {
+  display: block;
+  margin-top: 0.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--global-text-color-light);
+}
+
+.reading-badge {
+  margin-left: 0.35rem;
+  padding: 0 0.35rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 3px;
+  white-space: nowrap;
+
+  // start here: the entry reading of a chapter or branch
+  &.is-start {
+    color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+  }
+}
+
+// Prerequisites read as secondary
+.reading-item.is-prereq .reading-title {
+  font-weight: 500;
+  color: var(--global-text-color-light);
+}
+
+.reading-walked {
+  margin-left: 0.35rem;
+  color: var(--global-theme-color);
+}
+
+.reading-chevron {
+  flex: 0 0 auto;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin: 0.55rem 0.2rem 0 0;
+  border-right: 1.5px solid var(--global-text-color-light);
+  border-bottom: 1.5px solid var(--global-text-color-light);
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+
+  .is-open & {
+    transform: rotate(-135deg);
+    margin-top: 0.75rem;
+  }
+}
+
+.reading-out {
+  flex: 0 0 auto;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding: 0 0.55rem;
+  color: var(--global-text-color-light);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--global-theme-color);
+    text-decoration: none;
+  }
+}
+
+.reading-detail {
+  display: none;
+  font-size: 0.9rem;
+
+  .is-open > & {
+    display: block;
+    padding: 0.35rem 0.4rem 1rem 1.75rem;
+    animation: reading-in 0.18s ease-out;
+  }
+
+  .is-peek > & {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    top: 100%;
+    left: 1.35rem;
+    right: 0;
+    padding: 0.85rem 1rem;
+    background: var(--global-card-bg-color);
+    border: 1px solid var(--global-divider-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    animation: reading-in 0.15s ease-out;
+  }
+}
+
+.reading-note {
+  margin: 0 0 0.7rem;
+}
+
+.reading-facts {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0.45rem 1rem;
+  margin: 0;
+
+  dt {
+    padding-top: 0.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--global-theme-color);
+  }
+
+  dd {
+    margin: 0;
+    min-width: 0;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+.reading-question {
+  font-style: italic;
+  color: var(--global-text-color-light);
+}
+
+.reading-refs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li + li {
+    margin-top: 0.15rem;
+  }
+}
+
+.reading-ref-kind {
+  margin-left: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--global-text-color-light);
+}
+
+.reading-links > div + div {
+  margin-top: 0.35rem;
+}
+
+.reading-links-dir {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--global-text-color-light);
+}
+
+.reading-link {
+  display: inline-block;
+  max-width: 100%;
+  margin: 0 0.3rem 0.3rem 0;
+  padding: 0.05rem 0.55rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: top;
+  font-size: 0.78rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 999px;
+
+  &:hover {
+    border-color: var(--global-theme-color);
+    text-decoration: none;
+  }
+}
+
+@keyframes reading-in {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reading-flash {
+  0%,
+  40% {
+    background: color-mix(in srgb, var(--global-theme-color) 22%, transparent);
+  }
+  100% {
+    background: var(--global-code-bg-color);
+  }
+}
+
+@media (max-width: 576px) {
+  .reading-controls {
+    position: static;
+  }
+
+  .reading-facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+
+    dd + dt {
+      margin-top: 0.4rem;
+    }
+  }
+
+  .is-open > .reading-detail {
+    padding-left: 0.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-detail,
+  .reading-item.is-flash .reading-row {
+    animation: none !important;
+  }
+
+  .reading-chevron {
+    transition: none;
+  }
+}
+
+.path-suggested {
+  fill: none;
+  stroke: var(--global-text-color-light);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 4;
+  opacity: 0.45;
+}
+
+.path-kit {
+  margin: 1rem 0 0;
+  font-size: 0.92rem;
+
+  summary {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--global-theme-color);
+    cursor: pointer;
+  }
+
+  ol {
+    padding-left: 1.2rem;
+  }
+}
+
+// Connections between items on the map
+.path-edge {
+  fill: none;
+  stroke: var(--global-text-color-light);
+  stroke-width: 0.8;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+#path-svg.show-edges .path-edge {
+  opacity: 0.14;
+}
+
+#path-svg .path-edge.is-in {
+  opacity: 0.95;
+  stroke: var(--global-theme-color);
+  stroke-width: 1.4;
+}
+
+#path-svg .path-edge.is-out {
+  opacity: 0.7;
+  stroke-dasharray: 3 3;
+  stroke-width: 1.2;
+}
+
+#path-svg.is-focusing .path-walked,
+#path-svg.is-focusing .path-suggested {
+  opacity: 0.15;
+}
+
+.path-node.is-focus circle,
+.path-node.is-linked circle {
+  stroke: var(--global-theme-color);
+  stroke-width: 2;
+  opacity: 1;
+}
+
+.path-map figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+// The stack: layers × compute / store / move / search
+.path-stack {
+  margin: 1.5rem 0 0.5rem;
+
+  figcaption {
+    margin-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--global-text-color-light);
+  }
+}
+
+.path-stack-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.path-stack-title {
+  color: var(--global-theme-color);
+}
+
+.path-stack-grid {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, auto) repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.path-stack-colhead {
+  text-align: center;
+  color: var(--global-text-color-light);
+  padding-bottom: 0.15rem;
+}
+
+.path-stack-rowhead {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.4rem;
+  color: var(--global-text-color-light);
+}
+
+.path-stack-cell {
+  --cov: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-height: 3.2rem;
+  padding: 0.3rem 0.4rem;
+  font: inherit;
+  text-align: left;
+  color: var(--global-text-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--global-theme-color) calc(var(--cov) * 45%), var(--global-card-bg-color));
+  cursor: pointer;
+
+  &:hover,
+  &.is-active {
+    border-color: var(--global-theme-color);
+  }
+
+  &.is-empty {
+    cursor: default;
+    opacity: 0.45;
+    background: transparent;
+    border-style: dashed;
+  }
+}
+
+.path-stack-count {
+  color: var(--global-text-color-light);
+}
+
+.path-stack-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+
+  i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    border: 1px solid var(--global-text-color-light);
+    opacity: 0.6;
+  }
+
+  i.is-read {
+    background: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+    opacity: 1;
+  }
+}
+
+.reading-cell-filter {
+  font-family: var(--font-mono);
+}
+
+// Down and around: map of stages with the walked route
+.path-intro {
+  max-width: 44rem;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--global-text-color-light);
+}
+
+.path-map {
+  margin: 1.5rem 0 0.5rem;
+
+  figcaption {
+    margin-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--global-text-color-light);
+  }
+}
+
+.path-map-scroll {
+  overflow-x: auto;
+  border: 1px dashed var(--global-divider-color);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--global-bg-color) 80%, transparent);
+}
+
+#path-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  [data-track] {
+    transition: opacity 0.2s;
+  }
+
+  .is-dim {
+    opacity: 0.15;
+  }
+}
+
+// Metro map: the core line through the chapter stations, branches hanging below
+.path-core-line {
+  fill: none;
+  stroke: var(--global-theme-color);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+.path-branch-line,
+.path-branch-spine {
+  fill: none;
+  stroke: var(--global-text-color-light);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  opacity: 0.45;
+  transition:
+    opacity 0.15s,
+    stroke 0.15s;
+}
+
+.path-branch-spine {
+  stroke-dasharray: 2 3;
+}
+
+.path-branch-hit {
+  fill: transparent;
+}
+
+.path-rejoin {
+  fill: none;
+  stroke: var(--global-theme-color);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.path-branch.is-hot {
+  .path-branch-line,
+  .path-branch-spine {
+    stroke: var(--global-theme-color);
+    opacity: 1;
+  }
+
+  .path-rejoin {
+    opacity: 0.8;
+  }
+}
+
+.path-map-key {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  color: var(--global-text-color-light);
+}
+
+.path-stage {
+  circle {
+    fill: var(--global-bg-color);
+    stroke: var(--global-theme-color);
+    stroke-width: 1.5;
+  }
+
+  text {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-anchor: middle;
+    fill: var(--global-theme-color);
+  }
+}
+
+.path-walked {
+  fill: none;
+  stroke: var(--global-theme-color);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+
+  &.is-drawn {
+    transition: stroke-dashoffset 2.5s ease-in-out;
+  }
+}
+
+.path-node {
+  circle {
+    fill: var(--global-bg-color);
+    stroke: var(--global-text-color-light);
+    stroke-width: 1;
+    opacity: 0.7;
+  }
+
+  &.is-branch circle {
+    stroke-dasharray: 1.5 1.2;
+  }
+
+  &.is-prereq circle {
+    opacity: 0.4;
+  }
+
+  &.is-start circle {
+    stroke: var(--global-theme-color);
+    stroke-width: 1.4;
+    opacity: 1;
+  }
+
+  &.is-read circle {
+    fill: var(--global-theme-color);
+    stroke: var(--global-theme-color);
+    opacity: 1;
+  }
+
+  &:hover circle {
+    stroke: var(--global-theme-color);
+    stroke-width: 2;
+    opacity: 1;
+  }
+}
+
+.path-here {
+  fill: none;
+  stroke: var(--global-theme-color);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: path-pulse 2s ease-out infinite;
+}
+
+.path-here-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--global-theme-color);
+}
+
+@keyframes path-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .path-here {
+    animation: none;
+  }
+
+  .path-walked.is-drawn {
+    transition: none;
+  }
+}
+
 // CV: accent badges instead of the stock red
 .cv .badge.danger-color-dark {
   background-color: var(--global-theme-color) !important;

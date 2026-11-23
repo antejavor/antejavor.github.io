@@ -1,0 +1,75 @@
+{%- comment -%}
+  One station on the down-and-around page: a collapsed row that expands into its detail.
+  include.it     the reading from _data/reading_list.yml
+  include.key    its position in that list; identifies the station on the map and in links
+  include.view   chapters | pass; only the chapters view carries the anchor id (p-key) that links point at
+  include.start  true when this is the entry reading of its chapter or branch
+  include.tier   core | branch | prereq
+{%- endcomment -%}
+{%- assign rd = include.it -%}
+{%- assign rd_key = include.key -%}
+{%- assign rd_did = 'd-' | append: include.view | append: '-' | append: rd_key -%}
+<li
+  class="reading-item is-{{ include.tier }}{% if include.start %} is-start{% endif %}{% if rd.read %} is-read{% endif %}"
+  {% if include.view == 'chapters' %}
+    id="p-{{ rd_key }}"
+  {% endif %}
+  data-key="{{ rd_key }}"
+  data-layer="{{ rd.layer }}"
+  data-does="{{ rd.does | join: ' ' }}"
+>
+  <div class="reading-row">
+    <button type="button" class="reading-open" aria-expanded="false" aria-controls="{{ rd_did }}">
+      <span class="reading-dot" aria-hidden="true"></span>
+      <span class="reading-head">
+        <span class="reading-title">{{ rd.title }}</span>
+        <span class="reading-meta">
+          <span>{{ rd.year }}</span> · <span>{{ rd.by }}</span> · <span>{{ rd.kind }}</span>
+          {%- if include.start %}
+            <span class="reading-badge is-start">start here</span>
+          {%- endif %}
+          {%- if rd.read %}
+            <span class="reading-walked">walked {{ rd.read | date: '%b %-d, %Y' }}</span>
+          {%- endif %}
+        </span>
+      </span>
+      <span class="reading-chevron" aria-hidden="true"></span>
+    </button>
+    <a class="reading-out" href="{{ rd.url }}" target="_blank" rel="noopener" aria-label="Open {{ rd.title | escape }}" title="Open the {{ rd.kind }}"
+      >↗</a
+    >
+  </div>
+  <div class="reading-detail" id="{{ rd_did }}">
+    {%- if rd.note %}
+      <p class="reading-note">{{ rd.note | escape }}</p>
+    {%- endif %}
+    <dl class="reading-facts">
+      {%- if rd.focus %}
+        <dt>task</dt>
+        <dd>{{ rd.focus | escape }}</dd>
+      {%- endif %}
+      {%- if rd.question %}
+        <dt>carry</dt>
+        <dd class="reading-question">{{ rd.question | escape }}</dd>
+      {%- endif %}
+      <dt>references</dt>
+      <dd>
+        <ul class="reading-refs">
+          <li>
+            <a href="{{ rd.url }}" target="_blank" rel="noopener">The work itself</a> <span class="reading-ref-kind">{{ rd.kind }}</span>
+          </li>
+          {%- for r in rd.refs %}
+            <li>
+              <a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.title }}</a>
+              {%- if r.kind %}
+                <span class="reading-ref-kind">{{ r.kind }}</span>
+              {%- endif %}
+            </li>
+          {%- endfor %}
+        </ul>
+      </dd>
+      <dt class="reading-links-label" hidden>connections</dt>
+      <dd class="reading-links" hidden></dd>
+    </dl>
+  </div>
+</li>
