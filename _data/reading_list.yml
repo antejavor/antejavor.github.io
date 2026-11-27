@@ -31,6 +31,7 @@
     - "ImageNet Classification with Deep Convolutional Neural Networks"
   note: "One page. General methods that scale with compute have won, again and again. Keep it in mind for the whole list, then argue with it."
   focus: "Choose a scaling result and state which resource increased and how performance changed."
+  read: 2026-03-24
 
 - title: "Computing Machinery and Intelligence"
   by: Alan Turing
